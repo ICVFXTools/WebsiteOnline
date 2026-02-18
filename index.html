@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ICVFXTools | Unreal Engine Plugins for Virtual Production</title>
+  <meta name="author" content="ICVFX Tools" />
+  <meta name="description"
+    content="Discover advanced Unreal Engine plugins for virtual production and ICVFX workflows, including timecode sync, HyperDeck control, Cube LUT import, and lens calibration tools." />
+
+  <meta property="og:title" content="ICVFXTools | Unreal Engine Plugins for Virtual Production" />
+  <meta property="og:description"
+    content="Advanced Unreal Engine plugins for virtual production: timecode sync, HyperDeck control, Cube LUT import, KeyFlux, and calibration tools." />
+  <meta property="og:image" content="https://www.icvfxtools.com/img/preview.png" />
+  <meta property="og:url" content="https://www.icvfxtools.com/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="ICVFXTools" />
+  <meta property="og:locale" content="en_US" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ICVFXTools | Unreal Engine Plugins for Virtual Production" />
+  <meta name="twitter:description"
+    content="Advanced Unreal Engine plugins for virtual production and ICVFX workflows." />
+  <meta name="twitter:image" content="https://www.icvfxtools.com/img/preview.png" />
+  <meta name="twitter:site" content="@icvfxtools" />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-P3QKZ6E0HN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-P3QKZ6E0HN');
+  </script>
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://www.icvfxtools.com/" />
+
+  <!-- Language and region -->
+  <meta name="content-language" content="en" />
+
+  <!-- Robots and indexing -->
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+
+  <!-- Keywords -->
+  <meta name="keywords"
+    content="Unreal Engine Plugins, Virtual Production Tools, ICVFX, LED Volume, Camera Tracking, Timecode Sync, HyperDeck Control, Unreal Marketplace, Color Grading, Cube LUT Importer" />
+
+  <link rel="alternate" hreflang="en" href="https://www.icvfxtools.com/" />
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://www.icvfxtools.com/#organization",
+          "name": "ICVFXTools",
+          "url": "https://www.icvfxtools.com/",
+          "logo": "https://www.icvfxtools.com/img/favicon.svg",
+          "sameAs": [
+            "https://www.youtube.com/@ICVFXTools",
+            "https://www.instagram.com/icvfxtools",
+            "https://twitter.com/icvfxtools"
+          ],
+          "description": "ICVFXTools builds next-generation Unreal Engine plugins for Virtual Production and Game Development."
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://www.icvfxtools.com/#website",
+          "url": "https://www.icvfxtools.com/",
+          "name": "ICVFXTools",
+          "description": "Advanced Unreal Engine plugins for virtual production and ICVFX workflows.",
+          "publisher": {
+            "@id": "https://www.icvfxtools.com/#organization"
+          }
+        }
+      ]
+    }
+  </script>
+
+  <link rel="icon" href="img/favicon.svg" type="image/png" />
+  <link rel="shortcut icon" href="img/favicon.svg" />
+  <link rel="apple-touch-icon" href="img/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Orbitron:wght@700&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+    rel="stylesheet" />
+
+  <!-- three.js Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <style>
+    /* ========================================
+       CSS STYLES & LAYOUT
+       ======================================== */
+
+    :root {
+      --color-bg: #000000;
+      --color-primary: #ff1d53;
+      --color-glow: rgba(255, 29, 83, 0.7);
+      --color-text: #ffffff;
+      --color-text-muted: #e4e4e4;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      /* This will be changed for mobile */
+      font-family: "Roboto Mono", monospace;
+      background-color: var(--color-bg);
+      color: var(--color-text);
+    }
+
+    /* Scanlines Overlay */
+    body::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(0deg,
+          rgba(0, 0, 0, 0.3) 0px,
+          rgba(0, 0, 0, 0.3) 1px,
+          transparent 1px,
+          transparent 3px);
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0.5;
+    }
+
+    /* Background 3D canvas */
+    #bg-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    /* Main layout */
+    main {
+      position: relative;
+      z-index: 2;
+      width: 100vw;
+      height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-rows: auto minmax(0, 1fr) auto;
+      padding: 2rem;
+      mix-blend-mode: difference;
+    }
+
+    main>* {
+      min-height: 0;
+    }
+
+    /* Header */
+    #header {
+      grid-column: 1 / -1;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.5rem;
+      color: var(--color-primary);
+      text-shadow: 0 0 10px var(--color-glow);
+      padding-bottom: 1rem;
+    }
+
+    /* Footer */
+    footer {
+      grid-column: 1 / -1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      padding-top: 1rem;
+    }
+
+    .social-links a {
+      color: var(--color-text-muted);
+      text-decoration: none;
+      margin-left: 1.5rem;
+      transition: color 0.2s ease;
+    }
+
+    .social-links a:hover {
+      color: var(--color-primary);
+    }
+
+    /* Left content */
+    .plugin-display {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding-left: 5vw;
+      grid-column: 1 / 2;
+      grid-row: 2 / 3;
+      min-height: 0;
+    }
+
+    .plugin-display h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      letter-spacing: 1px;
+      color: var(--color-primary);
+      text-shadow: 0 0 15px var(--color-glow);
+      animation: fadeIn 0.5s ease-out 0.1s forwards;
+      -webkit-text-stroke: 5px #000;
+      paint-order: stroke fill;
+    }
+
+    .plugin-display p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: var(--color-text-muted);
+      max-width: 400px;
+      margin-bottom: 2.5rem;
+      text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+      animation: fadeIn 0.5s ease-out 0.2s forwards;
+    }
+
+    .button-group {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      animation: fadeIn 0.5s ease-out 0.3s forwards;
+      flex-wrap: wrap;
+      /* Allow buttons to wrap */
+      width: 400px;
+    }
+
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.8rem 1.8rem;
+      background: transparent;
+      color: var(--color-primary);
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 600;
+      border: 2px solid var(--color-primary);
+      transition: background-color 0.2s ease, text-shadow 0.2s ease;
+      font-size: 0.9rem;
+      line-height: 1;
+    }
+
+    .action-btn svg {
+      width: 1.15em;
+      height: 1.15em;
+      flex: none;
+      display: inline-block;
+    }
+
+    .action-btn span {
+      display: inline-block;
+      line-height: 1;
+    }
+
+    .action-btn:hover {
+      background-color: var(--color-primary);
+      color: var(--color-bg);
+      text-shadow: 0 0 10px var(--color-glow);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Sidebar list */
+    .plugin-list {
+      grid-column: 2 / 3;
+      grid-row: 2 / 3;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1rem;
+      width: 300px;
+      overflow-y: auto;
+      padding-right: 0.5rem;
+      min-height: 0;
+      max-height: 100%;
+    }
+
+    /* Scrollbar */
+    .plugin-list::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .plugin-list::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .plugin-list::-webkit-scrollbar-thumb {
+      background-color: var(--color-text-muted);
+      border-radius: 3px;
+    }
+
+    .plugin-list::-webkit-scrollbar-thumb:hover {
+      background-color: var(--color-primary);
+    }
+
+    /* List items */
+    .plugin-item {
+      cursor: pointer;
+      padding: 0.75rem 1rem;
+      border-left: 2px solid transparent;
+      transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .plugin-item-thumb {
+      width: 40px;
+      height: 40px;
+      border-radius: 4px;
+      background-color: #333;
+      flex-shrink: 0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      object-fit: cover;
+    }
+
+    .plugin-item-text {
+      flex-grow: 1;
+    }
+
+    .plugin-item::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 0;
+      background-color: var(--color-glow);
+      opacity: 0.5;
+      z-index: -1;
+      transition: height 0s;
+    }
+
+    .plugin-item.loading::before {
+      height: 100%;
+      transition: height 5s linear;
+    }
+
+    .plugin-item:hover {
+      background-color: rgba(255, 29, 83, 0.05);
+    }
+
+    .plugin-item h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      margin-bottom: 0.25rem;
+      transition: color 0.2s ease;
+    }
+
+    .plugin-item p {
+      font-family: "Roboto Mono", monospace;
+      font-size: 0.8rem;
+      color: #666;
+      transition: color 0.2s ease;
+    }
+
+    .plugin-item:hover h3,
+    .plugin-item.active h3 {
+      color: var(--color-primary);
+      text-shadow: 0 0 10px var(--color-glow);
+    }
+
+    .plugin-item:hover p,
+    .plugin-item.active p {
+      color: var(--color-text-muted);
+    }
+
+    .plugin-item.active {
+      border-color: var(--color-primary);
+    }
+
+    /* ========================================
+       MOBILE RESPONSIVE STYLES
+       ======================================== */
+    @media (max-width: 800px) {
+
+      /* Hide 3D canvas on mobile */
+      #bg-canvas {
+        display: none;
+      }
+
+      /* Allow scrolling on mobile */
+      html,
+      body {
+        overflow: auto;
+      }
+
+      /* Change main layout to vertical stack */
+      main {
+        display: flex;
+        flex-direction: column;
+        padding: 1.5rem;
+        height: auto;
+      }
+
+      #header {
+        position: static;
+        order: 0;
+        /* Added for clarity */
+      }
+
+      footer {
+        position: static;
+        margin-top: 2rem;
+        flex-direction: column;
+        gap: 1rem;
+        order: 3;
+        /* This fixes the footer position */
+      }
+
+      /* Center main content */
+      .plugin-display {
+        padding: 0;
+        min-height: 70vh;
+        align-items: center;
+        text-align: center;
+        order: 1;
+      }
+
+      .plugin-display h1 {
+        font-size: 2.5rem;
+      }
+
+      .plugin-display p {
+        font-size: 1rem;
+      }
+
+      /* Center button group on mobile */
+      .button-group {
+        justify-content: center;
+
+      }
+
+      /* Convert sidebar to horizontal-wrapping list */
+      .plugin-list {
+        order: 2;
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+        padding-bottom: 2rem;
+        overflow-y: hidden;
+        padding-right: 1rem;
+        min-height: auto;
+        max-height: none;
+        /* remove desktop height constraints */
+      }
+
+      /* Make list items full-width */
+      .plugin-item {
+        border-left: none;
+        border-bottom: 2px solid transparent;
+        text-align: left;
+        flex-basis: 100%;
+      }
+
+      .plugin-item.active {
+        border-color: var(--color-primary);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 3D Background Canvas -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- Main Content Wrapper -->
+  <main>
+    <header id="header">ICVFXTOOLS</header>
+
+    <!-- Left Content: Plugin Details -->
+    <div class="plugin-display">
+      <h1 id="pluginTitle">Unreal Engine Plugins for Virtual Production</h1>
+      <p id="pluginDescription">Explore advanced ICVFX tools for color workflows, timecode sync, HyperDeck control, and production automation.</p>
+      <div class="button-group">
+        <a href="#" id="marketplaceLink" class="action-btn" target="_blank" rel="noopener noreferrer">
+          <!-- Marketplace Icon -->
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M19 4h-3.5a2.5 2.5 0 0 0-5 0H7c-1.1 0-2 .9-2 2v13c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5-1.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5 1.5zm3.5 17H7V6h1.5v3h7V6H17v13z">
+            </path>
+          </svg>
+          Marketplace
+        </a>
+        <a href="#" id="youtubeLink" class="action-btn" target="_blank" rel="noopener noreferrer">
+          <!-- YouTube Icon -->
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M21.58 7.19c-.23-.86-.9-1.52-1.76-1.74C18.25 5 12 5 12 5s-6.25 0-7.82.45c-.86.22-1.53.88-1.76 1.74C2 8.75 2 12 2 12s0 3.25.42 4.81c.23.86.9 1.52 1.76 1.74C5.75 19 12 19 12 19s6.25 0 7.82-.45c.86-.22 1.53.88 1.76-1.74C22 15.25 22 12 22 12s0-3.25-.42-4.81zM10 15.46V8.54l5.22 3.46L10 15.46z">
+            </path>
+          </svg>
+          YouTube
+        </a>
+        <a href="#" id="documentationLink" class="action-btn" target="_blank" rel="noopener noreferrer">
+          <!-- Documentation Icon (Book) -->
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z">
+            </path>
+          </svg>
+          Documentation
+        </a>
+        <a href="#" id="forumLink" class="action-btn" target="_blank" rel="noopener noreferrer">
+          <!-- Forum Icon (People) -->
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z">
+            </path>
+          </svg>
+          Forum
+        </a>
+      </div>
+    </div>
+
+    <!-- Right Content: Plugin List (Sidebar) -->
+    <div class="plugin-list" id="pluginListContainer"></div>
+
+    <!-- Footer -->
+    <footer>
+      <span>© 2025 ICVFXTools. All Rights Reserved.</span>
+      <div class="social-links">
+        <a href="https://twitter.com/icvfxtools" target="_blank" rel="noopener noreferrer">X</a>
+        <a href="https://www.instagram.com/icvfxtools" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
+        <a href="https://www.youtube.com/@ICVFXTools">YOUTUBE</a>
+        <a href="https://www.icvfxtools.com/calibration-tool.html">CALIBRATION TOOL</a>
+      </div>
+    </footer>
+  </main>
+
+  <script src="js/home.js"></script>
+</body>
+
+</html>

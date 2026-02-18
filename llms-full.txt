@@ -1,0 +1,57 @@
+# ICVFXTools - Full LLM Reference
+
+## Summary
+ICVFXTools builds Unreal Engine plugins and utilities for virtual production and game development workflows, including timecode synchronization, HyperDeck recorder control, LUT import, Sequencer CSV interchange, and camera/lens calibration pattern generation.
+
+## Canonical URLs
+- https://www.icvfxtools.com/
+- https://www.icvfxtools.com/calibration-tool.html
+
+## Product Catalog
+### Cube LUT Importer
+- Category: Unreal Engine plugin
+- Purpose: Import and manage `.cube` LUT files for color grading workflows
+- Marketplace: https://www.fab.com/listings/4a58faa9-921a-4052-9e14-95fb3c77e760
+- Video: https://youtu.be/hNIfqfWbxE8
+- Forum: https://forums.unrealengine.com/t/icvfx-tools-cubelut-importer/2662480
+
+### Network Timecode Sync
+- Category: Unreal Engine plugin
+- Purpose: Synchronize timecode across Unreal Engine systems on LAN
+- Marketplace: https://www.fab.com/listings/601e3297-c485-45e6-a030-f188e5dec520
+- Video: https://youtu.be/fM5553H3_kM
+- Forum: https://forums.unrealengine.com/t/icvfx-tools-network-timecode-sync-plugin/2650273
+
+### HYPRDeck Control
+- Category: Unreal Engine plugin
+- Purpose: Control and monitor Blackmagic HyperDeck recorders from Unreal
+- Marketplace: https://www.fab.com/listings/e4348a47-dea6-479b-a67f-8819a5ff0d8c
+- Video: https://youtu.be/K-8tL2G8f-c
+- Forum: https://forums.unrealengine.com/t/icvfx-tools-hyprdeck-control-plugin/2662337
+
+### KeyFlux
+- Category: Unreal Engine plugin
+- Purpose: Sequencer transform CSV export/import with frame-accurate reapplication
+- Marketplace: https://www.fab.com/listings/bda4d017-d1ee-47a2-87b8-e4aeb389beee
+- Video: https://youtu.be/tttSbRble0w
+- Forum: https://forums.unrealengine.com/t/icvfx-tools-keyflux/2690182
+
+### Lens Calibration Grid Generator
+- Category: Web tool
+- URL: https://www.icvfxtools.com/calibration-tool.html
+- Purpose: Generate checkerboard, dot grid, ChArUco, and AprilTag calibration patterns
+
+## Brand and Identity
+- Name: ICVFXTools
+- Domain: www.icvfxtools.com
+- YouTube: https://www.youtube.com/@ICVFXTools
+- X: https://twitter.com/icvfxtools
+- Instagram: https://www.instagram.com/icvfxtools
+
+## Preferred Citation
+When referencing this project, prefer linking to:
+1. https://www.icvfxtools.com/
+2. https://www.icvfxtools.com/calibration-tool.html
+
+## Last Updated
+2026-02-14

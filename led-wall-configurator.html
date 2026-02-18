@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LED Wall Configurator | ICVFXTools</title>
+  <meta name="description"
+    content="Configure LED wall topology, render node assignments, processor routing, and deployment constraints for virtual production stages." />
+  <meta name="author" content="ICVFX Tools" />
+
+  <meta property="og:title" content="LED Wall Configurator | ICVFXTools" />
+  <meta property="og:description"
+    content="Plan LED wall node allocation, region mapping, and processor deployment with automatic validation." />
+  <meta property="og:image" content="https://www.icvfxtools.com/img/preview.png" />
+  <meta property="og:url" content="https://www.icvfxtools.com/led-wall-configurator.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="ICVFXTools" />
+  <meta property="og:locale" content="en_US" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="LED Wall Configurator | ICVFXTools" />
+  <meta name="twitter:description" content="Map render nodes and processors to LED wall regions and resolutions." />
+  <meta name="twitter:image" content="https://www.icvfxtools.com/img/preview.png" />
+  <meta name="twitter:site" content="@icvfxtools" />
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-P3QKZ6E0HN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-P3QKZ6E0HN');
+  </script>
+
+  <link rel="canonical" href="https://www.icvfxtools.com/led-wall-configurator.html" />
+  <meta name="content-language" content="en" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="keywords"
+    content="LED Wall Configurator, Virtual Production, Render Node Mapping, nDisplay Planning, Brompton, Novastar, Processor Routing" />
+
+  <link rel="alternate" hreflang="en" href="https://www.icvfxtools.com/led-wall-configurator.html" />
+
+  <link rel="icon" href="img/favicon.svg" type="image/png" />
+  <link rel="shortcut icon" href="img/favicon.svg" />
+  <link rel="apple-touch-icon" href="img/favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/led-configurator.css" />
+</head>
+
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <a href="./index.html" class="brand">ICVFXTOOLS</a>
+      <div class="toolbar-group">
+        <details class="tool-menu">
+          <summary class="tool-trigger" title="Global video settings">Video Settings ▾</summary>
+          <div class="tool-menu-panel tool-menu-form">
+            <label class="tool-inline" title="Global frame rate used for processor/XD capacity tables">FPS
+              <select id="quickFrameRate" class="tool-select">
+                <option value="23.976">23.976</option>
+                <option value="24">24</option>
+                <option value="25">25</option>
+                <option value="29.97">29.97</option>
+                <option value="30">30</option>
+                <option value="48">48</option>
+                <option value="50">50</option>
+                <option value="59.94">59.94</option>
+                <option value="60">60</option>
+                <option value="72">72</option>
+                <option value="100">100</option>
+                <option value="120">120</option>
+                <option value="144">144</option>
+                <option value="150">150</option>
+                <option value="180">180</option>
+                <option value="192">192</option>
+                <option value="200">200</option>
+                <option value="240">240</option>
+                <option value="250">250</option>
+              </select>
+            </label>
+            <label class="tool-inline" title="Global latency mode for profile calculations">Latency
+              <select id="quickLatencyMode" class="tool-select">
+                <option value="Standard">Standard</option>
+                <option value="ULL">ULL</option>
+              </select>
+            </label>
+            <label class="tool-inline" title="Global color depth used by processor/XD capacity tables">Depth
+              <select id="quickColorDepth" class="tool-select">
+                <option value="8-bit">8-bit</option>
+                <option value="10-bit" selected>10-bit</option>
+                <option value="12-bit">12-bit</option>
+              </select>
+            </label>
+          </div>
+        </details>
+        <details class="tool-menu">
+          <summary class="tool-trigger" title="LED wall cabinet geometry">Wall Settings ▾</summary>
+          <div class="tool-menu-panel tool-menu-form wall-settings-form">
+            <label class="tool-inline" title="Total cabinets horizontally">Tiles X
+              <input id="quickWallTilesX" type="number" class="tool-select" min="1" max="400" />
+            </label>
+            <label class="tool-inline" title="Total cabinets vertically">Tiles Y
+              <input id="quickWallTilesY" type="number" class="tool-select" min="1" max="200" />
+            </label>
+            <label class="tool-inline" title="Pixel width per cabinet">Cab W px
+              <input id="quickTilePxW" type="number" class="tool-select" min="1" max="5000" />
+            </label>
+            <label class="tool-inline" title="Pixel height per cabinet">Cab H px
+              <input id="quickTilePxH" type="number" class="tool-select" min="1" max="5000" />
+            </label>
+            <label class="tool-inline" title="Physical width per cabinet in mm">Cab W mm
+              <input id="quickTileMmW" type="number" class="tool-select" min="1" max="2000" />
+            </label>
+            <label class="tool-inline" title="Physical height per cabinet in mm">Cab H mm
+              <input id="quickTileMmH" type="number" class="tool-select" min="1" max="2000" />
+            </label>
+          </div>
+        </details>
+        <label class="tool-inline" title="Switch planner visual theme">Theme
+          <select id="themeSelect" class="tool-select">
+            <option value="dark">Dark</option>
+            <option value="light">Light</option>
+            <option value="blue">Blue</option>
+            <option value="lime">Lime</option>
+          </select>
+        </label>
+
+        <details class="tool-menu tool-menu-end">
+          <summary class="tool-trigger" title="Build and data utilities">Build ▾</summary>
+          <div class="tool-menu-panel">
+            <button id="validateBtn" class="tool-btn" title="Run validation for overlap, bounds, and capacity limits.">Validate</button>
+            <button id="suggestConfigsBtn" class="tool-btn" title="Suggest all feasible wall split configs for current node/processor counts.">Suggest Configs</button>
+            <button id="autoPackBtn" class="tool-btn" title="Auto-pack regions based on current Hz/ULL/depth, panel size, node limits, and processor cabling capacity.">Auto Pack (Current Settings)</button>
+            <button id="processorOverviewBtn" class="tool-btn" title="Show per-processor effective resolution, XD usage, and panel distribution.">Processor Overview</button>
+            <button id="exportBtn" class="tool-btn" title="Export all settings and mappings to JSON.">Export JSON</button>
+            <label class="tool-btn menu-file-btn" title="Import a previously exported LED wall JSON config.">Import JSON<input id="importInput"
+                type="file" accept="application/json" /></label>
+            <button id="removeSelectedBtn" class="tool-btn danger"
+              title="Remove the currently selected node, processor, or render area.">Remove Selected</button>
+          </div>
+        </details>
+      </div>
+    </header>
+
+    <section class="workspace">
+      <button id="toggleLeftBtn" class="tool-btn floating-toggle floating-left" title="Toggle outliner drawer">Outliner</button>
+      <button id="toggleRightBtn" class="tool-btn floating-toggle floating-right" title="Toggle details drawer">Details</button>
+      <button id="toggleLogBtn" class="tool-btn floating-toggle floating-bottom" title="Toggle output log drawer">▲ Log</button>
+
+      <section class="stage-panel">
+        <div class="stage-meta-overlay">
+          <button id="fitViewBtn" class="tool-btn icon-btn" title="Fit the full LED wall canvas into the visible stage area.">⤢</button>
+          <button id="toggleCablePlanBtn" class="tool-btn icon-btn" title="Toggle cable plan overlay">⌁</button>
+          <div id="selectionBadge" class="selection-badge">No selection</div>
+        </div>
+        <button id="plannerInfoBtn" class="planner-info-btn" title="Show processor and XD capacity details" aria-label="Planner capacity info">i</button>
+        <div id="plannerStats" class="planner-stats"></div>
+        <div class="canvas-wrap" id="canvasWrap">
+          <canvas id="coverageCanvas" width="1600" height="920"></canvas>
+        </div>
+        <div class="stage-footer" id="canvasStatus"></div>
+      </section>
+
+      <aside id="outlinerDrawer" class="panel drawer drawer-left outliner-panel">
+        <div class="drawer-head">
+          <h2>Outliner</h2>
+          <button id="collapseLeftBtn" class="tool-btn icon-btn drawer-collapse-btn" title="Hide outliner">◀</button>
+        </div>
+        <div class="compact-info" id="wallQuickStats"></div>
+        <div id="outlinerList" class="outliner-list"></div>
+      </aside>
+
+      <aside id="detailsDrawer" class="panel drawer drawer-right details-panel">
+        <div class="drawer-head">
+          <h2>Details</h2>
+          <button id="collapseRightBtn" class="tool-btn icon-btn drawer-collapse-btn" title="Hide details">▶</button>
+        </div>
+        <div class="tab-row">
+          <button data-tab="selection" class="tab-btn active" title="Edit selected node, processor, or area details.">Details</button>
+          <button data-tab="wall" class="tab-btn" title="Edit wall cabinet geometry and performance targets.">Wall</button>
+          <button data-tab="deployment" class="tab-btn" title="Configure output parameters and review deployment summary.">Deploy</button>
+        </div>
+        <div id="detailsHost" class="details-host"></div>
+      </aside>
+
+      <section id="logDrawer" class="panel drawer drawer-bottom log-panel">
+        <div class="log-header">
+          <h2>Output Log</h2>
+          <div class="toolbar-group">
+            <button id="clearLogBtn" class="tool-btn" title="Clear output log entries.">Clear</button>
+            <button id="collapseLogBtn" class="tool-btn" title="Hide log panel">Hide</button>
+          </div>
+        </div>
+        <div id="issues" class="issues"></div>
+        <pre id="outputLog" class="output-log"></pre>
+      </section>
+      <div class="legal-note">
+        Trademark Notice: Product names, brands, and logos (including Brompton, SX40, S8, and XD) are the property of their respective owners. References are for planning/compatibility only and do not imply affiliation, sponsorship, or endorsement.
+      </div>
+    </section>
+  </main>
+
+  <script src="js/led-configurator.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lens Calibration Grid Generator | ICVFXTools</title>
+  <meta name="description"
+    content="Generate precise checkerboard, dot grid, ChArUco, and AprilTag calibration patterns for camera and lens calibration workflows." />
+  <meta name="author" content="ICVFX Tools" />
+
+  <meta property="og:title" content="Lens Calibration Grid Generator | ICVFXTools" />
+  <meta property="og:description"
+    content="Create checkerboard, dot grid, ChArUco, and AprilTag patterns for lens and camera calibration." />
+  <meta property="og:image" content="https://www.icvfxtools.com/img/preview.png" />
+  <meta property="og:url" content="https://www.icvfxtools.com/calibration-tool.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="ICVFXTools" />
+  <meta property="og:locale" content="en_US" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Lens Calibration Grid Generator | ICVFXTools" />
+  <meta name="twitter:description"
+    content="Create checkerboard, dot grid, ChArUco, and AprilTag patterns for lens and camera calibration." />
+  <meta name="twitter:image" content="https://www.icvfxtools.com/img/preview.png" />
+  <meta name="twitter:site" content="@icvfxtools" />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-P3QKZ6E0HN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-P3QKZ6E0HN');
+  </script>
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://www.icvfxtools.com/calibration-tool.html" />
+
+  <!-- Language and region -->
+  <meta name="content-language" content="en" />
+
+  <!-- Robots and indexing -->
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+
+  <!-- Keywords -->
+  <meta name="keywords"
+    content="Unreal Engine Plugins, Virtual Production Tools, ICVFX, LED Volume, Camera Tracking, Timecode Sync, HyperDeck Control, Unreal Marketplace, Color Grading, Cube LUT Importer" />
+
+  <link rel="alternate" hreflang="en" href="https://www.icvfxtools.com/calibration-tool.html" />
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://www.icvfxtools.com/#organization",
+          "name": "ICVFXTools",
+          "url": "https://www.icvfxtools.com/",
+          "logo": "https://www.icvfxtools.com/img/favicon.svg",
+          "sameAs": [
+            "https://www.youtube.com/@ICVFXTools",
+            "https://www.instagram.com/icvfxtools",
+            "https://twitter.com/icvfxtools"
+          ]
+        },
+        {
+          "@type": "WebApplication",
+          "@id": "https://www.icvfxtools.com/calibration-tool.html#app",
+          "name": "Lens Calibration Grid Generator",
+          "url": "https://www.icvfxtools.com/calibration-tool.html",
+          "applicationCategory": "MultimediaApplication",
+          "operatingSystem": "Any",
+          "description": "Generate checkerboard, dot grid, ChArUco, and AprilTag calibration patterns.",
+          "publisher": {
+            "@id": "https://www.icvfxtools.com/#organization"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://www.icvfxtools.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Lens Calibration Grid Generator",
+              "item": "https://www.icvfxtools.com/calibration-tool.html"
+            }
+          ]
+        }
+      ]
+    }
+  </script>
+  <link rel="icon" href="img/favicon.svg" type="image/png" />
+  <link rel="shortcut icon" href="img/favicon.svg" />
+  <link rel="apple-touch-icon" href="img/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+  <!-- External libs (same as your original) -->
+  <script src="https://cdn.jsdelivr.net/npm/js-aruco@1.0.1/browser/aruco.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/apriltag@latest/dist/browser.js" defer></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    footer {
+      grid-column: 1 / -1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      padding-top: 1rem;
+      position: static;
+      margin-top: 2rem;
+      flex-direction: column;
+      gap: 1rem;
+      order: 3;
+      /* This fixes the footer position */
+    }
+
+    .social-links a {
+      color: var(--color-text-muted);
+      text-decoration: none;
+      margin-left: 1.5rem;
+      transition: color 0.2s ease;
+    }
+
+    .social-links a:hover {
+      color: var(--color-primary);
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <a href='./index.html' style="all: unset;
+      cursor: pointer;">
+      <header id="header">ICVFXTOOLS</header>
+    </a>
+    <div class="tool-content-wrapper">
+      <h1>Lens Calibration Grid</h1>
+      <p>Dynamic aspect-ratio preview. Set output width and cell size for export. ChArUco pulls from
+        <code>aruco_bitmaps.json</code>.
+      </p>
+
+      <div class="tool-interface" role="region" aria-label="Calibration Pattern Controls and Preview">
+        <div class="tool-controls">
+          <div class="control-group">
+            <label for="pattern">Pattern Type</label>
+            <select id="pattern">
+              <option value="checkerboard">Checkerboard</option>
+              <option value="grid">Grid Lines</option>
+              <option value="dots">Dot Grid</option>
+              <option value="charuco">ChArUco</option>
+              <option value="apriltag">AprilTag Grid</option>
+            </select>
+            <span id="charuco-warn" class="warn hidden" style="display: none !important;">ArUco library not loaded —
+              ChArUco disabled (no JSON).</span>
+            <span id="bitdb-status" class="badge">Loading aruco_bitmaps.json…</span>
+          </div>
+
+          <div class="control-row" id="checkerboard-opts">
+            <div class="control-group">
+              <label for="top-left">Top-left square</label>
+              <select id="top-left">
+                <option value="black" selected>Black</option>
+                <option value="white">White</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="control-row">
+            <div class="control-group"><label for="rows">Rows (inner)</label><input id="rows" type="number" value="9"
+                min="2" step="1" /></div>
+            <div class="control-group"><label for="cols">Cols (inner)</label><input id="cols" type="number" value="13"
+                min="2" step="1" /></div>
+          </div>
+
+          <div class="control-row">
+            <div class="control-group"><label for="output-w">Output Width (px)</label><input id="output-w" type="number"
+                value="1920" min="320" step="10" /></div>
+            <div class="control-group" id="cell-size-group"><label for="cell-size">Cell Size (px)</label><input
+                id="cell-size" type="number" value="100" min="2" step="1" /></div>
+          </div>
+
+          <div class="control-row">
+            <div class="control-group"><label for="aspect-w">Aspect W</label><input id="aspect-w" type="number"
+                value="16" min="1" step="1" /></div>
+            <div class="control-group"><label for="aspect-h">Aspect H</label><input id="aspect-h" type="number"
+                value="9" min="1" step="1" /></div>
+          </div>
+
+          <div class="control-group hidden" id="dot-radius-group"><label for="dot-radius">Dot Radius (×
+              cell)</label><input id="dot-radius" type="number" value="0.25" min="0.05" max="0.50" step="0.01" /></div>
+
+          <!-- ChArUco -->
+          <div class="control-group hidden" id="charuco-dict-group">
+            <label for="charuco-dict">ArUco Dictionary</label>
+            <select id="charuco-dict">
+              <option value="4x4_50">4x4_50</option>
+              <option value="4x4_100">4x4_100</option>
+              <option value="4x4_250">4x4_250</option>
+              <option value="5x5_100" selected>5x5_100</option>
+              <option value="6x6_250">6x6_250</option>
+              <option value="7x7_1000">7x7_1000</option>
+            </select>
+          </div>
+          <div class="control-row hidden" id="charuco-opts">
+            <div class="control-group"><label for="charuco-ratio">Marker:Square (0–1)</label><input id="charuco-ratio"
+                type="number" value="0.70" min="0.50" max="0.85" step="0.01" /></div>
+            <div class="control-group"><label for="charuco-start">Start Marker ID</label><input id="charuco-start"
+                type="number" value="0" min="0" step="1" /></div>
+          </div>
+
+          <div class="control-row hidden" id="charuco-layout">
+            <div class="control-group">
+              <label for="charuco-on">Place markers on</label>
+              <select id="charuco-on">
+                <option value="black">Black squares</option>
+                <option value="white" selected>White squares</option>
+              </select>
+            </div>
+            <div class="control-group">
+              <label for="charuco-origin">ID origin</label>
+              <select id="charuco-origin">
+                <option value="TL" selected>Top-Left</option>
+                <option value="TR">Top-Right</option>
+                <option value="BL">Bottom-Left</option>
+                <option value="BR">Bottom-Right</option>
+              </select>
+            </div>
+          </div>
+          <div class="control-row hidden" id="charuco-ordering">
+            <div class="control-group">
+              <label for="charuco-order">Traversal</label>
+              <select id="charuco-order">
+                <option value="row-major-ltr" selected>Row-major L→R</option>
+                <option value="row-major-rtl">Row-major R→L</option>
+                <option value="snake-ltr-first">Snake (L→R first)</option>
+                <option value="snake-rtl-first">Snake (R→L first)</option>
+              </select>
+            </div>
+            <div class="control-group">
+              <label for="charuco-step">ID step</label>
+              <input id="charuco-step" type="number" value="1" min="1" step="1" />
+            </div>
+          </div>
+          <div class="control-group hidden checkbox-group" id="charuco-show-id-toggle">
+            <label for="charuco-show-id">
+              <input type="checkbox" id="charuco-show-id" />
+              <span>Show Marker IDs</span>
+            </label>
+          </div>
+
+          <!-- AprilTag Grid -->
+          <div class="control-group hidden" id="apriltag-family-group">
+            <label for="apriltag-family">AprilTag Family</label>
+            <select id="apriltag-family">
+              <option value="36h11" selected>36h11</option>
+              <option value="25h9">25h9</option>
+              <option value="16h5">16h5</option>
+            </select>
+            <span id="apriltag-offline" class="badge hidden" style="display: none !important;">Offline fallback: tags
+              are NOT decodeable</span>
+          </div>
+          <div class="control-row hidden" id="apriltag-grid-opts">
+            <div class="control-group"><label for="apriltag-tag-size">Tag Size (px)</label><input id="apriltag-tag-size"
+                type="number" value="80" min="2" step="1" /></div>
+            <div class="control-group"><label for="apriltag-spacing-ratio">Spacing Ratio</label><input
+                id="apriltag-spacing-ratio" type="number" value="0.25" min="0" step="0.01" /></div>
+          </div>
+          <div class="control-group hidden" id="apriltag-start-group">
+            <label for="apriltag-start">Start Tag ID</label><input id="apriltag-start" type="number" value="0" min="0"
+              step="1" />
+          </div>
+          <div class="control-row hidden" id="apriltag-layout">
+            <div class="control-group">
+              <label for="apriltag-origin">ID origin</label>
+              <select id="apriltag-origin">
+                <option value="TL" selected>Top-Left</option>
+                <option value="TR">Top-Right</option>
+                <option value="BL">Bottom-Left</option>
+                <option value="BR">Bottom-Right</option>
+              </select>
+            </div>
+          </div>
+          <div class="control-row hidden" id="apriltag-ordering">
+            <div class="control-group">
+              <label for="apriltag-order">Traversal</label>
+              <select id="apriltag-order">
+                <option value="row-major-ltr" selected>Row-major L→R</option>
+                <option value="row-major-rtl">Row-major R→L</option>
+                <option value="snake-ltr-first">Snake (L→R first)</option>
+                <option value="snake-rtl-first">Snake (R→L first)</option>
+              </select>
+            </div>
+          </div>
+          <div class="control-group hidden checkbox-group" id="apriltag-show-id-toggle">
+            <label for="apriltag-show-id">
+              <input type="checkbox" id="apriltag-show-id" />
+              <span>Show Tag IDs</span>
+            </label>
+          </div>
+          <div class="control-group hidden checkbox-group" id="apriltag-intersection-toggle">
+            <label for="apriltag-show-intersections">
+              <input type="checkbox" id="apriltag-show-intersections" />
+              <span>Show Intersection Squares</span>
+            </label>
+          </div>
+          <div class="control-group hidden" id="apriltag-intersection-size">
+            <label for="apriltag-intersection-px">Intersection Square Size (px)</label>
+            <input id="apriltag-intersection-px" type="number" value="20" min="1" step="1" />
+          </div>
+
+          <button id="generate" class="action-btn">Generate / Refresh</button>
+          <div class="download-group">
+            <button id="dl-png" class="action-btn">PNG</button>
+            <button id="dl-svg" class="action-btn">SVG</button>
+          </div>
+        </div>
+
+        <div class="tool-canvas-area">
+          <div id="canvas-holder">
+            <canvas id="pattern-canvas"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Our app -->
+  <script type="module" src="./js/main.js"></script>
+
+  <!-- Footer -->
+  <footer>
+    <span>© 2025 ICVFXTools. All Rights Reserved.</span>
+    <div class="social-links">
+      <a href="https://twitter.com/icvfxtools" target="_blank" rel="noopener noreferrer">X</a>
+      <a href="https://www.instagram.com/icvfxtools" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
+      <a href="https://www.youtube.com/@ICVFXTools">YOUTUBE</a>
+      <a href="https://www.icvfxtools.com/">HOME</a>
+    </div>
+  </footer>
+</body>
+
+</html>
