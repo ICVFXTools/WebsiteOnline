@@ -50,7 +50,7 @@
     href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
     rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/led-configurator.css" />
+  <link rel="stylesheet" href="css/led-configurator.css?v=6" />
 </head>
 
 <body>
@@ -122,8 +122,9 @@
             </label>
           </div>
         </details>
-        <label class="tool-inline" title="Switch planner visual theme">Theme
-          <select id="themeSelect" class="tool-select">
+        <label class="theme-badge" title="Switch planner visual theme">
+          <span class="sc-badge-icon"><span class="icon-mask badge-icon-img icon-theme"></span></span>
+          <select id="themeSelect" class="theme-badge-select">
             <option value="dark">Dark</option>
             <option value="light">Light</option>
             <option value="blue">Blue</option>
@@ -131,20 +132,29 @@
           </select>
         </label>
 
+        <div id="suggestConfigsBtn" class="suggest-configs-badge" title="Suggest portrait, landscape and mixed configurations with SX40 counts." role="button" tabindex="0">
+          <span class="sc-badge-icon"><span class="icon-mask badge-icon-img icon-suggest"></span></span>
+          <span class="sc-badge-label">Suggest Configs</span>
+        </div>
         <details class="tool-menu tool-menu-end">
-          <summary class="tool-trigger" title="Build and data utilities">Build ▾</summary>
+          <summary class="tool-trigger build-badge" title="Build and data utilities">
+            <span class="sc-badge-icon"><span class="icon-mask badge-icon-img icon-build"></span></span>
+            <span class="sc-badge-label">Build</span>
+            <span class="build-badge-arrow">▾</span>
+          </summary>
           <div class="tool-menu-panel">
             <button id="validateBtn" class="tool-btn" title="Run validation for overlap, bounds, and capacity limits.">Validate</button>
-            <button id="suggestConfigsBtn" class="tool-btn" title="Suggest all feasible wall split configs for current node/processor counts.">Suggest Configs</button>
             <button id="autoPackBtn" class="tool-btn" title="Auto-pack regions based on current Hz/ULL/depth, panel size, node limits, and processor cabling capacity.">Auto Pack (Current Settings)</button>
             <button id="processorOverviewBtn" class="tool-btn" title="Show per-processor effective resolution, XD usage, and panel distribution.">Processor Overview</button>
-            <button id="exportBtn" class="tool-btn" title="Export all settings and mappings to JSON.">Export JSON</button>
-            <label class="tool-btn menu-file-btn" title="Import a previously exported LED wall JSON config.">Import JSON<input id="importInput"
+            <button id="exportBtn" class="tool-btn" title="Export all settings and mappings to JSON."><span class="icon-mask btn-icon icon-export"></span> Export JSON</button>
+            <button id="exportSvgBtn" class="tool-btn" title="Download the current LED wall layout as a vector SVG file."><span class="icon-mask btn-icon icon-svg-export"></span> Export SVG</button>
+            <label class="tool-btn menu-file-btn" title="Import a previously exported LED wall JSON config."><span class="icon-mask btn-icon icon-import"></span> Import JSON<input id="importInput"
                 type="file" accept="application/json" /></label>
             <button id="removeSelectedBtn" class="tool-btn danger"
               title="Remove the currently selected node, processor, or render area.">Remove Selected</button>
           </div>
         </details>
+        <div id="howToBtn" class="howto-badge" title="How to use this tool" role="button" tabindex="0"><span class="icon-mask badge-icon-img icon-help"></span></div>
       </div>
     </header>
 
@@ -155,8 +165,8 @@
 
       <section class="stage-panel">
         <div class="stage-meta-overlay">
-          <button id="fitViewBtn" class="tool-btn icon-btn" title="Fit the full LED wall canvas into the visible stage area.">⤢</button>
-          <button id="toggleCablePlanBtn" class="tool-btn icon-btn" title="Toggle cable plan overlay">⌁</button>
+          <button id="fitViewBtn" class="tool-btn icon-btn" title="Fit the full LED wall canvas into the visible stage area."><span class="icon-mask btn-icon icon-fit"></span></button>
+          <button id="toggleCablePlanBtn" class="tool-btn icon-btn" title="Toggle cable plan overlay"><span class="icon-mask btn-icon icon-cable"></span></button>
           <div id="selectionBadge" class="selection-badge">No selection</div>
         </div>
         <button id="plannerInfoBtn" class="planner-info-btn" title="Show processor and XD capacity details" aria-label="Planner capacity info">i</button>
@@ -206,7 +216,7 @@
     </section>
   </main>
 
-  <script src="js/led-configurator.js"></script>
+  <script src="js/led-configurator.js?v=5"></script>
 </body>
 
 </html>
