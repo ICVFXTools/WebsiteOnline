@@ -12,7 +12,7 @@
   <meta property="og:title" content="LED Wall Configurator | ICVFXTools" />
   <meta property="og:description"
     content="Plan LED wall node allocation, region mapping, and processor deployment with automatic validation." />
-  <meta property="og:image" content="https://www.icvfxtools.com/img/preview.png" />
+  <meta property="og:image" content="https://www.icvfxtools.com/img/ledwall.png" />
   <meta property="og:url" content="https://www.icvfxtools.com/led-wall-configurator.html" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="ICVFXTools" />
@@ -21,7 +21,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="LED Wall Configurator | ICVFXTools" />
   <meta name="twitter:description" content="Map render nodes and processors to LED wall regions and resolutions." />
-  <meta name="twitter:image" content="https://www.icvfxtools.com/img/preview.png" />
+  <meta name="twitter:image" content="https://www.icvfxtools.com/img/ledwall.png" />
   <meta name="twitter:site" content="@icvfxtools" />
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-P3QKZ6E0HN"></script>
@@ -40,9 +40,9 @@
 
   <link rel="alternate" hreflang="en" href="https://www.icvfxtools.com/led-wall-configurator.html" />
 
-  <link rel="icon" href="img/favicon.svg" type="image/png" />
-  <link rel="shortcut icon" href="img/favicon.svg" />
-  <link rel="apple-touch-icon" href="img/favicon.svg" />
+  <link rel="icon" href="img/ledwallico.png" type="image/png" />
+  <link rel="shortcut icon" href="img/ledwallico.png" />
+  <link rel="apple-touch-icon" href="img/ledwallico.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -50,7 +50,7 @@
     href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
     rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/led-configurator.css?v=6" />
+  <link rel="stylesheet" href="css/led-configurator.css?v=9" />
 </head>
 
 <body>
@@ -120,6 +120,15 @@
             <label class="tool-inline" title="Physical height per cabinet in mm">Cab H mm
               <input id="quickTileMmH" type="number" class="tool-select" min="1" max="2000" />
             </label>
+            <label class="tool-inline tool-inline-wide" title="LED processor type used across this project">Processor
+              <select id="quickProcessorProfile" class="tool-select">
+                <option value="Brompton SX40">Brompton SX40</option>
+                <option value="Brompton S8">Brompton S8</option>
+                <option value="Brompton SQ200">Brompton SQ200</option>
+                <option value="Megapixel HELIOS">Megapixel HELIOS</option>
+                <option value="Custom">Custom</option>
+              </select>
+            </label>
           </div>
         </details>
         <label class="theme-badge" title="Switch planner visual theme">
@@ -136,6 +145,14 @@
           <span class="sc-badge-icon"><span class="icon-mask badge-icon-img icon-suggest"></span></span>
           <span class="sc-badge-label">Suggest Configs</span>
         </div>
+        <div id="historyBtn" class="history-badge" title="Show history" role="button" tabindex="0">
+          <span class="history-badge-label">History</span>
+          <span id="historyBadgeCount" class="history-badge-count">0</span>
+        </div>
+        <div id="presetsBtn" class="presets-badge" title="Show presets" role="button" tabindex="0">
+          <span class="history-badge-label">Presets</span>
+          <span id="presetsBadgeCount" class="history-badge-count">0</span>
+        </div>
         <details class="tool-menu tool-menu-end">
           <summary class="tool-trigger build-badge" title="Build and data utilities">
             <span class="sc-badge-icon"><span class="icon-mask badge-icon-img icon-build"></span></span>
@@ -148,6 +165,7 @@
             <button id="processorOverviewBtn" class="tool-btn" title="Show per-processor effective resolution, XD usage, and panel distribution.">Processor Overview</button>
             <button id="exportBtn" class="tool-btn" title="Export all settings and mappings to JSON."><span class="icon-mask btn-icon icon-export"></span> Export JSON</button>
             <button id="exportSvgBtn" class="tool-btn" title="Download the current LED wall layout as a vector SVG file."><span class="icon-mask btn-icon icon-svg-export"></span> Export SVG</button>
+            <button id="exportCableSvgBtn" class="tool-btn" title="Download the wiring cable plan as a vector SVG file."><span class="icon-mask btn-icon icon-svg-export"></span> Export Wiring SVG</button>
             <label class="tool-btn menu-file-btn" title="Import a previously exported LED wall JSON config."><span class="icon-mask btn-icon icon-import"></span> Import JSON<input id="importInput"
                 type="file" accept="application/json" /></label>
             <button id="removeSelectedBtn" class="tool-btn danger"
@@ -167,6 +185,14 @@
         <div class="stage-meta-overlay">
           <button id="fitViewBtn" class="tool-btn icon-btn" title="Fit the full LED wall canvas into the visible stage area."><span class="icon-mask btn-icon icon-fit"></span></button>
           <button id="toggleCablePlanBtn" class="tool-btn icon-btn" title="Toggle cable plan overlay"><span class="icon-mask btn-icon icon-cable"></span></button>
+          <select id="wiringPatternSelect" class="wiring-pattern-select" title="Wiring daisy-chain pattern">
+            <option value="linear">Linear</option>
+            <option value="S">S-Shape</option>
+            <option value="invS">Inv. S</option>
+            <option value="N">N-Shape</option>
+            <option value="invN">Inv. N</option>
+          </select>
+          <button id="toggleGlobalXdBtn" class="tool-btn icon-btn global-xd-btn" title="Toggle global unit numbering — units numbered sequentially across all processors (X8 instead of X1)">#</button>
           <div id="selectionBadge" class="selection-badge">No selection</div>
         </div>
         <button id="plannerInfoBtn" class="planner-info-btn" title="Show processor and XD capacity details" aria-label="Planner capacity info">i</button>
@@ -216,7 +242,7 @@
     </section>
   </main>
 
-  <script src="js/led-configurator.js?v=5"></script>
+  <script src="js/led-configurator.js?v=9"></script>
 </body>
 
 </html>

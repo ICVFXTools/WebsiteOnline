@@ -80,8 +80,8 @@
       "Assign render nodes to exact wall regions.",
       "Validate throughput, coverage, and deployment constraints."
     ],
-    "showcaseImageUrl": "img/preview.png",
-    "thumbnailUrl": "img/favicon.svg",
+    "showcaseImageUrl": "img/ledwall.png",
+    "thumbnailUrl": "img/ledwallico.png",
     "customPage": true,
     "pageUrl": "led-wall-configurator.html"
   }
