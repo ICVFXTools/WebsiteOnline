@@ -84,5 +84,18 @@
     "thumbnailUrl": "img/ledwallico.png",
     "customPage": true,
     "pageUrl": "led-wall-configurator.html"
+  },
+  {
+    "title": "LensForge",
+    "subtext": "Lens Calibration Suite",
+    "description": "Professional multi-solver lens calibration for VFX and Virtual Production. Compare OpenCV Standard, Extended, Rational, and COLMAP SfM results side-by-side. Export to JSON, Nuke, CSV, or plain-text report.",
+    "subtitle": [
+      "Multi-solver lens calibration for VFX.",
+      "Compare OpenCV & COLMAP results instantly."
+    ],
+    "showcaseImageUrl": "img/lensforge.png",
+    "thumbnailUrl": "img/lensforgeico.png",
+    "customPage": true,
+    "pageUrl": "lensforge/"
   }
 ]
