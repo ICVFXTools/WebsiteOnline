@@ -3,23 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LensForge — Lens Calibration Suite</title>
+  <title>LensForge - Lens Calibration Suite</title>
   <meta name="description" content="Holistic lens calibration for VFX and Virtual Production. Multi-solver comparison: OpenCV Standard, Extended, Rational, and COLMAP SfM." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-  <script type="module" crossorigin src="/lensforge/assets/index-DRMwjCFv.js"></script>
-  <link rel="stylesheet" crossorigin href="/lensforge/assets/index-D66IZuAr.css">
+  <script type="module" crossorigin src="/lensforge/assets/index-D1PEmYtD.js"></script>
+  <link rel="stylesheet" crossorigin href="/lensforge/assets/index-Dx_RwWDN.css">
 </head>
 <body>
 
   <!-- =========================================================
-       API KEY GATE — shown until a valid key is entered
+       API KEY GATE - shown until a valid key is entered
   ========================================================== -->
   <div id="key-gate" class="gate-overlay">
     <div class="gate-box">
       <div class="gate-logo">ICVFXTOOLS</div>
-      <p class="gate-sub">LensForge — Lens Calibration Suite</p>
+      <p class="gate-sub">LensForge - Lens Calibration Suite</p>
       <p class="gate-desc">
         Enter your studio API key to access the calibration tools.<br />
         Keys are issued per-studio. Contact your facility admin if you don't have one.
@@ -71,7 +71,7 @@
     <nav class="step-nav" id="step-nav">
       <button class="step-btn active" data-step="1" onclick="goToStep(1)">
         <span class="step-num">01</span>
-        <span class="step-label">Sensor & Lens</span>
+        <span class="step-label">Sensor &amp; Lens</span>
       </button>
       <div class="step-line"></div>
       <button class="step-btn" data-step="2" onclick="goToStep(2)">
@@ -93,7 +93,7 @@
     <main>
 
       <!-- ======================================================
-           STEP 1 — Sensor & Lens
+           STEP 1 - Sensor & Lens
       ====================================================== -->
       <section class="step-panel active" id="step-1">
         <h2>Sensor &amp; Lens Configuration</h2>
@@ -114,19 +114,26 @@
             <input type="number" id="sensor-height" placeholder="19.13333.0" step="0.01" value="19.13333" min="0.1" max="200" />
           </div>
           <div class="form-group">
-            <label for="nominal-fl">Nominal Focal Length <span class="unit">mm</span></label>
+            <label for="nominal-fl">
+              Nominal Focal Length <span class="unit">mm</span>
+              <span id="exif-fl-hint" class="exif-hint hidden"></span>
+            </label>
             <input type="number" id="nominal-fl" placeholder="35.0" step="0.1" value="35.0" min="1" max="2000" />
             <span class="field-hint">The marked / stated focal length on the lens barrel</span>
           </div>
-          <div class="form-group">
-            <label>Image Resolution <span class="unit">px</span></label>
-            <div class="input-row">
-              <input type="number" id="img-width"  placeholder="1920" value="1920" min="100" max="20000" />
-              <span class="sep">×</span>
-              <input type="number" id="img-height" placeholder="1080" value="1080" min="100" max="20000" />
-            </div>
-            <span class="field-hint">Auto-detected from uploaded images</span>
-          </div>
+        </div>
+
+        <!-- FL quick-set buttons -->
+        <div class="fl-presets">
+          <span class="fl-preset-label">FL quick-set</span>
+          <button class="fl-preset-btn" data-fl="14"  onclick="setFL(this)">14mm</button>
+          <button class="fl-preset-btn" data-fl="18"  onclick="setFL(this)">18mm</button>
+          <button class="fl-preset-btn" data-fl="24"  onclick="setFL(this)">24mm</button>
+          <button class="fl-preset-btn" data-fl="35"  onclick="setFL(this)">35mm</button>
+          <button class="fl-preset-btn" data-fl="50"  onclick="setFL(this)">50mm</button>
+          <button class="fl-preset-btn" data-fl="85"  onclick="setFL(this)">85mm</button>
+          <button class="fl-preset-btn" data-fl="100" onclick="setFL(this)">100mm</button>
+          <button class="fl-preset-btn" data-fl="135" onclick="setFL(this)">135mm</button>
         </div>
 
         <!-- Sensor presets -->
@@ -148,7 +155,7 @@
       </section>
 
       <!-- ======================================================
-           STEP 2 — Calibration Pattern
+           STEP 2 - Calibration Pattern
       ====================================================== -->
       <section class="step-panel" id="step-2">
         <h2>Calibration Pattern</h2>
@@ -157,18 +164,25 @@
           Checkerboard is the most reliable and widely supported option.
         </p>
 
+        <div class="calibration-grid-nudge">
+          <span class="nudge-icon">◈</span>
+          <span>Don't have a checkerboard pattern? Generate one free with our
+            <a href="/calibration-tool.html" target="_blank">Calibration Grid Tool →</a>
+          </span>
+        </div>
+
         <div class="pattern-layout">
 
           <!-- Left: controls + guidelines -->
           <div class="pattern-controls">
             <div class="form-grid">
               <div class="form-group">
-                <label for="pattern-cols">Inner Corners — Width</label>
+                <label for="pattern-cols">Inner Corners - Width</label>
                 <input type="number" id="pattern-cols" value="11" min="3" max="25" />
                 <span class="field-hint">Number of internal corner intersections horizontally</span>
               </div>
               <div class="form-group">
-                <label for="pattern-rows">Inner Corners — Height</label>
+                <label for="pattern-rows">Inner Corners - Height</label>
                 <input type="number" id="pattern-rows" value="7" min="3" max="25" />
                 <span class="field-hint">Number of internal corner intersections vertically</span>
               </div>
@@ -182,10 +196,10 @@
             <div class="info-panel">
               <p class="info-title">Capture guidelines for reliable calibration</p>
               <ul>
-                <li>Use <strong>15–30 images</strong> — more is better, diminishing returns above 40</li>
+                <li>Use <strong>10-24 images</strong> (more is better, diminishing returns above 24)</li>
                 <li>Cover all four corners and the centre of the frame across your set</li>
-                <li>Tilt the board ±30° in X, Y, and Z axes between shots</li>
-                <li>Keep the board <strong>flat</strong> — mount on rigid aluminium or foam board</li>
+                <li>Tilt the board +/-30 degrees in X, Y, and Z axes between shots</li>
+                <li>Keep the board <strong>flat</strong> - mount on rigid aluminium or foam board</li>
                 <li>Avoid motion blur, focus the board sharply, use consistent exposure</li>
                 <li>Shoot at your working aperture (not wide-open, not diffraction-limited)</li>
               </ul>
@@ -196,13 +210,13 @@
           <div class="pattern-preview">
             <div class="pattern-preview-header">
               <h4>Live Preview</h4>
-              <span id="pattern-summary" class="pattern-summary">10 × 7 squares &mdash; 9 × 6 inner corners</span>
+              <span id="pattern-summary" class="pattern-summary">10 x 7 squares | 9 x 6 inner corners</span>
             </div>
             <div class="pattern-canvas-wrap">
               <canvas id="pattern-canvas" class="pattern-canvas" width="560" height="400"></canvas>
             </div>
             <p class="pattern-note">
-              <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#a3f26b;vertical-align:middle;margin-right:4px;"></span>
+              <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#ff1d53;vertical-align:middle;margin-right:4px;"></span>
               Green dots mark the inner corner intersections OpenCV detects
             </p>
           </div>
@@ -216,26 +230,79 @@
       </section>
 
       <!-- ======================================================
-           STEP 3 — Image Upload
+           STEP 3 - Image Upload
       ====================================================== -->
       <section class="step-panel" id="step-3">
         <h2>Calibration Images</h2>
-        <p class="section-hint">Upload your calibration image set. Images are sent securely to the LensForge compute server and deleted immediately after processing — nothing is stored.</p>
+        <p class="section-hint">Upload your calibration image set. Images are sent securely to the LensForge compute server and deleted immediately after processing - nothing is stored.</p>
 
-        <div id="drop-zone" class="drop-zone">
-          <div class="drop-icon">⬆</div>
-          <p class="drop-title">Drop images here</p>
-          <p class="drop-sub">or <label class="file-link" for="file-input">browse files</label></p>
-          <p class="drop-formats">JPG &nbsp;·&nbsp; PNG &nbsp;·&nbsp; TIFF &nbsp;·&nbsp; BMP &nbsp;·&nbsp; WEBP</p>
-          <input type="file" id="file-input" accept="image/*" multiple hidden />
+        <!-- Mode toggle -->
+        <div class="position-mode-row">
+          <label class="toggle-label">
+            <input type="checkbox" id="multi-position-toggle" />
+            <span class="toggle-visual"></span>
+            Multi-position calibration &mdash; zoom focal lengths &amp; focus breathing
+          </label>
         </div>
 
-        <div id="gallery-wrap" class="gallery-wrap hidden">
-          <div class="gallery-header">
-            <span id="gallery-count">0 images</span>
-            <button class="btn-sm btn-danger" onclick="clearImages()">Clear all</button>
+        <!-- Single-position area (default) -->
+        <div id="single-position-area">
+          <div id="drop-zone" class="drop-zone">
+            <div class="drop-icon">&#8679;</div>
+            <p class="drop-title">Drop images here</p>
+            <p class="drop-sub">or <label class="file-link" for="file-input">browse files</label></p>
+            <p class="drop-formats">JPG &nbsp;&middot;&nbsp; PNG &nbsp;&middot;&nbsp; TIFF &nbsp;&middot;&nbsp; BMP &nbsp;&middot;&nbsp; WEBP</p>
+            <input type="file" id="file-input" accept="image/*" multiple hidden />
           </div>
-          <div id="gallery-grid" class="gallery-grid"></div>
+
+          <div id="gallery-wrap" class="gallery-wrap hidden">
+            <div class="gallery-header">
+              <span id="gallery-count">0 images</span>
+              <button class="btn-sm btn-danger" onclick="clearImages()">Clear all</button>
+            </div>
+            <p id="min-images-msg" class="min-images-msg hidden"></p>
+            <div id="gallery-grid" class="gallery-grid"></div>
+          </div>
+        </div>
+
+        <!-- Multi-position area (hidden by default) -->
+        <div id="multi-position-area" class="hidden">
+
+          <!-- Single solver selector -->
+          <div class="multi-solver-picker">
+            <h4>Solver for all positions</h4>
+            <div class="multi-solver-radio-list">
+              <label class="multi-solver-option">
+                <input type="radio" name="multi-solver" class="multi-solver-radio" value="standard" />
+                <span class="radio-visual"></span>
+                <span>Standard K2</span>
+              </label>
+              <label class="multi-solver-option">
+                <input type="radio" name="multi-solver" class="multi-solver-radio" value="extended" checked />
+                <span class="radio-visual"></span>
+                <span>Extended K3 (recommended)</span>
+              </label>
+              <label class="multi-solver-option">
+                <input type="radio" name="multi-solver" class="multi-solver-radio" value="rational" />
+                <span class="radio-visual"></span>
+                <span>Rational</span>
+              </label>
+              <label class="multi-solver-option">
+                <input type="radio" name="multi-solver" class="multi-solver-radio" value="colmap" />
+                <span class="radio-visual"></span>
+                <span>COLMAP</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Bucket list -->
+          <div id="bucket-list" class="bucket-list"></div>
+          <button class="btn-add-bucket" onclick="addBucket()">+ Add Position</button>
+
+          <p class="field-hint" style="margin-top:10px">
+            Each position needs at least 10 images. Set the focal length and focus distance for each position.
+            Use &#8734; for infinity focus. After calibration you can export a multi-position .ulens file.
+          </p>
         </div>
 
         <div class="nav-bar">
@@ -247,7 +314,7 @@
       </section>
 
       <!-- ======================================================
-           STEP 4 — Calibrate & Results
+           STEP 4 - Calibrate & Results
       ====================================================== -->
       <section class="step-panel" id="step-4">
         <h2>Calibration &amp; Results</h2>
@@ -262,7 +329,7 @@
               <span class="check-visual"></span>
               <div class="solver-meta">
                 <strong>OpenCV Standard (K2)</strong>
-                <span>Estimates k1, k2, p1, p2 &mdash; best for typical cinema &amp; prime lenses</span>
+                <span>Estimates k1, k2, p1, p2 - best for typical cinema &amp; prime lenses</span>
               </div>
             </label>
 
@@ -271,7 +338,7 @@
               <span class="check-visual"></span>
               <div class="solver-meta">
                 <strong>OpenCV Extended (K3)</strong>
-                <span>Estimates k1, k2, k3/p3, p1, p2 &mdash; recommended for wide-angle lenses</span>
+                <span>Estimates k1, k2, k3, p1, p2 - recommended for wide-angle lenses</span>
               </div>
             </label>
 
@@ -280,7 +347,7 @@
               <span class="check-visual"></span>
               <div class="solver-meta">
                 <strong>OpenCV Rational Model</strong>
-                <span>Estimates k1–k6, p1, p2 &mdash; for fisheye or heavily distorted lenses</span>
+                <span>Estimates k1-k6, p1, p2 - for fisheye or heavily distorted lenses</span>
               </div>
             </label>
 
@@ -289,7 +356,7 @@
               <span class="check-visual"></span>
               <div class="solver-meta">
                 <strong>COLMAP (Structure from Motion)</strong>
-                <span>Independent SfM approach — no calibration target required, derives intrinsics from scene geometry</span>
+                <span>Independent SfM approach - no calibration target required, derives intrinsics from scene geometry</span>
               </div>
             </label>
 
@@ -313,14 +380,34 @@
           <div class="error-body">
             <p id="error-message" class="error-message"></p>
             <ul class="error-tips">
-              <li>Check <strong>Inner Corners</strong> in Step 2 — must match your physical board exactly (count intersections, not squares)</li>
-              <li>Make sure the board is <strong>fully in frame</strong> in every image — no edge cropping</li>
+              <li>Check <strong>Inner Corners</strong> in Step 2 - must match your physical board exactly (count intersections, not squares)</li>
+              <li>Make sure the board is <strong>fully in frame</strong> in every image - no edge cropping</li>
               <li>Use a fast shutter to avoid motion blur; board must be in sharp focus</li>
-              <li>Avoid overexposure — black and white squares must be clearly distinct</li>
-              <li>Upload at least 15 images with the board at varied angles and positions</li>
+              <li>Avoid overexposure - black and white squares must be clearly distinct</li>
+              <li>Upload at least 10 images with the board at varied angles and positions</li>
             </ul>
           </div>
           <button class="btn-ghost btn-sm" onclick="document.getElementById('error-area').classList.add('hidden')">Dismiss</button>
+        </div>
+
+        <!-- COLMAP partial failure warning -->
+        <div id="colmap-warning" class="solver-warning hidden">
+          <span class="solver-warning-icon">!</span>
+          COLMAP solver was selected but did not complete. Results shown are from OpenCV solvers only.
+        </div>
+
+        <!-- Multi-position bucket results (shown instead of single results when multi-run) -->
+        <div id="bucket-results-area" class="bucket-results-area hidden"></div>
+
+        <!-- Multi-position export row (shown together with bucket-results-area) -->
+        <div id="multi-export-row" class="results-topbar hidden">
+          <h3>Export Results</h3>
+          <div class="export-row">
+            <button class="btn-sm btn-unreal"  onclick="exportUnreal()">Export Unreal (.ulens)</button>
+            <button class="btn-sm"             onclick="exportJSONMulti()">Export JSON</button>
+            <button class="btn-sm btn-3de"     onclick="export3DEScript()">3DE (.py) - last pos</button>
+            <button class="btn-sm btn-blender" onclick="exportBlenderScript()">Blender (.py) - last pos</button>
+          </div>
         </div>
 
         <!-- Results -->
@@ -333,6 +420,11 @@
               <button class="btn-sm" onclick="exportNuke()">Export Nuke</button>
               <button class="btn-sm" onclick="exportCSV()">Export CSV</button>
               <button class="btn-sm" onclick="exportReport()">Export Report</button>
+              <button class="btn-sm btn-unreal" onclick="exportUnreal()">Export Unreal (.ulens)</button>
+              <button class="btn-sm btn-3de" onclick="export3DEScript()">Export 3DE (.py)</button>
+              <button class="btn-sm btn-blender" onclick="exportBlenderScript()">Export Blender (.py)</button>
+              <button class="btn-sm" onclick="loadCompareJSON()" title="Load a previous LensForge JSON to compare parameters side-by-side">Compare Previous</button>
+              <input type="file" id="compare-file-input" accept=".json" hidden />
             </div>
           </div>
 
@@ -341,19 +433,37 @@
           <div id="rms-chart" class="rms-chart">
             <h4>Reprojection Error (RMS pixels)</h4>
             <div id="rms-bars" class="rms-bars"></div>
-            <p class="rms-note">Lower is better. &lt;0.5 px = excellent &nbsp;|&nbsp; &lt;1.0 px = acceptable &nbsp;|&nbsp; &gt;1.0 px = investigate capture quality</p>
+            <p class="rms-note">Lower is better. &lt;0.5 px = excellent &nbsp;|&nbsp; &lt;1.0 px = acceptable &nbsp;|&nbsp; &gt;1.0 px = investigate</p>
+          </div>
+
+          <!-- Distortion preview canvases (shown after calibration) -->
+          <div id="undistortion-preview" class="undistortion-section hidden">
+            <h4>Lens Distortion Preview</h4>
+            <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:12px">
+              Visual representation of the solved distortion model. Barrel = lines bow outward. Pincushion = lines bow inward.
+            </p>
+            <div class="undist-canvases">
+              <div class="undist-canvas-wrap">
+                <canvas id="dist-canvas" width="380" height="260"></canvas>
+                <p>As captured (distorted)</p>
+              </div>
+              <div class="undist-canvas-wrap">
+                <canvas id="undist-canvas" width="380" height="260"></canvas>
+                <p>Corrected (undistorted)</p>
+              </div>
+            </div>
           </div>
 
           <div class="param-legend">
             <h4>Parameter Reference</h4>
             <dl>
-              <dt>fl_mm</dt><dd>Estimated real focal length in mm — computed from pixel focal length × sensor size ÷ image width/height.</dd>
+              <dt>fl_mm</dt><dd>Estimated real focal length in mm - computed from pixel focal length x sensor size divided by image width/height.</dd>
               <dt>fx / fy</dt><dd>Pixel focal lengths. May differ slightly for non-square pixels or anamorphic lenses.</dd>
               <dt>c1 (cx) / c2 (cy)</dt><dd>Principal point in pixels. Ideally close to image centre. Large offsets may indicate decentring.</dd>
               <dt>k1 / k2</dt><dd>Radial distortion. Negative k1 = barrel (typical for wide primes). Positive k1 = pincushion.</dd>
-              <dt>k3 / p3</dt><dd>Third radial distortion coefficient. OpenCV calls this k3; some VFX pipelines label it p3. Only non-zero in Extended and Rational models.</dd>
+              <dt>k3</dt><dd>Third radial distortion coefficient. Only estimated (non-zero) in the Extended K3 and Rational models. Fixed to 0 in the Standard K2 model.</dd>
               <dt>p1 / p2</dt><dd>Tangential (decentering) distortion. Usually very small (&lt;0.01). Large values suggest a misaligned lens element.</dd>
-              <dt>RMS</dt><dd>Root Mean Square reprojection error in pixels — how accurately the solved model predicts the detected corner positions.</dd>
+              <dt>RMS</dt><dd>Root Mean Square reprojection error in pixels - how accurately the solved model predicts the detected corner positions.</dd>
             </dl>
           </div>
 
@@ -367,7 +477,7 @@
     </main>
 
     <footer>
-      <p>LensForge &mdash; Open lens calibration for VFX &amp; Virtual Production &mdash; <a href="https://icvfxtools.com" target="_blank">icvfxtools.com</a></p>
+      <p>LensForge | Open lens calibration for VFX &amp; Virtual Production | <a href="https://icvfxtools.com" target="_blank">icvfxtools.com</a></p>
       <p>&copy; 2025 ICVFXTools. All Rights Reserved.</p>
     </footer>
 
