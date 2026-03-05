@@ -36,7 +36,7 @@ const S8_TABLE = {
   250: { standard: { 8: 1.008, 10: 0.8064, 12: 0.672 }, ull: { 8: 0.504, 10: 0.4032, 12: 0.336 } }
 };
 
-// Brompton SQ200 total processor capacity (MPix) per FPS — derived as 4× SX40 standard, capped at 36 MPix.
+// Brompton SQ200 total processor capacity (MPix) per FPS - derived as 4× SX40 standard, capped at 36 MPix.
 // ULL = half of standard (same ratio as SX40).
 const SQ200_TABLE = {
   24:  { standard: 36,    ull: 18     },
@@ -134,7 +134,7 @@ const HELIOS_ETH_PORTS_PER_SWITCH = 12; // RP12: 12 × 1G ports per switch
 
 // HELIOS pixel capacity per 1G Ethernet port (Switch to Tiles, 1G).
 // Source: HELIOS User Guide J.15 Output Port Capacity table.
-// 8-bit column absent from spec — using 10-bit values (conservative).
+// 8-bit column absent from spec - using 10-bit values (conservative).
 const HELIOS_SWITCH_PORT_TABLE = {
   24:  { 8: 1275000, 10: 1275000, 12: 1062500 },
   25:  { 8: 1225000, 10: 1225000, 12: 1020000 },
@@ -172,17 +172,17 @@ const FPS_HELIOS_FALLBACK = { '100': '120', '150': '144', '180': '144', '192': '
 
 // ─── Processor Registry ───────────────────────────────────────────────────────
 // To add a new processor: add one entry here. No other code changes needed.
-//   portUnitLabel  — display name for the distribution unit (e.g. 'XD', 'RP12')
-//   portUnitPrefix — short prefix for cable diagram labels (e.g. 'X' → X1P1, 'RP' → RP1P1)
-//   portsPerUnit   — Ethernet ports on each unit (1G links to panels)
-//   maxUnits       — max distribution units per processor (Infinity = no limit)
-//   hasInputGroups — true if input resolution is capped by fps
-//   inputGroupsFn  — function(fps) → { w, h, maxHz, label } for the active input group
-//   parentUnit     — optional { label, unitsPerParent } for 2-level port hierarchies (e.g. QDS→XDS)
-//   nearestFps     — function(rawFps) → fps key used for table lookup
-//   capacityLookup — function(fps, bpc, latencyMode) → total capacity in MPix
-//   portLookup     — function(fps, bpc, latencyMode) → pixels per 1G port
-//   infoNote       — optional string shown in the processor details panel
+//   portUnitLabel  - display name for the distribution unit (e.g. 'XD', 'RP12')
+//   portUnitPrefix - short prefix for cable diagram labels (e.g. 'X' → X1P1, 'RP' → RP1P1)
+//   portsPerUnit   - Ethernet ports on each unit (1G links to panels)
+//   maxUnits       - max distribution units per processor (Infinity = no limit)
+//   hasInputGroups - true if input resolution is capped by fps
+//   inputGroupsFn  - function(fps) → { w, h, maxHz, label } for the active input group
+//   parentUnit     - optional { label, unitsPerParent } for 2-level port hierarchies (e.g. QDS→XDS)
+//   nearestFps     - function(rawFps) → fps key used for table lookup
+//   capacityLookup - function(fps, bpc, latencyMode) → total capacity in MPix
+//   portLookup     - function(fps, bpc, latencyMode) → pixels per 1G port
+//   infoNote       - optional string shown in the processor details panel
 // ─────────────────────────────────────────────────────────────────────────────
 const PROCESSOR_REGISTRY = {
   'Brompton SX40': {
@@ -760,7 +760,7 @@ function syncCanvasMetaButtons() {
     els.toggleGlobalXdBtn.classList.toggle('primary', !!view.globalUnitNumbering);
     els.toggleGlobalXdBtn.title = view.globalUnitNumbering
       ? 'Disable global unit numbering (back to per-processor numbering)'
-      : 'Enable global unit numbering — units numbered sequentially across all processors';
+      : 'Enable global unit numbering - units numbered sequentially across all processors';
   }
 }
 
@@ -1586,7 +1586,7 @@ function renderSelectionDetails(report) {
         <div class="grid-2">
           <label class="field" title="Maximum single output width supported by this node">Max Width<input type="number" data-edit="node.maxWidth" value="${node.maxWidth}" /></label>
           <label class="field" title="Maximum single output height supported by this node">Max Height<input type="number" data-edit="node.maxHeight" value="${node.maxHeight}" /></label>
-          <label class="field" title="Physical output ports on this node — sets maximum render regions">Output Ports<input type="number" data-edit="node.outputs" value="${node.outputs}" min="1" max="8" /></label>
+          <label class="field" title="Physical output ports on this node - sets maximum render regions">Output Ports<input type="number" data-edit="node.outputs" value="${node.outputs}" min="1" max="8" /></label>
           <div class="field" title="Max pixel throughput derived from Max Width x Max Height">Max MPix<br><strong>${((node.maxWidth * node.maxHeight) / 1_000_000).toFixed(2)} MPix</strong><br><span style="font-size:0.68rem;color:var(--muted)">${node.maxWidth}x${node.maxHeight}</span></div>
         </div>
         <label class="field" title="Optional failover node. Use this only when running redundancy (N+1 or mirror).">Failover Node (Optional)<select data-edit="node.backupNodeId">${backupOptions}</select></label>
@@ -1815,7 +1815,7 @@ function suggestSmartPlacementForProcessor(processorId, ignoreRegionId = '') {
   const maxPanelsByPixels = Math.max(1, Math.floor(procCapPixels / tilePixels));
   const maxPanels = Math.min(maxPanelsByPixels, maxPanelsByPorts, 2000);
 
-  // Resolve node dimension constraints — also cap by processor input group at current FPS.
+  // Resolve node dimension constraints - also cap by processor input group at current FPS.
   const region = state.regions.find((r) => r.id === ignoreRegionId);
   const node = region ? state.nodes.find((n) => n.id === region.nodeId) : state.nodes[0];
   const rawNodeMaxW = node ? node.maxWidth : 7680;
@@ -2079,7 +2079,7 @@ function buildPortTilePath(port) {
     const regionIndex = region ? Math.max(0, state.regions.findIndex((r) => r.id === region.id)) : 0;
     const base = region ? colorForRegion(region, regionIndex) : '#6cb0ff';
     if (seg.vertical) {
-      // N / invN: column segment — traverse rows within this column.
+      // N / invN: column segment - traverse rows within this column.
       const start = seg.reversed ? seg.h - 1 : 0;
       const end   = seg.reversed ? -1 : seg.h;
       const step  = seg.reversed ? -1 : 1;
@@ -2087,7 +2087,7 @@ function buildPortTilePath(port) {
         tilePath.push({ x: seg.x, y: seg.y + ty, base });
       }
     } else {
-      // linear / S / invS: row segment — traverse columns within this row.
+      // linear / S / invS: row segment - traverse columns within this row.
       const start = seg.reversed ? seg.w - 1 : 0;
       const end   = seg.reversed ? -1 : seg.w;
       const step  = seg.reversed ? -1 : 1;
@@ -2554,7 +2554,7 @@ function resolveProcessorCapacity(processor, metadata) {
     };
   }
 
-  // Unknown / legacy profile — fall back to custom MPix.
+  // Unknown / legacy profile - fall back to custom MPix.
   return {
     capacityMPix: clampFloat(processor.customMPix, 0.1, 1000),
     matchedFps: nearestKnownFps(metadata.frameRate),
@@ -2700,7 +2700,7 @@ function showDisclaimer() {
       <div class="po-body disclaimer-body">
         <p>This tool uses its own calculation methods to estimate the number of processors, XD units, and other hardware required for your LED wall configuration.</p>
         <p><strong>These estimates may not be fully accurate.</strong> Actual hardware requirements can vary based on firmware versions, signal routing, redundancy configurations, and other factors not fully modelled here.</p>
-        <p>Please always refer to the original equipment manufacturers (OEMs) — such as Brompton Technology and Megapixel VR — for verified and up-to-date specifications before finalising your setup.</p>
+        <p>Please always refer to the original equipment manufacturers (OEMs) - such as Brompton Technology and Megapixel VR - for verified and up-to-date specifications before finalising your setup.</p>
         <p>This tool is intended for <strong style="color:#ff4f63">rough planning and estimation purposes only</strong>.</p>
         <button class="tool-btn primary disclaimer-accept-btn">I Understand</button>
       </div>
@@ -3416,7 +3416,7 @@ function showSuggestConfigsModal(hw) {
     .filter((c) => c.orientation !== 'portrait')
     .sort((a, b) => a.processors - b.processors || a.totalXds - b.totalXds)[0] || null;
 
-  // 3. Mixed: the band split (non-uniform rows — different-width regions per band)
+  // 3. Mixed: the band split (non-uniform rows - different-width regions per band)
   const mixedBest = hw.bandCandidate || null;
 
   const allThree = [portraitBest, landscapeBest, mixedBest].filter(Boolean);
@@ -3502,9 +3502,9 @@ function showSuggestConfigsModal(hw) {
     </div>`;
   }
 
-  const portraitSubtitle = `Node rotated 90° — tall narrow strips`;
-  const landscapeSubtitle = `Node normal orientation — wide short regions`;
-  const mixedSubtitle = `Non-uniform bands — mixed region widths per row`;
+  const portraitSubtitle = `Node rotated 90° - tall narrow strips`;
+  const landscapeSubtitle = `Node normal orientation - wide short regions`;
+  const mixedSubtitle = `Non-uniform bands - mixed region widths per row`;
 
   const modal = document.createElement('div');
   modal.id = 'suggestConfigsModal';
@@ -3527,7 +3527,7 @@ function showSuggestConfigsModal(hw) {
   modal.querySelector('.po-close').addEventListener('click', () => modal.remove());
   modal.addEventListener('click', (e) => { if (e.target === modal) modal.remove(); });
 
-  // Wire Apply buttons — pass a fake hw shell wrapping the chosen candidate.
+  // Wire Apply buttons - pass a fake hw shell wrapping the chosen candidate.
   const candidateMap = { Portrait: portraitBest, Landscape: landscapeBest, Mixed: mixedBest };
   modal.querySelectorAll('.sc-apply-btn').forEach((btn) => {
     btn.addEventListener('click', () => {
@@ -4338,7 +4338,7 @@ function buildCablePlan({ processorLoads, wall }) {
 
     regions.forEach((region) => {
       if (isColumnMajor) {
-        // N / invN: column-major traversal — iterate columns, snake up/down.
+        // N / invN: column-major traversal - iterate columns, snake up/down.
         for (let colIdx = 0; colIdx < region.w; colIdx += 1) {
           const x = region.x + colIdx;
           const reversed = (pattern === 'N' && colIdx % 2 === 1)
@@ -4367,7 +4367,7 @@ function buildCablePlan({ processorLoads, wall }) {
           }
         }
       } else {
-        // linear / S / invS: row-major traversal — iterate rows, optionally snake L/R.
+        // linear / S / invS: row-major traversal - iterate rows, optionally snake L/R.
         for (let y = region.y; y < region.y + region.h; y += 1) {
           const rowIdx = y - region.y;
           const reversed = (pattern === 'S' && rowIdx % 2 === 1)

@@ -1,5 +1,5 @@
 // js/patterns/aprilgrid_svg.js
-// SVG generator (in millimetres) for AprilTag grid — matches the example formation.
+// SVG generator (in millimetres) for AprilTag grid - matches the example formation.
 // - ONE added black border (our own), payload-only cells
 // - spacing-sized black squares at intersections, top/bottom, left/right, and corners
 // - IDs row-major from startId

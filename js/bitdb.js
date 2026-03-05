@@ -13,7 +13,7 @@ export async function loadBitDB(){
     bitdbStatus.textContent = `JSON loaded (dicts: ${Object.keys(st.bitDB).length})`;
   } catch(e){
     st.bitDB = null;
-    bitdbStatus.textContent = 'JSON not found — js-aruco fallback only';
+    bitdbStatus.textContent = 'JSON not found - js-aruco fallback only';
     bitdbStatus.classList.add('warn');
   }
 }

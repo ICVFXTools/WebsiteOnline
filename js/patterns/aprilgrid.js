@@ -1,5 +1,5 @@
 // js/patterns/aprilgrid.js
-// Canvas preview for AprilTag Grid — matches the example:
+// Canvas preview for AprilTag Grid - matches the example:
 // - ONE added black border (our own) around payload
 import { st } from '../state.js';
 import { ensureFamily } from '../apriltag.js'; // Use the shared ensureFamily
