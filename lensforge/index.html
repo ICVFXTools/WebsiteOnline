@@ -11,7 +11,7 @@
   <link rel="icon" href="/img/favicon.svg" type="image/svg+xml" />
   <link rel="shortcut icon" href="/img/favicon.svg" />
   <link rel="apple-touch-icon" href="/img/favicon.svg" />
-  <script type="module" crossorigin src="/lensforge/assets/index-Ck0ZrYmW.js"></script>
+  <script type="module" crossorigin src="/lensforge/assets/index-DGcZif4m.js"></script>
   <link rel="stylesheet" crossorigin href="/lensforge/assets/index-DJNH58r5.css">
 </head>
 <body>
@@ -578,6 +578,57 @@
           <p id="lib-upload-error" class="gate-error hidden"></p>
           <button class="btn-ghost btn-sm" onclick="libHideUpload()">Cancel</button>
           <button class="btn-primary btn-sm" id="lib-upload-btn" onclick="libDoUpload()">Upload</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================
+         EDIT METADATA MODAL
+    ========================================================== -->
+    <div id="lib-edit-modal" class="lib-modal-overlay hidden">
+      <div class="lib-modal-box">
+        <div class="lib-modal-header">
+          <h3>Edit Lens Metadata</h3>
+          <button class="lib-modal-close" onclick="libHideEdit()">×</button>
+        </div>
+        <div class="lib-modal-body">
+          <div class="form-group">
+            <label>Lens Name</label>
+            <input type="text" id="lib-edit-lens-name" placeholder="e.g. Zeiss CP.3 50mm T2.1" />
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Camera Make</label>
+              <select id="lib-edit-camera-make" onchange="libUpdateEditModels()">
+                <option value="">— Select Make —</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Camera Model</label>
+              <select id="lib-edit-camera-model">
+                <option value="">— Select Model —</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Focal Length <span class="unit">mm</span></label>
+            <input type="number" id="lib-edit-focal-length" placeholder="50" step="0.1" min="1" max="2000" />
+          </div>
+          <div class="form-group">
+            <label>Folder</label>
+            <select id="lib-edit-folder">
+              <option value="/">/ (root)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Notes <span class="unit">optional</span></label>
+            <textarea id="lib-edit-notes" rows="2" placeholder="Notes about this calibration…"></textarea>
+          </div>
+        </div>
+        <div class="lib-modal-footer">
+          <p id="lib-edit-error" class="gate-error hidden"></p>
+          <button class="btn-ghost btn-sm" onclick="libHideEdit()">Cancel</button>
+          <button class="btn-primary btn-sm" id="lib-edit-btn" onclick="libDoEdit()">Save</button>
         </div>
       </div>
     </div>
