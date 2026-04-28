@@ -1,0 +1,96 @@
+/* ==========================================================================
+   Calibration Tool - Design System Skin
+   Loaded AFTER css/styles.css. Remaps old vars to new tokens.
+   ========================================================================== */
+
+:root {
+  --color-bg:         var(--c-bg);          /* #000 (unchanged) */
+  --color-primary:    var(--c-primary);     /* #ff1d53 (unchanged) */
+  --color-glow:       var(--c-glow);        /* rgba(255,29,83,.7) */
+  --color-text:       var(--c-text);        /* #fff */
+  --color-text-muted: var(--c-text-muted);  /* #e4e4e4 */
+  --panel-bg:         var(--c-bg-2);        /* #101014 was #111 */
+  --panel-border:     var(--c-line);        /* #2e2f34 was #333 */
+}
+
+/* Update body scanline to match token system */
+html, body {
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.04) 0px, rgba(255,255,255,.04) 1px, transparent 1px, transparent 3px),
+    var(--c-bg);
+  background-attachment: fixed;
+}
+
+/* New topbar replacing the old #header element */
+#header {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--t-md);
+  letter-spacing: var(--tracking-display);
+  color: var(--c-primary);
+  text-shadow: var(--shadow-text);
+  margin-bottom: var(--s-5);
+  padding-bottom: var(--s-4);
+  border-bottom: 1px solid var(--c-line);
+}
+
+/* Tighter control labels using display font */
+.control-group label {
+  font-family: var(--font-display);
+  font-size: var(--t-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--c-text-dim);
+}
+
+/* Inputs aligned to token system */
+.control-group input,
+.control-group select {
+  background: var(--c-bg-input);
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-sm);
+  color: var(--c-text);
+  transition: border-color var(--dur-1);
+}
+.control-group input:focus,
+.control-group select:focus {
+  outline: none;
+  border-color: var(--c-primary);
+  box-shadow: 0 0 0 1px var(--c-glow-soft);
+}
+
+/* Action buttons via token system */
+.action-btn {
+  font-family: var(--font-mono);
+  font-size: var(--t-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-radius: var(--r-sm);
+  border-width: var(--bw-2);
+  transition: background var(--dur-2), color var(--dur-2);
+}
+
+/* Tool interface panel */
+.tool-interface {
+  border-radius: var(--r-md);
+  border-color: var(--c-line);
+}
+
+/* Badge */
+.badge {
+  font-family: var(--font-mono);
+  font-size: var(--t-xs);
+  border-color: var(--c-line);
+  border-radius: var(--r-sm);
+  color: var(--c-text-dim);
+  background: var(--c-bg-3);
+}
+
+/* Footer links */
+.social-links a {
+  font-family: var(--font-mono);
+  font-size: var(--t-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+}

@@ -3,16 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LensForge - Lens Calibration Suite</title>
-  <meta name="description" content="Holistic lens calibration for VFX and Virtual Production. Multi-solver comparison: OpenCV Standard, Extended, Rational, and COLMAP SfM." />
+  <title>LensForge | Lens Calibration Suite for VFX and Virtual Production</title>
+  <meta name="description" content="LensForge is a lens calibration suite for VFX and virtual production with OpenCV and COLMAP solver comparison, calibration reports, and exports for production pipelines." />
+  <meta name="author" content="ICVFXTools" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <link rel="canonical" href="https://www.icvfxtools.com/lensforge/" />
+  <link rel="alternate" hreflang="en" href="https://www.icvfxtools.com/lensforge/" />
+  <meta property="og:title" content="LensForge | Lens Calibration Suite for VFX and Virtual Production" />
+  <meta property="og:description" content="Multi-solver lens calibration with OpenCV and COLMAP comparison, calibration reports, and exports for VFX and virtual production pipelines." />
+  <meta property="og:image" content="https://www.icvfxtools.com/img/lensforge.png" />
+  <meta property="og:url" content="https://www.icvfxtools.com/lensforge/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="ICVFXTools" />
+  <meta property="og:locale" content="en_US" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="LensForge | Lens Calibration Suite for VFX and Virtual Production" />
+  <meta name="twitter:description" content="Multi-solver lens calibration with OpenCV and COLMAP comparison for VFX and virtual production pipelines." />
+  <meta name="twitter:image" content="https://www.icvfxtools.com/img/lensforge.png" />
+  <meta name="twitter:site" content="@icvfxtools" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="icon" href="/img/favicon.svg" type="image/svg+xml" />
   <link rel="shortcut icon" href="/img/favicon.svg" />
   <link rel="apple-touch-icon" href="/img/favicon.svg" />
-  <script type="module" crossorigin src="/lensforge/assets/index-DGcZif4m.js"></script>
-  <link rel="stylesheet" crossorigin href="/lensforge/assets/index-DJNH58r5.css">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "@id": "https://www.icvfxtools.com/lensforge/#app",
+      "name": "LensForge",
+      "url": "https://www.icvfxtools.com/lensforge/",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Any",
+      "description": "Lens calibration suite for VFX and virtual production with OpenCV and COLMAP solver comparison.",
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://www.icvfxtools.com/#organization",
+        "name": "ICVFXTools",
+        "url": "https://www.icvfxtools.com/"
+      }
+    }
+  </script>
+  <script type="module" crossorigin src="/lensforge/assets/index-ezmIHXDf.js"></script>
+  <link rel="stylesheet" crossorigin href="/lensforge/assets/index-DlIMCEwP.css">
 </head>
 <body>
 
@@ -534,7 +568,7 @@
       <div class="lib-modal-box">
         <div class="lib-modal-header">
           <h3>Upload Lens File</h3>
-          <button class="lib-modal-close" onclick="libHideUpload()">×</button>
+          <button class="lib-modal-close" onclick="libHideUpload()">&times;</button>
         </div>
         <div class="lib-modal-body">
           <div class="form-group">
@@ -549,13 +583,13 @@
             <div class="form-group">
               <label>Camera Make</label>
               <select id="lib-camera-make" onchange="libUpdateModels()">
-                <option value="">— Select Make —</option>
+                <option value=""> - Select Make - </option>
               </select>
             </div>
             <div class="form-group">
               <label>Camera Model</label>
               <select id="lib-camera-model">
-                <option value="">— Select Model —</option>
+                <option value=""> - Select Model - </option>
               </select>
             </div>
           </div>
@@ -589,7 +623,7 @@
       <div class="lib-modal-box">
         <div class="lib-modal-header">
           <h3>Edit Lens Metadata</h3>
-          <button class="lib-modal-close" onclick="libHideEdit()">×</button>
+          <button class="lib-modal-close" onclick="libHideEdit()">&times;</button>
         </div>
         <div class="lib-modal-body">
           <div class="form-group">
@@ -600,13 +634,13 @@
             <div class="form-group">
               <label>Camera Make</label>
               <select id="lib-edit-camera-make" onchange="libUpdateEditModels()">
-                <option value="">— Select Make —</option>
+                <option value=""> - Select Make - </option>
               </select>
             </div>
             <div class="form-group">
               <label>Camera Model</label>
               <select id="lib-edit-camera-model">
-                <option value="">— Select Model —</option>
+                <option value=""> - Select Model - </option>
               </select>
             </div>
           </div>
@@ -622,7 +656,7 @@
           </div>
           <div class="form-group">
             <label>Notes <span class="unit">optional</span></label>
-            <textarea id="lib-edit-notes" rows="2" placeholder="Notes about this calibration…"></textarea>
+            <textarea id="lib-edit-notes" rows="2" placeholder="Notes about this calibration..."></textarea>
           </div>
         </div>
         <div class="lib-modal-footer">

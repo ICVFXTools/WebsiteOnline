@@ -1,0 +1,163 @@
+/* =====================================================================
+   ICVFXTOOLS - DESIGN SYSTEM 
+   ===================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap");
+
+:root {
+  /* ---- COLOR - CORE ------------------------------------------------ */
+  --c-bg:            #000000;          /* page background */
+  --c-bg-1:          #08080b;          /* elevated surface 1 */
+  --c-bg-2:          #101014;          /* panel */
+  --c-bg-3:          #141417;          /* panel raised */
+  --c-bg-input:      #1a1a1f;          /* form fields */
+
+  --c-line:          #2e2f34;          /* default border */
+  --c-line-soft:     #1c1c20;          /* subtle divider */
+  --c-line-strong:   #44454b;          /* hover/focus border */
+
+  --c-text:          #ffffff;          /* primary text */
+  --c-text-muted:    #e4e4e4;          /* secondary text */
+  --c-text-dim:      #a3aab4;          /* tertiary / labels */
+  --c-text-faint:    #6a6f78;          /* placeholder / meta */
+
+  /* ---- COLOR - BRAND ----------------------------------------------- */
+  --c-primary:       #ff1d53;          /* signature magenta-red */
+  --c-primary-soft:  rgba(255,29,83,.15);
+  --c-glow:          rgba(255,29,83,.7);
+  --c-glow-soft:     rgba(255,29,83,.35);
+
+  /* ---- COLOR - STATUS ---------------------------------------------- */
+  --c-good:          #39c17b;
+  --c-warn:          #ffb13c;
+  --c-danger:        #ff4f63;
+  --c-info:          #6cb6ff;
+
+  /* ---- TYPE -------------------------------------------------------- */
+  --font-display:    "Orbitron", "Helvetica Neue", sans-serif;
+  --font-mono:       "Roboto Mono", "SF Mono", Menlo, monospace;
+  --font-body:       "Roboto Mono", "SF Mono", Menlo, monospace;
+
+  /* type scale - modular, monospace-friendly */
+  --t-xs:            0.72rem;   /* 11.5 - meta / badges */
+  --t-sm:            0.82rem;   /* 13 - secondary */
+  --t-base:          0.94rem;   /* 15 - body */
+  --t-md:            1.05rem;   /* 17 - emphasized body */
+  --t-lg:            1.35rem;   /* 22 - h3 */
+  --t-xl:            1.75rem;   /* 28 - h2 */
+  --t-2xl:           2.4rem;    /* 38 - h1 */
+  --t-3xl:           3.5rem;    /* 56 - hero */
+  --t-4xl:           5rem;      /* 80 - display */
+
+  --leading-tight:   1.1;
+  --leading-snug:    1.3;
+  --leading-normal:  1.55;
+  --leading-loose:   1.75;
+
+  --tracking-display:0.04em;   /* Orbitron breathes */
+  --tracking-label:  0.12em;   /* uppercase labels */
+  --tracking-mono:   0;
+
+  /* ---- SPACING (4-pt grid, doubled at large sizes) ----------------- */
+  --s-0:  0;
+  --s-1:  0.25rem;   /* 4  */
+  --s-2:  0.5rem;    /* 8  */
+  --s-3:  0.75rem;   /* 12 */
+  --s-4:  1rem;      /* 16 */
+  --s-5:  1.5rem;    /* 24 */
+  --s-6:  2rem;      /* 32 */
+  --s-7:  3rem;      /* 48 */
+  --s-8:  4rem;      /* 64 */
+  --s-9:  6rem;      /* 96 */
+
+  /* ---- RADIUS / BORDER -------------------------------------------- */
+  --r-sm:  3px;
+  --r-md:  6px;
+  --r-lg:  10px;
+  --r-pill:999px;
+
+  --bw-1:  1px;
+  --bw-2:  2px;
+
+  /* ---- SHADOW / GLOW (used sparingly - terminal aesthetic) -------- */
+  --shadow-glow:        0 0 12px var(--c-glow);
+  --shadow-glow-strong: 0 0 24px var(--c-glow);
+  --shadow-panel:       0 0 0 1px var(--c-line) inset;
+  --shadow-text:        0 0 10px var(--c-glow);
+
+  /* ---- MOTION ------------------------------------------------------ */
+  --ease-out:    cubic-bezier(.2, .7, .2, 1);
+  --ease-in-out: cubic-bezier(.65, 0, .35, 1);
+  --dur-1:  120ms;
+  --dur-2:  200ms;
+  --dur-3:  360ms;
+  --dur-4:  600ms;
+
+  /* ---- LAYOUT ------------------------------------------------------ */
+  --container:       1200px;
+  --container-wide:  1440px;
+  --gutter:          var(--s-6);
+  --topbar-h:        56px;
+
+  /* ---- Z-INDEX SCALE ---------------------------------------------- */
+  --z-base:    1;
+  --z-raised:  10;
+  --z-overlay: 100;
+  --z-toast:   500;
+  --z-modal:   1000;
+}
+
+/* =====================================================================
+   GLOBAL RESET + BASE
+   ===================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body);
+  font-size: var(--t-base);
+  line-height: var(--leading-normal);
+  color: var(--c-text);
+  background: var(--c-bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* The signature CRT scanline overlay - apply on body OR a wrapper */
+.scanlines::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: var(--z-overlay);
+  opacity: 0.5;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0,0,0,0.30) 0px,
+    rgba(0,0,0,0.30) 1px,
+    transparent     1px,
+    transparent     3px
+  );
+}
+
+::selection { background: var(--c-primary); color: #000; }
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--c-line); border-radius: var(--r-sm); }
+::-webkit-scrollbar-thumb:hover { background: var(--c-primary); }
+
+a { color: var(--c-primary); text-decoration: none; }
+a:hover { text-shadow: var(--shadow-text); }
+
+code, kbd, samp {
+  font-family: var(--font-mono);
+  background: var(--c-bg-2);
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-sm);
+  padding: 1px 6px;
+  font-size: 0.92em;
+  color: var(--c-text-muted);
+}

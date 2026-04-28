@@ -1,0 +1,227 @@
+{
+  "pluginId": "hyprdeck-control",
+  "title": "HYPRDeck Control",
+  "version": "1.0.0",
+  "engineVersions": [
+    "5.3",
+    "5.4",
+    "5.6",
+    "5.7"
+  ],
+  "description": "A comprehensive and robust solution for controlling and monitoring Blackmagic Design HyperDeck disk recorders directly from Unreal Engine.",
+  "marketplaceUrl": "https://www.fab.com/listings/e4348a47-dea6-479b-a67f-8819a5ff0d8c",
+  "youtubeUrl": "https://youtu.be/K-8tL2G8f-c",
+  "documentationUrl": "https://docs.google.com/document/d/17wdb4LNC3RfWrqjt-dOydf519Xk3bemsP4x9K63dkNU/edit?usp=sharing",
+  "forumUrl": "https://forums.unrealengine.com/t/icvfx-tools-hyprdeck-control-plugin/2662337",
+  "sections": [
+    {
+      "id": "overview",
+      "title": "Overview",
+      "type": "text",
+      "body": [
+        "The HYPRDeck Control plugin provides a comprehensive and robust solution for controlling and monitoring Blackmagic Design HyperDeck disk recorders directly from within Unreal Engine. By leveraging the HyperDeck's REST API and real-time WebSocket interface, this plugin allows for seamless integration of professional recording hardware into your virtual production pipeline.",
+        "Fully exposed to Blueprints, you can easily create custom control UIs, automate complex recording workflows, and build dynamic, media-driven experiences  -  almost all necessary functions are exposed as Blueprint Nodes."
+      ]
+    },
+    {
+      "id": "features",
+      "title": "Features",
+      "type": "text",
+      "body": [
+        "<strong>Full Blueprint Transport Control</strong>  -  Programmatically start/stop recordings, initiate playback, pause, set variable playback speeds (including reverse), and stop the transport.",
+        "<strong>Advanced Timeline Navigation</strong>  -  Seek to specific frames or use the <code>ClipNext</code> and <code>ClipPrevious</code> nodes to jump between clips in the active timeline.",
+        "<strong>Real-Time Event System</strong>  -  The plugin listens for state changes via WebSockets, providing instant bindable events in Blueprints for: transport mode changes, active clip index changes during playback, disk list updates (e.g. when an SSD is inserted or removed), and timeline content changes.",
+        "<strong>State & Media Querying</strong>  -  Access up-to-date information about the device including connection status, transport info (mode, speed, timecode), and detailed lists of all media disks and clips they contain.",
+        "<strong>Remote Configuration</strong>  -  Configure device settings directly from Unreal Engine such as recording codec, video format, and active video input source."
+      ]
+    },
+    {
+      "id": "setup",
+      "title": "Initial Setup",
+      "type": "steps",
+      "steps": [
+        "To use the plugin in your project, first get a reference to its Engine Subsystem in your Blueprint (e.g., in a Widget Blueprint, Player Controller, or Level Blueprint).",
+        "In the Event Graph of your Blueprint, on <strong>Event Begin Play</strong> (for actors) or <strong>Event Construct</strong> (for widgets), add a <strong>Get Subsystem</strong> node.",
+        "In the <strong>Subsystem Class</strong> dropdown, select <strong>HyperDeck Engine Subsystem</strong>.",
+        "Right-click the <strong>Return Value</strong> pin and select <strong>Promote to variable</strong>. Name it something clear like <code>HyperDeckSubsystem</code>. This gives you a reusable reference throughout the Blueprint."
+      ]
+    },
+    {
+      "id": "setup-img",
+      "type": "image",
+      "src": "data/docs/images/hyprdeck-control/image5.png",
+      "caption": "Getting the HyperDeck Engine Subsystem reference in Blueprint"
+    },
+    {
+      "id": "connecting",
+      "title": "1. Connecting to the HyperDeck",
+      "type": "steps",
+      "steps": [
+        "Drag your <code>HyperDeckSubsystem</code> variable into the graph and pull a wire from it.",
+        "Call the <strong>Connect</strong> function, providing the IP address of your HyperDeck.",
+        "To react when the connection status changes, bind to the <strong>On Connection Changed</strong> event."
+      ]
+    },
+    {
+      "id": "connect-img",
+      "type": "image",
+      "src": "data/docs/images/hyprdeck-control/image3.png",
+      "caption": "Connecting to the HyperDeck and binding to connection events"
+    },
+    {
+      "id": "transport",
+      "title": "2. Controlling the Transport",
+      "type": "text",
+      "body": [
+        "Once connected, use the transport functions:",
+        "<strong>Start Recording</strong>  -  Begins a new recording. You can optionally provide a clip name.",
+        "<strong>Start Playback</strong>  -  Puts the device in Output mode and begins playing the timeline at normal speed.",
+        "<strong>Stop Transport</strong>  -  Stops any current recording or playback.",
+        "<strong>Set Playback Speed</strong>  -  Changes the playback speed. <code>1.0</code> is normal, <code>0.0</code> is pause, and negative values play in reverse."
+      ]
+    },
+    {
+      "id": "events",
+      "title": "3. Reacting to Real-Time Events",
+      "type": "steps",
+      "steps": [
+        "Select your <code>HyperDeckSubsystem</code> variable in the <strong>My Blueprint</strong> panel.",
+        "In the <strong>Details</strong> panel, you will see a list of all available events (e.g., <strong>On Transport Mode Changed</strong>, <strong>On Disk List Updated</strong>).",
+        "Click the green <strong>+</strong> button next to an event to create a corresponding event node in your Event Graph.",
+        "This event node will now execute automatically whenever that specific state changes on the HyperDeck, no matter what caused the change."
+      ]
+    },
+    {
+      "id": "querying",
+      "title": "4. Querying Information",
+      "type": "text",
+      "body": [
+        "You can get the current state of the device at any time using the pure (blue) nodes:",
+        "<strong>Is Connected</strong>  -  Returns a boolean for the WebSocket connection status.",
+        "<strong>Get Last Transport Info</strong>  -  Returns the <code>FHyperDeckTransportInfo</code> struct containing the current mode, speed, timecode, and clip index.",
+        "<strong>Get Cached Disk List</strong>  -  Returns an array of <code>FHyperDeckDiskInfo</code> structs, perfect for populating a UI list.",
+        "<strong>Get Active Disk Info</strong>  -  Returns the <code>FHyperDeckDiskInfo</code> for only the currently active disk."
+      ]
+    },
+    {
+      "id": "remote-ui",
+      "title": "HYPRDeck Remote UI Widget",
+      "type": "text",
+      "body": [
+        "Click the red settings icon in the editor toolbar to launch the HYPRDeck Remote UI. The widget provides a complete visual control surface for the HyperDeck, driven entirely by the Blueprint API described above.",
+        "The UI is divided into four main sections:"
+      ]
+    },
+    {
+      "id": "remote-ui-img",
+      "type": "image",
+      "src": "data/docs/images/hyprdeck-control/image2.png",
+      "caption": "HYPRDeck Remote UI Widget"
+    },
+    {
+      "id": "widget-connection",
+      "title": "Widget  -  Connection Status",
+      "type": "text",
+      "body": [
+        "This section indicates the connection state of the plugin to the HyperDeck.",
+        "<strong>Wi-Fi Icon</strong>  -  Displays the current connection status. Green means the plugin is successfully connected to the HyperDeck's WebSocket for real-time events (updated by binding to <code>OnConnectionChanged</code>). Gray means disconnected.",
+        "<strong>Spinner Icon</strong>  -  Appears while the plugin is attempting to connect, providing visual feedback for a pending state."
+      ]
+    },
+    {
+      "id": "widget-input",
+      "title": "Widget  -  Input & Mode Selection",
+      "type": "text",
+      "body": [
+        "This group of buttons configures the HyperDeck's primary mode and input source.",
+        "<strong>SDI / HDMI</strong>  -  Select the active video input. Clicking calls <code>SetVideoInput</code> on the HyperDeck Subsystem. The currently active input is highlighted blue, updated in real-time by binding to <code>OnInputVideoSourceChanged</code>.",
+        "<strong>OUT / IN</strong>  -  Set the primary transport mode. <strong>IN (Input Preview)</strong> shows the live video input  -  calls <code>SetTransportMode</code> with <code>InputPreview</code>. <strong>OUT (Output)</strong> shows playback from the media disks  -  calls <code>SetTransportMode</code> with <code>Output</code>. Active mode is highlighted blue, driven by <code>OnTransportModeChanged</code>."
+      ]
+    },
+    {
+      "id": "widget-transport",
+      "title": "Widget  -  Transport & Playback Controls",
+      "type": "text",
+      "body": [
+        "This section provides a standard set of controls for recording and playback.",
+        "<strong>Record (●)</strong>  -  Starts a new recording. Calls <code>StartRecording</code>. The button turns red or flashes when the transport mode changes to <code>InputRecord</code>.",
+        "<strong>Stop (■)</strong>  -  Stops the current recording or playback. Calls <code>StopTransport</code>.",
+        "<strong>Play (►)</strong>  -  Starts playback of the timeline. Calls <code>StartPlayback</code>.",
+        "<strong>Previous Clip (|◄)</strong>  -  Jumps to the beginning of the previous clip. Calls <code>ClipPrevious</code>.",
+        "<strong>Next Clip (►|)</strong>  -  Jumps to the beginning of the next clip. Calls <code>ClipNext</code>.",
+        "<strong>Rewind (◄◄)</strong>  -  Plays in reverse at fast speed. Calls <code>SetPlaybackSpeed</code> with a negative value (e.g., <code>-2.0</code>).",
+        "<strong>Fast Forward (►►)</strong>  -  Plays forward at fast speed. Calls <code>SetPlaybackSpeed</code> with a value greater than <code>1.0</code> (e.g., <code>2.0</code>).",
+        "<strong>Film Strip Icon</strong>  -  Refresh button."
+      ]
+    },
+    {
+      "id": "widget-media",
+      "title": "Widget  -  Media Status",
+      "type": "text",
+      "body": [
+        "This bottom row provides a real-time visualization of the media disks connected to the HyperDeck. The entire section is populated and updated by binding to the <code>OnDiskListUpdated</code> event.",
+        "<strong>Disk Icons (ssd1, ssd2)</strong>  -  Each icon represents a physical media slot. The icon shows an SSD when a disk is detected.",
+        "<strong>Green Name</strong>  -  Indicates this is the active disk for recording and playback (where <code>bIsActive</code> is <code>true</code>).",
+        "<strong>Blue Bar</strong>  -  Capacity meter showing how full the disk is, calculated from <code>TotalSpace</code> and <code>RemainingSpace</code> in the <code>FHyperDeckDiskInfo</code> struct.",
+        "<strong>\"Not Mounted\"</strong>  -  No media detected in that slot. Different icons represent different slot types (e.g., SD card, USB-C)."
+      ]
+    },
+    {
+      "id": "component-img",
+      "type": "image",
+      "src": "data/docs/images/hyprdeck-control/image1.png",
+      "caption": "HYPRDeck Remote UI  -  full component breakdown"
+    },
+    {
+      "id": "breakdown-connection",
+      "title": "Component  -  Device Connection & Identification",
+      "type": "text",
+      "body": [
+        "<strong>Connect to device (Wi-Fi Icon)</strong>  -  Initiates the connection to the HyperDeck using its configured IP address. Calls the <code>Connect</code> function. The icon turns green on successful connection, driven by the <code>OnConnectionChanged</code> event.",
+        "<strong>Identify Device (Flashing Light Icon)</strong>  -  Triggers the HyperDeck's identify feature, causing lights on the physical hardware to flash for easy identification. Calls <code>IdentifyDevice</code> with <code>true</code>. The feature deactivates automatically after a few seconds."
+      ]
+    },
+    {
+      "id": "breakdown-input",
+      "title": "Component  -  Input & Mode Selection",
+      "type": "text",
+      "body": [
+        "<strong>Switch to SDI / Switch to HDMI</strong>  -  Selects the active video input source for recording and preview. Calls <code>SetVideoInput</code>, passing either <code>SDI</code> or <code>HDMI</code>. The currently active input is highlighted, updated by binding to <code>OnInputVideoSourceChanged</code>.",
+        "<strong>Input Preview (IN Button)</strong>  -  Sets the device to display the live video signal from the selected input. Calls <code>SetTransportMode</code> with the <code>InputPreview</code> value. Button is highlighted when in Input Preview mode, updated by <code>OnTransportModeChanged</code>.",
+        "<strong>Output Preview (OUT Button)</strong>  -  Sets the device to display the video signal from media playback. Calls <code>SetTransportMode</code> with the <code>Output</code> value. Button is highlighted when in Output mode, updated by <code>OnTransportModeChanged</code>."
+      ]
+    },
+    {
+      "id": "breakdown-recording",
+      "title": "Component  -  Recording & Timeline Navigation",
+      "type": "text",
+      "body": [
+        "<strong>Start Recording (● Icon)</strong>  -  Begins a new recording on the active disk. Calls <code>StartRecording</code>. The icon turns red when <code>OnTransportModeChanged</code> reports the mode is <code>InputRecord</code>.",
+        "<strong>Play Previous Clip (|◄ Icon)</strong>  -  Seeks to the beginning of the previous clip in the timeline. Calls <code>ClipPrevious</code>.",
+        "<strong>Play Next Clip (►| Icon)</strong>  -  Seeks to the beginning of the next clip in the timeline. Calls <code>ClipNext</code>."
+      ]
+    },
+    {
+      "id": "breakdown-playback",
+      "title": "Component  -  Playback Controls",
+      "type": "text",
+      "body": [
+        "<strong>Play Clip (► Icon)</strong>  -  Starts playback of the current timeline from the current position. Calls <code>StartPlayback</code>.",
+        "<strong>Stop (■ Icon)</strong>  -  Stops any active recording or playback session. Calls <code>StopTransport</code>. Note: this is a universal stop command, not specific to recording.",
+        "<strong>Increase Play Speed (►► Icon)</strong>  -  Increases forward playback speed (e.g., to 2.0x, 4.0x). Calls <code>SetPlaybackSpeed</code> with a value greater than <code>1.0</code>.",
+        "<strong>Decrease Play Speed (◄◄ Icon)</strong>  -  Decreases playback speed, entering slow-motion or reverse playback. Calls <code>SetPlaybackSpeed</code> with a value less than <code>1.0</code> (e.g., <code>0.5</code> for slow-motion or <code>-1.0</code> for reverse)."
+      ]
+    },
+    {
+      "id": "breakdown-media",
+      "title": "Component  -  Media Status Display",
+      "type": "text",
+      "body": [
+        "This section provides a real-time overview of all connected media slots. The entire display is driven by data received from the <code>OnDiskListUpdated</code> event.",
+        "<strong>Media Slots (SSD Slot 1, Card Slot 1, etc.)</strong>  -  Each of the five slots represents a physical media interface on the HyperDeck. The UI displays an icon when a disk is detected and mounted.",
+        "<strong>Green Means Active</strong>  -  The name of a disk (e.g., \"ssd1\") is highlighted in green when it is the currently active disk for recording and playback. Determined by the <code>bIsActive</code> property in the <code>FHyperDeckDiskInfo</code> struct.",
+        "<strong>Filled Space (Blue Bar)</strong>  -  This progress bar visualizes used disk capacity, calculated from <code>TotalSpace</code> and <code>RemainingSpace</code> in the <code>FHyperDeckDiskInfo</code> struct."
+      ]
+    }
+  ]
+}

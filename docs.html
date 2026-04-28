@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ICVFXTools Documentation | Unreal Engine Plugin Guides</title>
+  <meta name="description" content="Documentation for ICVFXTools Unreal Engine plugins and virtual production tools, including setup guides, workflow references, and troubleshooting notes." />
+  <meta name="author" content="ICVFXTools" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <link rel="canonical" href="https://www.icvfxtools.com/docs.html" />
+  <link rel="alternate" hreflang="en" href="https://www.icvfxtools.com/docs.html" />
+  <meta property="og:title" content="ICVFXTools Documentation | Unreal Engine Plugin Guides" />
+  <meta property="og:description" content="Setup guides, workflow references, and troubleshooting notes for ICVFXTools Unreal Engine plugins and virtual production tools." />
+  <meta property="og:image" content="https://www.icvfxtools.com/img/preview.png" />
+  <meta property="og:url" content="https://www.icvfxtools.com/docs.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="ICVFXTools" />
+  <meta property="og:locale" content="en_US" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ICVFXTools Documentation | Unreal Engine Plugin Guides" />
+  <meta name="twitter:description" content="Documentation for ICVFXTools Unreal Engine plugins and virtual production tools." />
+  <meta name="twitter:image" content="https://www.icvfxtools.com/img/preview.png" />
+  <meta name="twitter:site" content="@icvfxtools" />
+  <base href="./" />
+
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="tokens.css" />
+  <link rel="stylesheet" href="components.css" />
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "@id": "https://www.icvfxtools.com/docs.html#docs",
+      "name": "ICVFXTools Documentation",
+      "url": "https://www.icvfxtools.com/docs.html",
+      "description": "Documentation for ICVFXTools Unreal Engine plugins and virtual production tools.",
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://www.icvfxtools.com/#organization",
+        "name": "ICVFXTools",
+        "url": "https://www.icvfxtools.com/"
+      }
+    }
+  </script>
+
+  <style>
+    html, body { height: 100%; margin: 0; }
+    body { display: flex; flex-direction: column; overflow: hidden; background: var(--c-bg); }
+
+    /* ---- Topbar ---------------------------------------------------- */
+    .docs-topbar {
+      display: flex; align-items: center; gap: var(--s-4);
+      padding: 0 var(--s-5);
+      height: 52px; flex: none;
+      border-bottom: 1px solid var(--c-line);
+      background: var(--c-bg-2);
+    }
+    .docs-topbar .back {
+      font-family: var(--font-mono); font-size: var(--t-xs);
+      color: var(--c-text-dim); text-decoration: none;
+      text-transform: uppercase; letter-spacing: var(--tracking-label);
+      display: flex; align-items: center; gap: var(--s-2);
+      flex: none;
+    }
+    .docs-topbar .back:hover { color: var(--c-primary); }
+    .docs-topbar .divider { width: 1px; height: 20px; background: var(--c-line); flex: none; }
+    .docs-topbar .plugin-title {
+      font-family: var(--font-display); font-size: var(--t-md);
+      color: var(--c-text); letter-spacing: var(--tracking-display);
+      font-weight: 700; flex: 1; white-space: nowrap; overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .topbar-chips { display: flex; gap: var(--s-2); align-items: center; }
+    .ver-chip {
+      font-family: var(--font-mono); font-size: var(--t-xs);
+      padding: 2px 8px; border-radius: var(--r-sm);
+      border: 1px solid rgba(255,29,83,0.35);
+      color: rgba(255,29,83,0.8);
+      letter-spacing: 0.04em;
+    }
+    .topbar-links { display: flex; gap: var(--s-2); }
+    .topbar-link {
+      font-family: var(--font-mono); font-size: var(--t-xs);
+      padding: 4px 10px; border-radius: var(--r-sm);
+      border: 1px solid var(--c-line); color: var(--c-text-dim);
+      text-decoration: none; text-transform: uppercase;
+      letter-spacing: var(--tracking-label);
+      transition: border-color var(--dur-1), color var(--dur-1);
+    }
+    .topbar-link:hover { border-color: var(--c-primary); color: var(--c-primary); }
+    .topbar-link.primary {
+      border-color: var(--c-primary); color: var(--c-primary);
+      background: rgba(255,29,83,0.06);
+    }
+    .topbar-link.primary:hover { background: rgba(255,29,83,0.12); }
+
+    /* ---- Layout ---------------------------------------------------- */
+    .docs-layout {
+      display: flex; flex: 1; overflow: hidden;
+    }
+
+    /* ---- Sidebar --------------------------------------------------- */
+    .docs-sidebar {
+      width: 220px; flex: none;
+      border-right: 1px solid var(--c-line);
+      overflow-y: auto; padding: var(--s-5) 0;
+      background: var(--c-bg-2);
+    }
+    .docs-sidebar::-webkit-scrollbar { width: 4px; }
+    .toc-label {
+      font-family: var(--font-display); font-size: var(--t-xs);
+      color: var(--c-text-faint); text-transform: uppercase;
+      letter-spacing: var(--tracking-label);
+      padding: 0 var(--s-4) var(--s-3);
+    }
+    .toc-item {
+      display: block; padding: var(--s-2) var(--s-4);
+      font-family: var(--font-mono); font-size: var(--t-xs);
+      color: var(--c-text-dim); text-decoration: none;
+      border-left: 2px solid transparent;
+      transition: color var(--dur-1), border-color var(--dur-1), background var(--dur-1);
+    }
+    .toc-item:hover { color: var(--c-text); background: rgba(255,255,255,0.03); }
+    .toc-item.active {
+      color: var(--c-primary); border-left-color: var(--c-primary);
+      background: rgba(255,29,83,0.06);
+    }
+    .toc-divider {
+      height: 1px; background: var(--c-line-soft);
+      margin: var(--s-3) var(--s-4);
+    }
+
+    /* ---- Content --------------------------------------------------- */
+    .docs-content {
+      flex: 1; overflow-y: auto;
+      padding: var(--s-7) var(--s-8);
+      scroll-behavior: smooth;
+    }
+    .docs-content::-webkit-scrollbar { width: 6px; }
+    .docs-content::-webkit-scrollbar-thumb { background: var(--c-line); border-radius: 3px; }
+
+    .doc-inner { max-width: 780px; margin: 0 auto; }
+
+    /* ---- Plugin hero ----------------------------------------------- */
+    .doc-hero {
+      margin-bottom: var(--s-8);
+      padding-bottom: var(--s-6);
+      border-bottom: 1px solid var(--c-line);
+    }
+    .doc-hero-eyebrow {
+      font-family: var(--font-mono); font-size: var(--t-xs);
+      color: var(--c-text-faint); text-transform: uppercase;
+      letter-spacing: var(--tracking-label); margin-bottom: var(--s-3);
+    }
+    .doc-hero h1 {
+      font-family: var(--font-display); font-weight: 800;
+      font-size: var(--t-3xl); color: var(--c-primary);
+      text-shadow: var(--shadow-text); letter-spacing: var(--tracking-display);
+      margin: 0 0 var(--s-3);
+    }
+    .doc-hero p {
+      font-family: var(--font-mono); font-size: var(--t-base);
+      color: var(--c-text-muted); line-height: var(--leading-loose);
+      max-width: 65ch; margin: 0 0 var(--s-4);
+    }
+    .doc-hero-meta {
+      display: flex; flex-wrap: wrap; gap: var(--s-3);
+      align-items: center;
+    }
+    .meta-chip {
+      font-family: var(--font-mono); font-size: var(--t-xs);
+      padding: 3px 10px; border-radius: var(--r-sm);
+      border: 1px solid var(--c-line); color: var(--c-text-dim);
+    }
+
+    /* ---- Section base ---------------------------------------------- */
+    .doc-section {
+      margin-bottom: var(--s-8);
+      scroll-margin-top: var(--s-5);
+    }
+    .doc-section h2 {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: var(--t-xl); color: var(--c-text);
+      letter-spacing: var(--tracking-display);
+      margin: 0 0 var(--s-4);
+      padding-bottom: var(--s-3);
+      border-bottom: 1px solid var(--c-line-soft);
+    }
+    .doc-section h3 {
+      font-family: var(--font-display); font-size: var(--t-md);
+      color: var(--c-text-dim); letter-spacing: 0.04em;
+      margin: var(--s-5) 0 var(--s-3);
+    }
+
+    /* ---- Text section ---------------------------------------------- */
+    .doc-body p {
+      font-family: var(--font-mono); font-size: var(--t-sm);
+      color: var(--c-text-muted); line-height: var(--leading-loose);
+      margin: 0 0 var(--s-4);
+    }
+    .doc-body strong { color: var(--c-text); font-weight: 600; }
+    .doc-body a { color: var(--c-primary); text-decoration: none; }
+    .doc-body a:hover { text-decoration: underline; }
+    .doc-body code {
+      font-family: var(--font-mono); font-size: var(--t-xs);
+      background: var(--c-bg-3); border: 1px solid var(--c-line);
+      border-radius: 3px; padding: 1px 5px; color: var(--c-text);
+    }
+
+    /* ---- Steps section --------------------------------------------- */
+    .steps-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--s-3); }
+    .step-item {
+      display: flex; gap: var(--s-4); align-items: flex-start;
+      padding: var(--s-4);
+      background: var(--c-bg-2); border: 1px solid var(--c-line);
+      border-radius: var(--r-md);
+    }
+    .step-num {
+      font-family: var(--font-display); font-size: var(--t-md);
+      color: var(--c-primary); font-weight: 700;
+      letter-spacing: var(--tracking-display);
+      min-width: 28px; text-align: center; flex: none;
+      padding-top: 2px;
+    }
+    .step-body-text {
+      font-family: var(--font-mono); font-size: var(--t-sm);
+      color: var(--c-text-muted); line-height: var(--leading-loose);
+    }
+    .step-body-text strong { color: var(--c-text); }
+    .step-body-text code {
+      font-family: var(--font-mono); font-size: var(--t-xs);
+      background: var(--c-bg-3); border: 1px solid var(--c-line);
+      border-radius: 3px; padding: 1px 5px; color: var(--c-text);
+    }
+
+    /* ---- Image section --------------------------------------------- */
+    .doc-figure {
+      margin: 0;
+      border: 1px solid var(--c-line); border-radius: var(--r-md);
+      overflow: hidden;
+    }
+    .doc-figure img {
+      display: block; width: 100%; max-height: 480px;
+      object-fit: contain; background: var(--c-bg-3);
+    }
+    .doc-figure figcaption {
+      padding: var(--s-3) var(--s-4);
+      font-family: var(--font-mono); font-size: var(--t-xs);
+      color: var(--c-text-faint); border-top: 1px solid var(--c-line);
+      background: var(--c-bg-2);
+    }
+    /* Figure layout variants */
+    .doc-figure.fig-left  { float: left;  max-width: 46%; margin: 0 var(--s-5) var(--s-4) 0; }
+    .doc-figure.fig-right { float: right; max-width: 46%; margin: 0 0 var(--s-4) var(--s-5); }
+    .doc-figure.fig-center { float: none; max-width: 100%; clear: both; }
+    .doc-figure.fig-half   { float: none; max-width: 50%;  clear: both; margin: 0 auto; }
+    .doc-section::after { content: ''; display: table; clear: both; }
+
+    /* ---- Video section --------------------------------------------- */
+    .video-wrap {
+      position: relative; padding-bottom: 56.25%; height: 0;
+      border-radius: var(--r-md); overflow: hidden;
+      border: 1px solid var(--c-line);
+    }
+    .video-wrap iframe {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; border: 0;
+    }
+
+    /* ---- Callout section ------------------------------------------- */
+    .doc-callout {
+      display: flex; gap: var(--s-4);
+      padding: var(--s-4) var(--s-5);
+      border-radius: var(--r-md);
+      border-left: 3px solid var(--c-primary);
+      background: var(--c-bg-2);
+    }
+    .doc-callout.warn { border-left-color: var(--c-warn); }
+    .doc-callout.tip  { border-left-color: var(--c-good); }
+    .doc-callout.danger { border-left-color: var(--c-danger); }
+    .callout-icon {
+      font-size: var(--t-lg); flex: none; line-height: 1; margin-top: 2px;
+    }
+    .callout-body {
+      font-family: var(--font-mono); font-size: var(--t-sm);
+      color: var(--c-text-muted); line-height: var(--leading-loose);
+    }
+    .callout-body strong { color: var(--c-text); }
+
+    /* ---- Params table ---------------------------------------------- */
+    .params-table {
+      width: 100%; border-collapse: collapse;
+      font-family: var(--font-mono); font-size: var(--t-xs);
+    }
+    .params-table th {
+      font-family: var(--font-display); font-size: var(--t-xs);
+      color: var(--c-text-dim); text-transform: uppercase;
+      letter-spacing: var(--tracking-label);
+      padding: 0.55rem 0.8rem; text-align: left;
+      border-bottom: 1px solid var(--c-line);
+      background: var(--c-bg-2);
+    }
+    .params-table td {
+      padding: 0.6rem 0.8rem;
+      border-bottom: 1px solid var(--c-line-soft);
+      color: var(--c-text-muted); vertical-align: top;
+    }
+    .params-table tr:hover td { background: rgba(255,29,83,0.02); }
+    .params-table .p-name { color: var(--c-text); font-weight: 500; }
+    .params-table .p-type {
+      color: var(--c-primary); opacity: 0.8; font-size: 10px;
+      white-space: nowrap;
+    }
+    .params-table .p-default {
+      color: var(--c-text-faint);
+      white-space: nowrap;
+    }
+
+    /* ---- Code block ------------------------------------------------ */
+    .doc-code {
+      background: var(--c-bg-3); border: 1px solid var(--c-line);
+      border-radius: var(--r-md); overflow-x: auto;
+      padding: var(--s-4) var(--s-5);
+    }
+    .doc-code pre {
+      margin: 0; font-family: var(--font-mono); font-size: var(--t-xs);
+      color: var(--c-text-muted); line-height: 1.7; white-space: pre;
+    }
+    .doc-code .code-lang {
+      font-family: var(--font-mono); font-size: 10px;
+      color: var(--c-text-faint); text-transform: uppercase;
+      letter-spacing: var(--tracking-label);
+      margin-bottom: var(--s-3); display: block;
+    }
+
+    /* ---- Not found state ------------------------------------------- */
+    .doc-not-found {
+      text-align: center; padding: var(--s-9);
+      font-family: var(--font-mono); color: var(--c-text-faint);
+    }
+    .doc-not-found h2 {
+      font-family: var(--font-display); font-size: var(--t-2xl);
+      color: var(--c-primary); letter-spacing: var(--tracking-display);
+      text-shadow: var(--shadow-text); margin: 0 0 var(--s-3);
+    }
+
+    /* ---- Landing grid -------------------------------------------- */
+    .landing-hero {
+      margin-bottom: var(--s-8); padding-bottom: var(--s-6);
+      border-bottom: 1px solid var(--c-line-soft);
+    }
+    .landing-hero .eyebrow {
+      font-family: var(--font-mono); font-size: var(--t-xs);
+      color: var(--c-text-faint); text-transform: uppercase;
+      letter-spacing: var(--tracking-label); margin-bottom: var(--s-3);
+    }
+    .landing-hero h1 {
+      font-family: var(--font-display); font-weight: 800;
+      font-size: var(--t-3xl); color: var(--c-primary);
+      text-shadow: var(--shadow-text); letter-spacing: var(--tracking-display);
+      margin: 0 0 var(--s-3);
+    }
+    .landing-hero p {
+      font-family: var(--font-mono); font-size: var(--t-sm);
+      color: var(--c-text-muted); line-height: var(--leading-loose);
+      max-width: 60ch; margin: 0;
+    }
+
+    .plugin-doc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: var(--s-4);
+    }
+    .doc-card {
+      display: flex; flex-direction: column;
+      background: var(--c-bg-2); border: 1px solid var(--c-line);
+      border-radius: var(--r-md);
+      cursor: pointer; text-decoration: none;
+      overflow: hidden;
+      transition: border-color var(--dur-2), background var(--dur-2), transform 0.15s ease;
+    }
+    .doc-card:hover {
+      border-color: rgba(255,29,83,0.45);
+      background: rgba(255,29,83,0.04);
+      transform: translateY(-2px);
+    }
+    .doc-card-thumb {
+      width: 100%; aspect-ratio: 16/9;
+      object-fit: cover;
+      background: var(--c-bg-3);
+      border-bottom: 1px solid var(--c-line);
+    }
+    .doc-card-body {
+      padding: var(--s-4);
+      display: flex; flex-direction: column; gap: var(--s-2); flex: 1;
+    }
+    .doc-card-name {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: var(--t-md); color: var(--c-text);
+      letter-spacing: var(--tracking-display);
+    }
+    .doc-card:hover .doc-card-name { color: var(--c-primary); }
+    .doc-card-sub {
+      font-family: var(--font-mono); font-size: var(--t-xs);
+      color: var(--c-text-faint); line-height: 1.5;
+    }
+    .doc-card-chips {
+      display: flex; flex-wrap: wrap; gap: 4px; margin-top: auto; padding-top: var(--s-2);
+    }
+    .doc-card-chip {
+      font-family: var(--font-mono); font-size: 9px;
+      padding: 1px 6px; border-radius: 3px;
+      border: 1px solid var(--c-line); color: var(--c-text-faint);
+    }
+
+    /* Landing sidebar nav */
+    .landing-nav-item {
+      display: flex; align-items: center; gap: var(--s-3);
+      padding: var(--s-2) var(--s-4);
+      font-family: var(--font-mono); font-size: var(--t-xs);
+      color: var(--c-text-dim); text-decoration: none;
+      border-left: 2px solid transparent;
+      transition: color var(--dur-1), border-color var(--dur-1), background var(--dur-1);
+    }
+    .landing-nav-item img {
+      width: 24px; height: 24px; border-radius: 5px;
+      border: 1px solid var(--c-line); object-fit: cover;
+      background: var(--c-bg-3); flex: none;
+    }
+    .landing-nav-item:hover { color: var(--c-text); background: rgba(255,255,255,0.03); }
+    .landing-nav-item.tool-item { color: var(--c-text-faint); }
+    .landing-nav-item.tool-item:hover { color: var(--c-text-dim); }
+
+
+    @media (max-width: 800px) {
+      .docs-sidebar { display: none; }
+      .docs-content { padding: var(--s-5) var(--s-4); }
+      .topbar-chips, .topbar-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+<!-- Topbar -->
+<header class="docs-topbar" id="topbar">
+  <a href="index.html" class="back">← Home</a>
+  <div class="divider"></div>
+  <span class="plugin-title" id="topbarTitle">Loading…</span>
+  <div class="topbar-links" id="topbarLinks"></div>
+</header>
+
+<!-- Docs layout -->
+<div class="docs-layout">
+
+  <!-- Sidebar TOC -->
+  <nav class="docs-sidebar" id="sidebar">
+    <div class="toc-label">Contents</div>
+    <div id="tocList"></div>
+  </nav>
+
+  <!-- Content -->
+  <main class="docs-content" id="docsContent">
+    <div class="doc-inner" id="docInner">
+      <div class="doc-not-found">
+        <h2>Loading…</h2>
+      </div>
+    </div>
+  </main>
+
+</div>
+
+<script>
+/* =====================================================================
+   ICVFXTools Docs Template - data-driven from data/docs/{id}.json
+   ===================================================================== */
+
+const params   = new URLSearchParams(location.search);
+const pluginId = params.get('plugin');
+
+async function loadDoc() {
+  if (!pluginId) { await renderLanding(); return; }
+  try {
+    const res = await fetch(`data/docs/${pluginId}.json`);
+    if (!res.ok) throw new Error('Not found');
+    const doc = await res.json();
+    render(doc);
+  } catch(e) {
+    renderNotFound(`No documentation found for <strong>${pluginId}</strong>.`);
+  }
+}
+
+/* ---- Landing (no ?plugin param) ------------------------------------ */
+async function renderLanding() {
+  document.title = 'Documentation | ICVFXTools';
+  document.getElementById('topbarTitle').textContent = 'Documentation';
+
+  const res = await fetch('data/plugins.json');
+  const plugins = await res.json();
+
+  /* sidebar: list all plugins with thumbnail */
+  const sidebar = document.getElementById('tocList');
+  sidebar.innerHTML = '';
+  const lbl = document.querySelector('.toc-label');
+  if (lbl) lbl.textContent = 'All Plugins';
+
+  plugins.forEach(p => {
+    const url = p.docsId ? `docs.html?plugin=${p.docsId}` : (p.customPage ? p.pageUrl : '#');
+    const a = document.createElement('a');
+    a.className = 'landing-nav-item' + (p.customPage ? ' tool-item' : '');
+    a.href = url;
+    a.innerHTML = `<img src="${p.thumbnailUrl}" alt="" /><span>${p.title}</span>`;
+    sidebar.appendChild(a);
+  });
+
+  /* content: landing grid */
+  const inner = document.getElementById('docInner');
+  inner.innerHTML = '';
+
+  const hero = document.createElement('div');
+  hero.className = 'landing-hero';
+  hero.innerHTML = `
+    <div class="eyebrow">ICVFXTools</div>
+    <h1>Documentation</h1>
+    <p>Browse plugin documentation. Select a plugin to read the full guide, installation steps, and usage reference.</p>
+  `;
+  inner.appendChild(hero);
+
+  const grid = document.createElement('div');
+  grid.className = 'plugin-doc-grid';
+
+  plugins.forEach(p => {
+    const url = p.docsId ? `docs.html?plugin=${p.docsId}` : (p.customPage ? p.pageUrl : null);
+    if (!url) return;
+
+    const card = document.createElement('a');
+    card.className = 'doc-card';
+    card.href = url;
+    const chips = (p.engineVersions || []).map(v => `<span class="doc-card-chip">${v}</span>`).join('');
+    card.innerHTML = `
+      <img class="doc-card-thumb" src="${p.showcaseImageUrl || p.thumbnailUrl}" alt="${p.title}" />
+      <div class="doc-card-body">
+        <div class="doc-card-name">${p.title}</div>
+        <div class="doc-card-sub">${p.subtext}</div>
+        ${chips ? `<div class="doc-card-chips">${chips}</div>` : ''}
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+
+  inner.appendChild(grid);
+}
+
+/* ---- Topbar -------------------------------------------------------- */
+function setMeta(selector, attr, value) {
+  const el = document.head.querySelector(selector);
+  if (el && value) el.setAttribute(attr, value);
+}
+
+function updateDocMeta(doc) {
+  const url = `https://www.icvfxtools.com/docs.html?plugin=${encodeURIComponent(pluginId)}`;
+  const title = `${doc.title} Documentation | ICVFXTools`;
+  const desc = doc.description || 'Documentation for an ICVFXTools Unreal Engine plugin or virtual production tool.';
+
+  document.title = title;
+  setMeta('meta[name="description"]', 'content', desc);
+  setMeta('link[rel="canonical"]', 'href', url);
+  setMeta('link[rel="alternate"][hreflang="en"]', 'href', url);
+  setMeta('meta[property="og:title"]', 'content', title);
+  setMeta('meta[property="og:description"]', 'content', desc);
+  setMeta('meta[property="og:url"]', 'content', url);
+  setMeta('meta[name="twitter:title"]', 'content', title);
+  setMeta('meta[name="twitter:description"]', 'content', desc);
+}
+
+function buildTopbar(doc) {
+  updateDocMeta(doc);
+  document.getElementById('topbarTitle').textContent = doc.title;
+
+  const links = document.getElementById('topbarLinks');
+  const linkDefs = [
+    { label: 'Marketplace', url: doc.marketplaceUrl, primary: true },
+    { label: 'Forum',       url: doc.forumUrl },
+    { label: 'YouTube',     url: doc.youtubeUrl },
+  ].filter(l => l.url);
+  linkDefs.forEach(l => {
+    const a = document.createElement('a');
+    a.className = 'topbar-link' + (l.primary ? ' primary' : '');
+    a.textContent = l.label; a.href = l.url;
+    a.target = '_blank'; a.rel = 'noopener';
+    links.appendChild(a);
+  });
+}
+
+/* ---- TOC ----------------------------------------------------------- */
+function buildTOC(sections) {
+  const toc = document.getElementById('tocList');
+  toc.innerHTML = '';
+
+  /* hero always first */
+  const heroLink = document.createElement('a');
+  heroLink.className = 'toc-item'; heroLink.href = '#doc-hero';
+  heroLink.textContent = 'Overview'; heroLink.dataset.target = 'doc-hero';
+  toc.appendChild(heroLink);
+
+  if (sections.length) {
+    const div = document.createElement('div');
+    div.className = 'toc-divider'; toc.appendChild(div);
+  }
+
+  sections.forEach(sec => {
+    if (!sec.title || sec.type === 'callout') return;
+    const a = document.createElement('a');
+    a.className = 'toc-item'; a.href = '#' + sec.id;
+    a.textContent = sec.title; a.dataset.target = sec.id;
+    toc.appendChild(a);
+  });
+}
+
+/* ---- Scroll spy ---------------------------------------------------- */
+function initScrollSpy() {
+  const content = document.getElementById('docsContent');
+  content.addEventListener('scroll', () => {
+    const targets = document.querySelectorAll('#tocList .toc-item');
+    let active = null;
+    targets.forEach(a => {
+      const el = document.getElementById(a.dataset.target);
+      if (!el) return;
+      if (el.getBoundingClientRect().top - 80 <= 0) active = a;
+    });
+    targets.forEach(a => a.classList.remove('active'));
+    if (active) active.classList.add('active');
+    else if (targets.length) targets[0].classList.add('active');
+  });
+}
+
+/* ---- Section renderers -------------------------------------------- */
+function renderSection(sec) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'doc-section';
+  wrapper.id = sec.id;
+
+  switch (sec.type) {
+    case 'text':    wrapper.appendChild(renderText(sec));    break;
+    case 'steps':   wrapper.appendChild(renderSteps(sec));   break;
+    case 'image':   wrapper.appendChild(renderImage(sec));   break;
+    case 'video':   wrapper.appendChild(renderVideo(sec));   break;
+    case 'callout': wrapper.appendChild(renderCallout(sec)); break;
+    case 'params':  wrapper.appendChild(renderParams(sec));  break;
+    case 'code':    wrapper.appendChild(renderCode(sec));    break;
+    default:        break;
+  }
+
+  return wrapper;
+}
+
+function sectionHead(title, align) {
+  const h = document.createElement('h2');
+  h.textContent = title;
+  if (align && align !== 'left') h.style.textAlign = align;
+  return h;
+}
+
+function renderText(sec) {
+  const el = document.createDocumentFragment();
+  const ta = sec.textAlign || 'left';
+  if (sec.title) el.appendChild(sectionHead(sec.title, ta));
+  const body = document.createElement('div');
+  body.className = 'doc-body';
+  if (ta !== 'left') body.style.textAlign = ta;
+  (sec.body || []).forEach(para => {
+    const p = document.createElement('p');
+    p.innerHTML = para;
+    body.appendChild(p);
+  });
+  el.appendChild(body);
+  return el;
+}
+
+function renderSteps(sec) {
+  const el = document.createDocumentFragment();
+  const ta = sec.textAlign || 'left';
+  if (sec.title) el.appendChild(sectionHead(sec.title, ta));
+  const ol = document.createElement('ol');
+  ol.className = 'steps-list';
+  (sec.steps || []).forEach((step, i) => {
+    const li = document.createElement('li');
+    li.className = 'step-item';
+    li.innerHTML = `<span class="step-num">0${i + 1}</span><span class="step-body-text">${step}</span>`;
+    ol.appendChild(li);
+  });
+  el.appendChild(ol);
+  return el;
+}
+
+function renderImage(sec) {
+  const el = document.createDocumentFragment();
+  if (sec.title) el.appendChild(sectionHead(sec.title));
+  const figAlign = sec.figAlign || 'center';
+  const fit      = sec.fit      || 'contain';
+  const fig = document.createElement('figure');
+  fig.className = 'doc-figure fig-' + figAlign;
+  const img = document.createElement('img');
+  img.src = sec.src; img.alt = sec.caption || ''; img.loading = 'lazy';
+  img.style.objectFit = fit;
+  fig.appendChild(img);
+  if (sec.caption) {
+    const cap = document.createElement('figcaption');
+    cap.textContent = sec.caption;
+    fig.appendChild(cap);
+  }
+  el.appendChild(fig);
+  return el;
+}
+
+function renderVideo(sec) {
+  const el = document.createDocumentFragment();
+  if (sec.title) el.appendChild(sectionHead(sec.title));
+  const wrap = document.createElement('div');
+  wrap.className = 'video-wrap';
+  wrap.innerHTML = `<iframe src="https://www.youtube.com/embed/${sec.youtubeId}" title="${sec.title || 'Video'}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+  el.appendChild(wrap);
+  return el;
+}
+
+function renderCallout(sec) {
+  const icons = { info: 'ℹ', warn: '⚠', tip: '✓', danger: '✕' };
+  const div = document.createElement('div');
+  div.className = 'doc-callout ' + (sec.variant || 'info');
+  div.innerHTML = `
+    <span class="callout-icon">${icons[sec.variant] || 'ℹ'}</span>
+    <div class="callout-body">${sec.body || ''}</div>
+  `;
+  return div;
+}
+
+function renderParams(sec) {
+  const el = document.createDocumentFragment();
+  if (sec.title) el.appendChild(sectionHead(sec.title));
+  const wrap = document.createElement('div');
+  wrap.style.overflowX = 'auto';
+  const table = document.createElement('table');
+  table.className = 'params-table';
+  table.innerHTML = `
+    <thead>
+      <tr>
+        <th>Parameter</th>
+        <th>Type</th>
+        <th>Default</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${(sec.rows || []).map(r => `
+        <tr>
+          <td class="p-name">${r.name}</td>
+          <td class="p-type">${r.type || ' - '}</td>
+          <td class="p-default">${r.default != null ? r.default : ' - '}</td>
+          <td>${r.description || ''}</td>
+        </tr>
+      `).join('')}
+    </tbody>
+  `;
+  wrap.appendChild(table);
+  el.appendChild(wrap);
+  return el;
+}
+
+function renderCode(sec) {
+  const el = document.createDocumentFragment();
+  if (sec.title) el.appendChild(sectionHead(sec.title));
+  const box = document.createElement('div');
+  box.className = 'doc-code';
+  box.innerHTML = `
+    ${sec.language ? `<span class="code-lang">${sec.language}</span>` : ''}
+    <pre>${escHtml(sec.code || '')}</pre>
+  `;
+  el.appendChild(box);
+  return el;
+}
+
+function escHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+/* ---- Hero ---------------------------------------------------------- */
+function renderHero(doc) {
+  const hero = document.createElement('div');
+  hero.className = 'doc-hero'; hero.id = 'doc-hero';
+  hero.innerHTML = `
+    <div class="doc-hero-eyebrow">ICVFXTools Documentation</div>
+    <h1>${doc.title}</h1>
+    <p>${doc.description || ''}</p>
+    <div class="doc-hero-meta">
+      ${doc.version ? `<span class="meta-chip">v${doc.version}</span>` : ''}
+      ${(doc.engineVersions || []).map(v => `<span class="meta-chip">UE ${v}</span>`).join('')}
+    </div>
+  `;
+  return hero;
+}
+
+/* ---- Main render --------------------------------------------------- */
+function render(doc) {
+  buildTopbar(doc);
+  buildTOC(doc.sections || []);
+
+  const inner = document.getElementById('docInner');
+  inner.innerHTML = '';
+  inner.appendChild(renderHero(doc));
+
+  (doc.sections || []).forEach(sec => {
+    inner.appendChild(renderSection(sec));
+  });
+
+  initScrollSpy();
+
+  /* activate first TOC item */
+  const first = document.querySelector('#tocList .toc-item');
+  if (first) first.classList.add('active');
+}
+
+function renderNotFound(msg) {
+  document.getElementById('topbarTitle').textContent = 'Documentation';
+  document.getElementById('docInner').innerHTML = `
+    <div class="doc-not-found">
+      <h2>404</h2>
+      <p>${msg}</p>
+      <p style="margin-top: var(--s-4);">
+        <a href="index.html" style="color:var(--c-primary); font-family:var(--font-mono); font-size:var(--t-xs);">← Back to home</a>
+      </p>
+    </div>
+  `;
+}
+
+loadDoc();
+</script>
+</body>
+</html>

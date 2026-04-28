@@ -1,12 +1,15 @@
 [
   {
     "title": "Cube LUT Importer",
+    "initials": "CL",
     "subtext": "Advanced Color Grading",
     "description": "Instantly import and manage high-fidelity Cube LUTs for professional, cinematic color grading directly in Unreal Engine.",
     "subtitle": [
       "High-fidelity color grading for Unreal Engine.",
       "Import and apply .cube files instantly."
     ],
+    "engineVersions": ["5.3", "5.4", "5.6", "5.7"],
+    "docsId": "cube-lut",
     "showcaseImageUrl": "img/cubelut.png",
     "thumbnailUrl": "img/cubelutico.png",
     "marketplaceUrl": "https://www.fab.com/listings/4a58faa9-921a-4052-9e14-95fb3c77e760",
@@ -16,12 +19,15 @@
   },
   {
     "title": "Network Timecode Sync",
+    "initials": "NT",
     "subtext": "Multi-Machine Timecoded Sync",
     "description": "Keep all your production machines in perfect harmony. This tool provides robust, low-latency timecode synchronization across multiple Unreal Engine instances over a local network.",
     "subtitle": [
       "Synchronize timecode across multiple machines.",
       "Robust, low-latency sync over LAN."
     ],
+    "engineVersions": ["5.3", "5.4", "5.6", "5.7"],
+    "docsId": "network-timecode-sync",
     "showcaseImageUrl": "img/nts.png",
     "thumbnailUrl": "img/ntsico.png",
     "marketplaceUrl": "https://www.fab.com/listings/601e3297-c485-45e6-a030-f188e5dec520",
@@ -31,12 +37,15 @@
   },
   {
     "title": "HYPRDeck Control",
+    "initials": "HC",
     "subtext": "Control BMD Hyperdeck Recorder",
     "description": "A comprehensive and robust solution for controlling and monitoring Blackmagic Design HyperDeck disk recorders directly from Unreal Engine.",
     "subtitle": [
       "Control and monitor Blackmagic HyperDeck recorders.",
       "A comprehensive, robust, and integrated solution."
     ],
+    "engineVersions": ["5.3", "5.4", "5.6", "5.7"],
+    "docsId": "hyprdeck-control",
     "showcaseImageUrl": "img/hypr.png",
     "thumbnailUrl": "img/hyprico.png",
     "marketplaceUrl": "https://www.fab.com/listings/e4348a47-dea6-479b-a67f-8819a5ff0d8c",
@@ -46,12 +55,15 @@
   },
   {
     "title": "KeyFlux",
+    "initials": "KF",
     "subtext": "Sequencer CSV Export/Import",
-    "description": "Extend Unreal Engine’s Sequencer with tools to export and import transform data directly from the editor. Capture an actor’s keyframes as CSV and reapply them to any actor in a Level Sequence with frame-accurate precision.",
+    "description": "Extend Unreal Engine's Sequencer with tools to export and import transform data directly from the editor. Capture an actor's keyframes as CSV and reapply them to any actor in a Level Sequence with frame-accurate precision.",
     "subtitle": [
       "CSV export/import for Sequencer transforms.",
       "Frame-accurate reapplication in Level Sequences."
     ],
+    "engineVersions": ["5.3", "5.4", "5.6", "5.7"],
+    "docsId": "keyflux",
     "showcaseImageUrl": "img/Keyflux.png",
     "thumbnailUrl": "img/Keyfluxico.png",
     "marketplaceUrl": "https://www.fab.com/listings/bda4d017-d1ee-47a2-87b8-e4aeb389beee",
@@ -61,12 +73,15 @@
   },
   {
     "title": "Lens Calibration Grid",
+    "initials": "LC",
     "subtext": "Checkerboard & Grid Generator",
     "description": "Generate precise checkerboard and grid patterns essential for camera and lens calibration. Customize patterns for your specific virtual production or CG workflow.",
     "subtitle": [
       "Generate precise calibration patterns.",
       "Customize checkerboards, dot grids, and more."
     ],
+    "engineVersions": ["5.3", "5.4", "5.6", "5.7"],
+    "docsId": "lens-calibration-grid",
     "showcaseImageUrl": "img/calibration.png",
     "thumbnailUrl": "img/calibrationico.png",
     "customPage": true,
@@ -74,25 +89,82 @@
   },
   {
     "title": "LED Wall Configurator",
+    "initials": "LW",
     "subtext": "Node & Processor Mapping",
     "description": "Plan LED wall resolution, map regions to render nodes and processors, validate overlaps/capacity, and export deployment-ready configuration JSON.",
     "subtitle": [
       "Assign render nodes to exact wall regions.",
       "Validate throughput, coverage, and deployment constraints."
     ],
+    "engineVersions": ["5.3", "5.4", "5.6", "5.7"],
+    "docsId": "led-wall-configurator",
     "showcaseImageUrl": "img/ledwall.png",
     "thumbnailUrl": "img/ledwallico.png",
     "customPage": true,
     "pageUrl": "led-wall-configurator.html"
   },
   {
+    "title": "Grapher",
+    "initials": "GR",
+    "subtext": "Transform Trajectory Visualizer",
+    "description": "Visualize and compare transform data from CSV files and Sequencer tracks. Inspect spatial trajectories in three projections and analyze six motion channels side-by-side for quick on-set diagnostics.",
+    "subtitle": [
+      "Visualize transform tracks from CSV or Sequencer.",
+      "Compare trajectories across X/Y, X/Z and Y/Z projections."
+    ],
+    "engineVersions": ["5.3", "5.4", "5.6", "5.7"],
+    "docsId": "grapher",
+    "showcaseImageUrl": "img/grapher.png",
+    "thumbnailUrl": "img/Grapherico.png",
+    "marketplaceUrl": "https://www.fab.com/listings/5f0e51cc-f410-4ba6-9d4d-a0c979460901",
+    "documentationUrl": "https://docs.google.com/document/d/16AqnUHsDIoZM75Zw4wekI3yzaRqhFXzxsz8Ox5ilP6I/edit?usp=sharing",
+    "forumUrl": "https://forums.unrealengine.com/t/icvfx-tools-grapher-chart-plugin/2715554"
+  },
+  {
+    "title": "Optimise UE",
+    "initials": "OP",
+    "subtext": "Performance Diagnostic Suite",
+    "description": "A comprehensive diagnostic and optimization framework for Unreal Engine. Audit assets, analyze material complexity, inspect draw calls, and manage level-wide performance - all from a centralized command center.",
+    "subtitle": [
+      "Audit assets, materials, lights and draw calls.",
+      "Live performance dashboard for virtual production."
+    ],
+    "engineVersions": ["5.3", "5.4", "5.6", "5.7"],
+    "docsId": "optimise-ue",
+    "showcaseImageUrl": "img/optimise.png",
+    "thumbnailUrl": "img/OptimiseIco.png",
+    "marketplaceUrl": "https://www.fab.com/listings/20e8f4e6-b0f1-4dae-ae31-263dc1cbf5df",
+    "documentationUrl": "https://docs.google.com/document/d/1FBS6L9pGA_hASTKB7u2VUpK4tA7vXVcOJJ861nnkFRs/edit?usp=sharing",
+    "forumUrl": "https://forums.unrealengine.com/t/icvfx-tools-optimiseue/2712803"
+  },
+  {
+    "title": "ChArUco Utilities",
+    "initials": "CA",
+    "subtext": "Camera Calibration Toolkit",
+    "description": "A complete ChArUco-based camera calibration toolkit for Unreal Engine. Generate boards, detect markers from live media feeds, solve intrinsics and stereo rigs, and export directly to UE native Lens Files.",
+    "subtitle": [
+      "ChArUco board generation and live detection.",
+      "Solve intrinsics and stereo rigs, export to Lens Files."
+    ],
+    "engineVersions": ["5.3", "5.4", "5.6", "5.7"],
+    "docsId": "charuco-utilities",
+    "showcaseImageUrl": "img/CharucoIco.png",
+    "thumbnailUrl": "img/CharucoIco.png",
+    "marketplaceUrl": "https://www.fab.com/listings/95b8d3b1-6ab1-4369-8fdc-ed405198977c",
+    "documentationUrl": "https://docs.google.com/document/d/15gYjOHP8KjmksaghJYJl9Dn6sraJ_a9Fi5RQ_shjWGA/edit?usp=sharing",
+    "forumUrl": "https://forums.unrealengine.com/t/icvfx-tools-charuco-utilities-plugin/2710523"
+  },
+  {
     "title": "LensForge",
+    "initials": "LF",
     "subtext": "Lens Calibration Suite",
     "description": "Professional multi-solver lens calibration for VFX and Virtual Production. Compare OpenCV Standard, Extended, Rational, and COLMAP SfM results side-by-side. Export to JSON, Nuke, CSV, or plain-text report.",
     "subtitle": [
       "Multi-solver lens calibration for VFX.",
       "Compare OpenCV & COLMAP results instantly."
     ],
+    "engineVersions": ["5.3", "5.4", "5.6", "5.7"],
+    "docsId": "lensforge",
     "showcaseImageUrl": "img/lensforge.png",
     "thumbnailUrl": "img/lensforgeico.png",
     "customPage": true,

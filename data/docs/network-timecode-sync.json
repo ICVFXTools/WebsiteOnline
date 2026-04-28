@@ -1,0 +1,112 @@
+{
+  "pluginId": "network-timecode-sync",
+  "title": "Network Timecode Sync",
+  "version": "1.0.0",
+  "engineVersions": [
+    "5.3",
+    "5.4",
+    "5.6",
+    "5.7"
+  ],
+  "description": "Keep all your production machines in perfect harmony. Robust, low-latency timecode synchronization across multiple Unreal Engine instances over a local network.",
+  "marketplaceUrl": "https://www.fab.com/listings/601e3297-c485-45e6-a030-f188e5dec520",
+  "youtubeUrl": "https://youtu.be/fM5553H3_kM",
+  "documentationUrl": "https://docs.google.com/document/d/19wAUWFfvg5pVAg3ZyTPnWvBg-dMZpA0XVExhM8v0wT0/edit?usp=sharing",
+  "forumUrl": "https://forums.unrealengine.com/t/icvfx-tools-network-timecode-sync-plugin/2650273",
+  "sections": [
+    {
+      "id": "overview",
+      "title": "Overview",
+      "type": "text",
+      "body": [
+        "NetworkTimecodeSync is an Unreal Engine plugin designed to synchronize timecode between multiple computers over a local area network (LAN). It is an essential tool for virtual production, multi-machine render setups, and any scenario where precise timing across different Unreal Engine instances is required.",
+        "The plugin operates on a simple Master/Client model. One machine is designated as the <strong>Master</strong>, which broadcasts its current timecode. All other machines act as <strong>Clients</strong>, listening to the broadcast and synchronizing their own engine clocks to match the Master's."
+      ]
+    },
+    {
+      "id": "features",
+      "title": "Core Features",
+      "type": "text",
+      "body": [
+        "<strong>Master/Client Architecture</strong> - A straightforward and robust model for network synchronization.",
+        "<strong>UDP Broadcasting</strong> - Uses efficient UDP packets to send timecode data across the network.",
+        "<strong>Freewheel Clock</strong> - The client uses a continuous local clock that never pauses, providing smooth and stable timecode without stuttering.",
+        "<strong>Packet Loss Compensation</strong> - Drift detection and smooth correction ensure a continuous timecode sequence even on imperfect networks.",
+        "<strong>Backlog Safety Net</strong> - If a client falls too far behind the master, the buffer is purged and a hard resync is initiated.",
+        "<strong>Editor Toolbar UI</strong> - A simple dropdown menu in the editor toolbar provides one-click configuration and control for clients."
+      ]
+    },
+    {
+      "id": "setup-img",
+      "type": "image",
+      "src": "data/docs/images/network-timecode-sync/image4.png",
+      "caption": "Network Timecode Sync plugin settings in Project Settings"
+    },
+    {
+      "id": "master-setup",
+      "title": "Master Machine Setup",
+      "type": "steps",
+      "steps": [
+        "In your Unreal Engine project, navigate to <strong>Edit > Project Settings</strong>.",
+        "In the left-hand panel, scroll to the <strong>Plugins</strong> section and click on <strong>Network Timecode Sync</strong>.",
+        "Change the <strong>Sync Role</strong> property to <strong>Master</strong>.",
+        "<strong>IP Address</strong> - For most networks, leave this as the default broadcast address <code>255.255.255.255</code>. If you experience issues, change this to your subnet-specific broadcast address (e.g., <code>192.168.1.255</code>).",
+        "<strong>Port</strong> - Leave at the default <code>51500</code> unless you have a specific reason to change it.",
+        "The Master instance will now start broadcasting its timecode. Control the Master's timecode and frame rate using the standard Unreal Engine timecode tools or console commands (e.g., <code>timecode.setrate 24/1</code>). You can also use Blackmagic or AJA devices to control timecode and sync on the Master."
+      ]
+    },
+    {
+      "id": "client-setup",
+      "title": "Client Machine Setup",
+      "type": "steps",
+      "steps": [
+        "Go to <strong>Edit > Project Settings > Plugins > Network Timecode Sync</strong>.",
+        "Change the <strong>Sync Role</strong> to <strong>Client</strong>.",
+        "Set <strong>Custom Time Step</strong> to <code>NetworkCustomTimeStep</code> and <strong>Timecode Provider</strong> to <code>NetworkTimecodeProvider</code>.",
+        "Match the <strong>Port</strong> number to the one set on the Master.",
+        "Click the <strong>WebTimecode</strong> button and select the frame rate your Master is broadcasting (e.g., 24 fps) - this executes the <code>t.MaxFPS</code> console command for you."
+      ]
+    },
+    {
+      "id": "client-img1",
+      "type": "image",
+      "src": "data/docs/images/network-timecode-sync/image1.png",
+      "caption": "Client machine plugin settings"
+    },
+    {
+      "id": "client-img2",
+      "type": "image",
+      "src": "data/docs/images/network-timecode-sync/image2.png",
+      "caption": "WebTimecode frame rate selection on client"
+    },
+    {
+      "id": "tuning",
+      "title": "Tuning Client Performance",
+      "type": "text",
+      "body": [
+        "<strong>Frame Delay</strong> - Adds a manual positive offset (in frames) to the incoming timecode. Use this to compensate for inherent system and network latency. For example, if there is a consistent 2-frame delay between master and client, setting this to <code>2</code> will align them.",
+        "<strong>Jitter Buffer Size</strong> - Number of frames the client will buffer before starting playback. Absorbs small, rapid variations in network packet arrival time. A good starting value is <strong>3-5</strong>. Higher values increase initial latency but handle more network jitter.",
+        "<strong>Backlog Threshold Frames</strong> - The emergency brake. Defines how many frames of additional lag the client can accumulate before the system purges the buffer and forces a resync. Must be <em>larger</em> than the Jitter Buffer Size. A good starting value is <strong>15-30</strong>."
+      ]
+    },
+    {
+      "id": "troubleshooting",
+      "title": "Troubleshooting",
+      "type": "text",
+      "body": [
+        "<strong>Firewall</strong> - The most common problem. Ensure that firewalls on both Master and Client machines are not blocking UDP traffic on port <code>51500</code>. Add an exception for Unreal Engine if needed.",
+        "<strong>AP Isolation</strong> - If on Wi-Fi, check your router settings for <em>AP Isolation</em> or <em>Client Isolation</em>. This security feature prevents devices from communicating with each other and must be disabled.",
+        "<strong>Incorrect IP/Port</strong> - Double-check that the Port number is identical on the Master and all Clients, and that all machines are on the same subnet.",
+        "<strong>Role Not Set</strong> - Ensure Sync Role is correctly set to Master on one machine and Client on all others.",
+        "<strong>Port in use</strong> - If another application is using the port, find and kill it: <code>lsof -i :51500</code>"
+      ]
+    },
+    {
+      "id": "subnet",
+      "title": "Finding Your Subnet Broadcast Address",
+      "type": "callout",
+      "variant": "info",
+      "body": "<strong>Windows:</strong> Run <code>ipconfig</code> in Command Prompt. Find your IPv4 Address (e.g., <code>192.168.1.50</code>) and Subnet Mask (e.g., <code>255.255.255.0</code>). Replace the parts where the mask is <code>0</code> with <code>255</code> - your broadcast address is <code>192.168.1.255</code>.<br><br><strong>macOS:</strong> Run <code>ifconfig</code> in Terminal. Find the active interface (usually <code>en0</code>) and look for the <code>broadcast</code> value directly in the output (e.g., <code>inet 192.168.1.55 netmask 0xffffff00 broadcast 192.168.1.255</code>)."
+    }
+  ]
+}

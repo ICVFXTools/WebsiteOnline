@@ -1,0 +1,17 @@
+{
+  "pluginId": "lens-calibration-grid",
+  "title": "Lens Calibration Grid",
+  "version": "1.0.0",
+  "engineVersions": ["5.3", "5.4", "5.6", "5.7"],
+  "description": "Generate precise checkerboard and grid patterns essential for camera and lens calibration. Customize patterns for your specific virtual production or CG workflow.",
+  "sections": [
+    {
+      "id": "overview",
+      "title": "Overview",
+      "type": "text",
+      "body": [
+        "Documentation coming soon. Add your content to <code>data/docs/lens-calibration-grid.json</code>."
+      ]
+    }
+  ]
+}

@@ -1,14 +1,1 @@
-export const st = {
-  canvas: null,
-  ctx: null,
-  holder: null,
-  controls: null,
-
-  bitDB: null,          // aruco JSON bitsets
-  AprilFamily: null,    // AprilTagFamily instance or fallback
-  AprilFallback: false, // true if using SimpleTagFamily
-  isDrawing: false,     // Flag to prevent re-entrant draw calls
-
-  // convenience getters
-  get dpr() { return Math.max(1, window.devicePixelRatio || 1); }
-};
+export const st={canvas:null,ctx:null,holder:null,controls:null,bitDB:null,AprilFamily:null,AprilFallback:!1,isDrawing:!1,get dpr(){return Math.max(1,window.devicePixelRatio||1)}};

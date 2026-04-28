@@ -1,0 +1,159 @@
+{
+  "pluginId": "optimise-ue",
+  "title": "Optimise UE",
+  "version": "1.0.0",
+  "engineVersions": [
+    "5.3",
+    "5.4",
+    "5.6",
+    "5.7"
+  ],
+  "description": "A comprehensive diagnostic and optimization framework for Unreal Engine. Audit assets, analyze material complexity, inspect draw calls, and manage level-wide performance from a centralized command center.",
+  "marketplaceUrl": "https://www.fab.com/listings/20e8f4e6-b0f1-4dae-ae31-263dc1cbf5df",
+  "documentationUrl": "https://docs.google.com/document/d/1FBS6L9pGA_hASTKB7u2VUpK4tA7vXVcOJJ861nnkFRs/edit?usp=sharing",
+  "forumUrl": "https://forums.unrealengine.com/t/icvfx-tools-optimiseue/2712803",
+  "sections": [
+    {
+      "id": "overview",
+      "title": "Overview",
+      "type": "text",
+      "body": [
+        "Optimise UE is a comprehensive diagnostic and optimization framework designed to empower Technical Directors and Artists to identify, quantify, and resolve performance bottlenecks in complex virtual production environments.",
+        "The suite provides a centralized command center to audit assets, analyze material complexity, inspect draw calls, and manage level-wide optimizations like light configurations and cull distances - all without leaving the editor."
+      ]
+    },
+    {
+      "id": "overview-img",
+      "type": "image",
+      "src": "data/docs/images/optimise-ue/image6.png",
+      "caption": "Optimise UE plugin interface overview"
+    },
+    {
+      "id": "asset-auditor",
+      "title": "Asset Auditor",
+      "type": "text",
+      "body": [
+        "Scans the entire project for common asset problems: oversized textures, high-polygon meshes, assets with missing or inadequate LODs, and unused assets consuming disk and memory.",
+        "Outputs a prioritised report with actionable fix suggestions so artists and TDs can quickly identify what is hurting performance before a shoot or render."
+      ]
+    },
+    {
+      "id": "asset-auditor-img",
+      "type": "image",
+      "src": "data/docs/images/optimise-ue/image11.png",
+      "caption": "Asset Auditor scan results panel"
+    },
+    {
+      "id": "nanite-audit",
+      "title": "Nanite Audit",
+      "type": "text",
+      "body": [
+        "Evaluates static meshes to determine whether enabling Nanite makes practical sense based on geometry density, material slots, and LOD setup. Scores each mesh and provides a prioritized recommendation list."
+      ]
+    },
+    {
+      "id": "nanite-img",
+      "type": "image",
+      "src": "data/docs/images/optimise-ue/image12.png",
+      "caption": "Nanite Audit scoring panel"
+    },
+    {
+      "id": "lod-generator",
+      "title": "LOD Auto-Generator",
+      "type": "text",
+      "body": [
+        "Batch-generates Level of Detail (LOD) meshes for static meshes using Unreal's built-in reduction tools. Includes preview before applying and full Session History rollback - changes are non-destructive."
+      ]
+    },
+    {
+      "id": "lod-img",
+      "type": "image",
+      "src": "data/docs/images/optimise-ue/image4.png",
+      "caption": "LOD Auto-Generator batch panel"
+    },
+    {
+      "id": "material-analyser",
+      "title": "Material Complexity Analyser",
+      "type": "text",
+      "body": [
+        "Scans materials and material instances under a chosen folder and scores each one across five cost dimensions: Blend mode (flags Translucent, Additive, Modulate), Shading model (flags Subsurface, Hair, Cloth, Eye), Texture count, World Position Offset, and Pixel Depth Offset."
+      ]
+    },
+    {
+      "id": "material-img",
+      "type": "image",
+      "src": "data/docs/images/optimise-ue/image3.png",
+      "caption": "Material Complexity Analyser results"
+    },
+    {
+      "id": "drawcall-inspector",
+      "title": "Draw Call Inspector",
+      "type": "text",
+      "body": [
+        "Scans static meshes to identify small props (default < 500 triangles) that do not justify individual draw calls. Flags merge candidates in Red (Merge) or Yellow (Review) and summarizes potential savings by shared materials. Exports to CSV."
+      ]
+    },
+    {
+      "id": "drawcall-img",
+      "type": "image",
+      "src": "data/docs/images/optimise-ue/image8.png",
+      "caption": "Draw Call Inspector merge candidates"
+    },
+    {
+      "id": "light-optimiser",
+      "title": "Light Optimiser",
+      "type": "text",
+      "body": [
+        "Scans placed actors in the active level to flag expensive lighting configurations: Movable shadow casters, small-radius shadow maps on fill lights (default < 300cm radius), and overlapping light influence volumes."
+      ]
+    },
+    {
+      "id": "light-img",
+      "type": "image",
+      "src": "data/docs/images/optimise-ue/image17.png",
+      "caption": "Light Optimiser scan results"
+    },
+    {
+      "id": "stats-dashboard",
+      "title": "Stats Dashboard",
+      "type": "text",
+      "body": [
+        "A live performance panel updating every 250ms. Displays FPS (color-coded for film targets), CPU/GPU frame times, RAM usage, and real-time tracking of pending shader compile jobs."
+      ]
+    },
+    {
+      "id": "stats-img",
+      "type": "image",
+      "src": "data/docs/images/optimise-ue/image1.png",
+      "caption": "Stats Dashboard live performance panel"
+    },
+    {
+      "id": "texture-optimizer",
+      "title": "Texture Optimizer",
+      "type": "text",
+      "body": [
+        "Batch-resizes textures via MaxTextureSize - a GPU-side cap that is fully non-destructive. Supports Proportional (fraction-based, e.g. halving 8K to 4K) and Absolute (fixed power-of-two cap, e.g. all to 2048px) modes."
+      ]
+    },
+    {
+      "id": "texture-img",
+      "type": "image",
+      "src": "data/docs/images/optimise-ue/image14.png",
+      "caption": "Texture Optimizer batch resize panel"
+    },
+    {
+      "id": "level-warmup",
+      "title": "Level Warmup",
+      "type": "text",
+      "body": [
+        "A structured pass to eliminate on-set technical hitches. Includes: Shader Pre-compilation (blocks the editor until all queued shaders are finished) and Mip Residency (forces textures to full resolution to prevent blurry-to-sharp popping during a shoot)."
+      ]
+    },
+    {
+      "id": "warn-backup",
+      "type": "callout",
+      "variant": "warn",
+      "body": "<strong>Always back up your project</strong> before running batch operations like Texture Optimizer or LOD Auto-Generator. Session History allows rollback but a project backup is the safest net."
+    }
+  ]
+}

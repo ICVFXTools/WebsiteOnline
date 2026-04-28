@@ -1,54 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ICVFXTools | Unreal Engine Plugins for Virtual Production</title>
-  <meta name="author" content="ICVFX Tools" />
-  <meta name="description"
-    content="Discover advanced Unreal Engine plugins for virtual production and ICVFX workflows, including timecode sync, HyperDeck control, Cube LUT import, and lens calibration tools." />
-
-  <meta property="og:title" content="ICVFXTools | Unreal Engine Plugins for Virtual Production" />
-  <meta property="og:description"
-    content="Advanced Unreal Engine plugins for virtual production: timecode sync, HyperDeck control, Cube LUT import, KeyFlux, and calibration tools." />
+  <title>ICVFXTools | Unreal Engine Virtual Production Tools</title>
+  <meta name="description" content="ICVFXTools builds Unreal Engine virtual production plugins and web tools for LED wall planning, lens calibration, timecode sync, HyperDeck control, color workflows, and production diagnostics." />
+  <meta name="author" content="ICVFXTools" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <link rel="canonical" href="https://www.icvfxtools.com/" />
+  <link rel="alternate" hreflang="en" href="https://www.icvfxtools.com/" />
+  <meta property="og:title" content="ICVFXTools | Unreal Engine Virtual Production Tools" />
+  <meta property="og:description" content="Plugins and web tools for Unreal Engine virtual production, LED wall planning, lens calibration, timecode sync, HyperDeck control, color workflows, and diagnostics." />
   <meta property="og:image" content="https://www.icvfxtools.com/img/preview.png" />
   <meta property="og:url" content="https://www.icvfxtools.com/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="ICVFXTools" />
   <meta property="og:locale" content="en_US" />
-
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="ICVFXTools | Unreal Engine Plugins for Virtual Production" />
-  <meta name="twitter:description"
-    content="Advanced Unreal Engine plugins for virtual production and ICVFX workflows." />
+  <meta name="twitter:title" content="ICVFXTools | Unreal Engine Virtual Production Tools" />
+  <meta name="twitter:description" content="Unreal Engine virtual production plugins and tools for ICVFX stages, LED walls, lens calibration, timecode, and diagnostics." />
   <meta name="twitter:image" content="https://www.icvfxtools.com/img/preview.png" />
   <meta name="twitter:site" content="@icvfxtools" />
+  <base href="./" />
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-P3QKZ6E0HN"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="tokens.css" />
+  <link rel="stylesheet" href="components.css" />
 
-    gtag('config', 'G-P3QKZ6E0HN');
-  </script>
-  <!-- Canonical URL -->
-  <link rel="canonical" href="https://www.icvfxtools.com/" />
-
-  <!-- Language and region -->
-  <meta name="content-language" content="en" />
-
-  <!-- Robots and indexing -->
-  <meta name="robots" content="index, follow, max-image-preview:large" />
-
-  <!-- Keywords -->
-  <meta name="keywords"
-    content="Unreal Engine Plugins, Virtual Production Tools, ICVFX, LED Volume, Camera Tracking, Timecode Sync, HyperDeck Control, Unreal Marketplace, Color Grading, Cube LUT Importer" />
-
-  <link rel="alternate" hreflang="en" href="https://www.icvfxtools.com/" />
-  <!-- Structured Data (JSON-LD) -->
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -63,509 +41,717 @@
             "https://www.youtube.com/@ICVFXTools",
             "https://www.instagram.com/icvfxtools",
             "https://twitter.com/icvfxtools"
-          ],
-          "description": "ICVFXTools builds next-generation Unreal Engine plugins for Virtual Production and Game Development."
+          ]
         },
         {
           "@type": "WebSite",
           "@id": "https://www.icvfxtools.com/#website",
-          "url": "https://www.icvfxtools.com/",
           "name": "ICVFXTools",
-          "description": "Advanced Unreal Engine plugins for virtual production and ICVFX workflows.",
+          "url": "https://www.icvfxtools.com/",
           "publisher": {
             "@id": "https://www.icvfxtools.com/#organization"
-          }
+          },
+          "description": "Unreal Engine virtual production plugins and web tools for ICVFX professionals."
         }
       ]
     }
   </script>
 
-  <link rel="icon" href="img/favicon.svg" type="image/png" />
-  <link rel="shortcut icon" href="img/favicon.svg" />
-  <link rel="apple-touch-icon" href="img/favicon.svg" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Orbitron:wght@700&display=swap"
-    rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
-    rel="stylesheet" />
-
-  <!-- three.js Library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://unpkg.com/three@0.128.0/examples/js/loaders/FontLoader.js"></script>
+  <script src="https://unpkg.com/three@0.128.0/examples/js/geometries/TextGeometry.js"></script>
 
   <style>
-    /* ========================================
-       CSS STYLES & LAYOUT
-       ======================================== */
+    html, body { height: 100%; overflow: hidden; }
 
-    :root {
-      --color-bg: #000000;
-      --color-primary: #ff1d53;
-      --color-glow: rgba(255, 29, 83, 0.7);
-      --color-text: #ffffff;
-      --color-text-muted: #e4e4e4;
-    }
+    #bg-canvas { position: fixed; inset: 0; z-index: 1; }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html,
-    body {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      /* This will be changed for mobile */
-      font-family: "Roboto Mono", monospace;
-      background-color: var(--color-bg);
-      color: var(--color-text);
-    }
-
-    /* Scanlines Overlay */
-    body::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(0deg,
-          rgba(0, 0, 0, 0.3) 0px,
-          rgba(0, 0, 0, 0.3) 1px,
-          transparent 1px,
-          transparent 3px);
-      pointer-events: none;
-      z-index: 100;
-      opacity: 0.5;
-    }
-
-    /* Background 3D canvas */
-    #bg-canvas {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-    }
-
-    /* Main layout */
-    main {
-      position: relative;
-      z-index: 2;
-      width: 100vw;
-      height: 100vh;
+    .page {
+      position: relative; z-index: 2;
+      width: 100vw; height: 100vh;
       display: grid;
-      grid-template-columns: 1fr auto;
-      grid-template-rows: auto minmax(0, 1fr) auto;
-      padding: 2rem;
+      grid-template-rows: auto 1fr auto;
+      padding: var(--s-5) var(--s-6);
+      gap: var(--s-5);
       mix-blend-mode: difference;
     }
 
-    main>* {
+    /* Topbar */
+    .home-topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: var(--s-5);
+    }
+    .home-topbar .nav { display: flex; gap: var(--s-5); }
+    .home-topbar .nav a {
+      font-family: var(--font-mono); font-size: var(--t-xs);
+      color: var(--c-text-dim); text-transform: uppercase;
+      letter-spacing: var(--tracking-label);
+    }
+    .home-topbar .nav a:hover { color: var(--c-primary); text-shadow: none; }
+
+    /* Main content area */
+    .home-main {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: var(--s-7);
       min-height: 0;
-    }
-
-    /* Header */
-    #header {
-      grid-column: 1 / -1;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.5rem;
-      color: var(--color-primary);
-      text-shadow: 0 0 10px var(--color-glow);
-      padding-bottom: 1rem;
-    }
-
-    /* Footer */
-    footer {
-      grid-column: 1 / -1;
-      display: flex;
-      justify-content: space-between;
       align-items: center;
-      font-size: 0.8rem;
-      color: var(--color-text-muted);
-      padding-top: 1rem;
     }
 
-    .social-links a {
-      color: var(--color-text-muted);
-      text-decoration: none;
-      margin-left: 1.5rem;
-      transition: color 0.2s ease;
+    /* Hero */
+    .hero-block {
+      display: flex; flex-direction: column;
+      gap: var(--s-5);
+      padding-left: clamp(0px, 4vw, 64px);
+      max-width: 640px;
     }
-
-    .social-links a:hover {
-      color: var(--color-primary);
+    .hero-block .eyebrow {
+      display: inline-flex; align-items: center; gap: var(--s-2);
+      font-family: var(--font-mono); font-size: var(--t-xs);
+      color: var(--c-text-dim); text-transform: uppercase;
+      letter-spacing: var(--tracking-label);
     }
-
-    /* Left content */
-    .plugin-display {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      padding-left: 5vw;
-      grid-column: 1 / 2;
-      grid-row: 2 / 3;
-      min-height: 0;
+    .hero-block h1 {
+      font-family: var(--font-display); font-weight: 800;
+      font-size: clamp(2.4rem, 4.6vw, 3.6rem);
+      line-height: 1.05; letter-spacing: var(--tracking-display);
+      color: var(--c-primary); text-shadow: var(--shadow-glow-strong);
+      -webkit-text-stroke: 4px #000; paint-order: stroke fill;
+      margin: 0;
     }
-
-    .plugin-display h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 3.5rem;
-      font-weight: 700;
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
-      letter-spacing: 1px;
-      color: var(--color-primary);
-      text-shadow: 0 0 15px var(--color-glow);
-      animation: fadeIn 0.5s ease-out 0.1s forwards;
-      -webkit-text-stroke: 5px #000;
-      paint-order: stroke fill;
+    .hero-block p {
+      font-family: var(--font-mono); font-size: var(--t-md);
+      color: var(--c-text-muted); line-height: var(--leading-loose);
+      max-width: 52ch; margin: 0;
     }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: var(--s-3); margin-top: var(--s-2); }
+    .hero-actions .btn { padding: 0.65rem 1.1rem; font-size: var(--t-xs); }
 
-    .plugin-display p {
-      font-size: 1.1rem;
-      line-height: 1.7;
-      color: var(--color-text-muted);
-      max-width: 400px;
-      margin-bottom: 2.5rem;
-      text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-      animation: fadeIn 0.5s ease-out 0.2s forwards;
-    }
-
-    .button-group {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      animation: fadeIn 0.5s ease-out 0.3s forwards;
-      flex-wrap: wrap;
-      /* Allow buttons to wrap */
-      width: 400px;
-    }
-
-    .action-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      padding: 0.8rem 1.8rem;
-      background: transparent;
-      color: var(--color-primary);
-      text-decoration: none;
-      border-radius: 4px;
-      font-weight: 600;
-      border: 2px solid var(--color-primary);
-      transition: background-color 0.2s ease, text-shadow 0.2s ease;
-      font-size: 0.9rem;
-      line-height: 1;
-    }
-
-    .action-btn svg {
-      width: 1.15em;
-      height: 1.15em;
-      flex: none;
-      display: inline-block;
-    }
-
-    .action-btn span {
-      display: inline-block;
-      line-height: 1;
-    }
-
-    .action-btn:hover {
-      background-color: var(--color-primary);
-      color: var(--color-bg);
-      text-shadow: 0 0 10px var(--color-glow);
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Sidebar list */
+    /* Plugin sidebar */
     .plugin-list {
-      grid-column: 2 / 3;
-      grid-row: 2 / 3;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 1rem;
-      padding: 1rem;
-      width: 300px;
-      overflow-y: auto;
-      padding-right: 0.5rem;
-      min-height: 0;
+      display: flex; flex-direction: column;
+      gap: var(--s-2);
       max-height: 100%;
+      overflow-y: auto; padding-right: var(--s-2);
+      align-self: stretch;
+      justify-content: center;
     }
+    .plugin-list::-webkit-scrollbar { width: 4px; }
 
-    /* Scrollbar */
-    .plugin-list::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    .plugin-list::-webkit-scrollbar-track {
-      background: transparent;
-    }
-
-    .plugin-list::-webkit-scrollbar-thumb {
-      background-color: var(--color-text-muted);
-      border-radius: 3px;
-    }
-
-    .plugin-list::-webkit-scrollbar-thumb:hover {
-      background-color: var(--color-primary);
-    }
-
-    /* List items */
     .plugin-item {
-      cursor: pointer;
-      padding: 0.75rem 1rem;
+      display: flex; align-items: center; gap: var(--s-3);
+      padding: var(--s-3) var(--s-4);
+      background: rgba(16,16,20,0.6);
+      border: 1px solid var(--c-line-soft);
       border-left: 2px solid transparent;
-      transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
-      position: relative;
-      overflow: hidden;
-      z-index: 1;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
+      border-radius: var(--r-sm);
+      cursor: pointer;
+      position: relative; overflow: hidden;
+      transition: background var(--dur-2), border-color var(--dur-2);
     }
+    .plugin-item:hover { background: rgba(255,29,83,0.06); border-left-color: var(--c-primary); }
+    .plugin-item.active { border-left-color: var(--c-primary); background: rgba(255,29,83,0.08); }
+    .plugin-item::before {
+      content: ''; position: absolute; bottom: 0; left: 0;
+      width: 100%; height: 0; background: var(--c-glow-soft);
+      z-index: 0; transition: height 0s;
+    }
+    .plugin-item.loading::before { height: 100%; transition: height 5s linear; }
+    .plugin-item > * { position: relative; z-index: 1; }
 
-    .plugin-item-thumb {
-      width: 40px;
-      height: 40px;
-      border-radius: 4px;
-      background-color: #333;
-      flex-shrink: 0;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+    .plugin-thumb {
+      width: 36px; height: 36px; flex: none;
+      border: 1px solid var(--c-line);
+      border-radius: var(--r-sm);
+      background: var(--c-bg-3);
       object-fit: cover;
     }
-
-    .plugin-item-text {
-      flex-grow: 1;
+    .plugin-item .name {
+      font-family: var(--font-display); font-weight: 600;
+      font-size: var(--t-sm); color: var(--c-text-muted);
+      letter-spacing: 0.02em;
+      transition: color var(--dur-2), text-shadow var(--dur-2);
     }
-
-    .plugin-item::before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 0;
-      background-color: var(--color-glow);
-      opacity: 0.5;
-      z-index: -1;
-      transition: height 0s;
+    .plugin-item .sub {
+      font-family: var(--font-mono); font-size: var(--t-xs);
+      color: var(--c-text-faint); margin-top: 2px;
     }
-
-    .plugin-item.loading::before {
-      height: 100%;
-      transition: height 5s linear;
+    .plugin-item .versions {
+      display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px;
     }
-
-    .plugin-item:hover {
-      background-color: rgba(255, 29, 83, 0.05);
+    .plugin-item .ver-chip {
+      font-family: var(--font-mono); font-size: 9px;
+      padding: 1px 5px; border-radius: 3px;
+      border: 1px solid var(--c-line);
+      color: var(--c-text-faint);
+      letter-spacing: 0.04em;
     }
-
-    .plugin-item h3 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.9rem;
-      color: var(--color-text-muted);
-      margin-bottom: 0.25rem;
-      transition: color 0.2s ease;
+    .plugin-item.active .ver-chip, .plugin-item:hover .ver-chip {
+      border-color: rgba(255,29,83,0.35); color: rgba(255,29,83,0.7);
     }
-
-    .plugin-item p {
-      font-family: "Roboto Mono", monospace;
-      font-size: 0.8rem;
-      color: #666;
-      transition: color 0.2s ease;
+    .plugin-item:hover .name, .plugin-item.active .name {
+      color: var(--c-primary); text-shadow: var(--shadow-text);
     }
+    .plugin-item:hover .sub, .plugin-item.active .sub { color: var(--c-text-dim); }
 
-    .plugin-item:hover h3,
-    .plugin-item.active h3 {
-      color: var(--color-primary);
-      text-shadow: 0 0 10px var(--color-glow);
+    /* Footer */
+    .home-footer {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: var(--s-4); flex-wrap: wrap;
+      font-family: var(--font-mono); font-size: var(--t-xs);
+      color: var(--c-text-dim); text-transform: uppercase;
+      letter-spacing: var(--tracking-label);
+      border-top: 1px solid var(--c-line-soft);
+      padding-top: var(--s-4);
     }
+    .home-footer .links { display: flex; gap: var(--s-5); }
+    .home-footer .links a { color: var(--c-text-dim); }
+    .home-footer .links a:hover { color: var(--c-primary); text-shadow: none; }
 
-    .plugin-item:hover p,
-    .plugin-item.active p {
-      color: var(--color-text-muted);
+
+    /* Plugin sidebar header row */
+    .plugin-list-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 var(--s-1) var(--s-2);
+      font-family: var(--font-mono); font-size: var(--t-xs);
+      color: var(--c-text-faint); text-transform: uppercase; letter-spacing: var(--tracking-label);
     }
-
-    .plugin-item.active {
-      border-color: var(--color-primary);
+    .grid-toggle-btn {
+      background: none; border: 1px solid var(--c-line-soft);
+      border-radius: var(--r-sm); padding: 4px 6px;
+      cursor: pointer; color: var(--c-text-dim);
+      display: flex; align-items: center; gap: 5px;
+      font-family: var(--font-mono); font-size: var(--t-xs);
+      letter-spacing: var(--tracking-label); text-transform: uppercase;
+      transition: border-color var(--dur-2), color var(--dur-2);
     }
+    .grid-toggle-btn:hover { border-color: var(--c-primary); color: var(--c-primary); }
 
-    /* ========================================
-       MOBILE RESPONSIVE STYLES
-       ======================================== */
-    @media (max-width: 800px) {
+    /* Fullscreen grid overlay */
+    .plugin-grid-overlay {
+      position: fixed; inset: 0; z-index: 100;
+      background: rgba(6, 6, 10, 0.94);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: var(--s-7);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .plugin-grid-overlay.open {
+      opacity: 1; pointer-events: all;
+    }
+    .grid-overlay-header {
+      display: flex; align-items: center; justify-content: space-between;
+      width: 100%; max-width: 900px;
+      padding: 0 var(--s-5);
+    }
+    .grid-overlay-title {
+      font-family: var(--font-mono); font-size: var(--t-xs);
+      color: var(--c-text-dim); text-transform: uppercase; letter-spacing: var(--tracking-label);
+    }
+    .grid-overlay-close {
+      background: none; border: 1px solid var(--c-line-soft);
+      border-radius: var(--r-sm); padding: 5px 10px;
+      cursor: pointer; color: var(--c-text-dim);
+      font-family: var(--font-mono); font-size: var(--t-xs);
+      letter-spacing: var(--tracking-label); text-transform: uppercase;
+      transition: border-color var(--dur-2), color var(--dur-2);
+    }
+    .grid-overlay-close:hover { border-color: var(--c-primary); color: var(--c-primary); }
 
-      /* Hide 3D canvas on mobile */
-      #bg-canvas {
-        display: none;
-      }
+    .plugin-icon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      gap: var(--s-5);
+      width: 100%; max-width: 900px;
+      padding: 0 var(--s-5);
+      max-height: 70vh; overflow-y: auto;
+    }
+    .plugin-icon-grid::-webkit-scrollbar { width: 4px; }
 
-      /* Allow scrolling on mobile */
-      html,
-      body {
-        overflow: auto;
-      }
+    .grid-icon {
+      display: flex; flex-direction: column; align-items: center;
+      gap: var(--s-2); padding: var(--s-3) var(--s-2);
+      border-radius: var(--r-md);
+      cursor: pointer;
+      transition: background var(--dur-2), transform 0.15s ease;
+      text-align: center;
+    }
+    .grid-icon:hover {
+      background: rgba(255, 29, 83, 0.08);
+      transform: scale(1.06);
+    }
+    .grid-icon.active { background: rgba(255, 29, 83, 0.12); }
 
-      /* Change main layout to vertical stack */
-      main {
-        display: flex;
-        flex-direction: column;
-        padding: 1.5rem;
-        height: auto;
-      }
+    .grid-icon-img {
+      width: 72px; height: 72px;
+      border-radius: 16px;
+      border: 1px solid var(--c-line);
+      background: var(--c-bg-3);
+      object-fit: cover;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+      transition: box-shadow 0.15s ease, border-color 0.15s ease;
+    }
+    .grid-icon:hover .grid-icon-img {
+      border-color: rgba(255,29,83,0.5);
+      box-shadow: 0 4px 20px rgba(255,29,83,0.2);
+    }
+    .grid-icon.active .grid-icon-img {
+      border-color: var(--c-primary);
+      box-shadow: 0 4px 20px rgba(255,29,83,0.35);
+    }
+    .grid-icon-name {
+      font-family: var(--font-display); font-size: var(--t-xs);
+      color: var(--c-text-muted); font-weight: 600;
+      letter-spacing: 0.01em; line-height: 1.3;
+    }
+    .grid-icon-sub {
+      font-family: var(--font-mono); font-size: 9px;
+      color: var(--c-text-faint); line-height: 1.3;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .grid-icon:hover .grid-icon-name, .grid-icon.active .grid-icon-name { color: var(--c-primary); }
 
-      #header {
-        position: static;
-        order: 0;
-        /* Added for clarity */
-      }
-
-      footer {
-        position: static;
-        margin-top: 2rem;
-        flex-direction: column;
-        gap: 1rem;
-        order: 3;
-        /* This fixes the footer position */
-      }
-
-      /* Center main content */
-      .plugin-display {
-        padding: 0;
-        min-height: 70vh;
-        align-items: center;
-        text-align: center;
-        order: 1;
-      }
-
-      .plugin-display h1 {
-        font-size: 2.5rem;
-      }
-
-      .plugin-display p {
-        font-size: 1rem;
-      }
-
-      /* Center button group on mobile */
-      .button-group {
-        justify-content: center;
-
-      }
-
-      /* Convert sidebar to horizontal-wrapping list */
-      .plugin-list {
-        order: 2;
-        width: 100%;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1rem;
-        padding-bottom: 2rem;
-        overflow-y: hidden;
-        padding-right: 1rem;
-        min-height: auto;
-        max-height: none;
-        /* remove desktop height constraints */
-      }
-
-      /* Make list items full-width */
-      .plugin-item {
-        border-left: none;
-        border-bottom: 2px solid transparent;
-        text-align: left;
-        flex-basis: 100%;
-      }
-
-      .plugin-item.active {
-        border-color: var(--color-primary);
-      }
+    @media (max-width: 900px) {
+      html, body { overflow: auto; height: auto; }
+      #bg-canvas { display: none; }
+      .page { height: auto; grid-template-rows: auto auto auto auto; padding: var(--s-4); }
+      .home-main { grid-template-columns: 1fr; gap: var(--s-6); }
+      .hero-block { padding-left: 0; }
+      .plugin-list { max-height: none; overflow: visible; padding: 0; justify-content: flex-start; }
+      .plugin-icon-grid { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); }
     }
   </style>
 </head>
+<body class="scanlines">
 
-<body>
-
-  <!-- 3D Background Canvas -->
   <canvas id="bg-canvas"></canvas>
+  <div class="page">
 
-  <!-- Main Content Wrapper -->
-  <main>
-    <header id="header">ICVFXTOOLS</header>
+    <!-- Topbar -->
+    <header class="home-topbar">
+      <a href="./index.html" class="brand">ICVFXTOOLS</a>
+      <nav class="nav">
+        <a href="#" id="navPluginsLink">Plugins</a>
+        <a href="docs.html">Docs</a>
+        <a href="forum.html">Forum</a>
+      </nav>
+    </header>
 
-    <!-- Left Content: Plugin Details -->
-    <div class="plugin-display">
-      <h1 id="pluginTitle">Unreal Engine Plugins for Virtual Production</h1>
-      <p id="pluginDescription">Explore advanced ICVFX tools for color workflows, timecode sync, HyperDeck control, and production automation.</p>
-      <div class="button-group">
-        <a href="#" id="marketplaceLink" class="action-btn" target="_blank" rel="noopener noreferrer">
-          <!-- Marketplace Icon -->
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path
-              d="M19 4h-3.5a2.5 2.5 0 0 0-5 0H7c-1.1 0-2 .9-2 2v13c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5-1.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5 1.5zm3.5 17H7V6h1.5v3h7V6H17v13z">
-            </path>
-          </svg>
-          Marketplace
-        </a>
-        <a href="#" id="youtubeLink" class="action-btn" target="_blank" rel="noopener noreferrer">
-          <!-- YouTube Icon -->
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path
-              d="M21.58 7.19c-.23-.86-.9-1.52-1.76-1.74C18.25 5 12 5 12 5s-6.25 0-7.82.45c-.86.22-1.53.88-1.76 1.74C2 8.75 2 12 2 12s0 3.25.42 4.81c.23.86.9 1.52 1.76 1.74C5.75 19 12 19 12 19s6.25 0 7.82-.45c.86-.22 1.53.88 1.76-1.74C22 15.25 22 12 22 12s0-3.25-.42-4.81zM10 15.46V8.54l5.22 3.46L10 15.46z">
-            </path>
-          </svg>
-          YouTube
-        </a>
-        <a href="#" id="documentationLink" class="action-btn" target="_blank" rel="noopener noreferrer">
-          <!-- Documentation Icon (Book) -->
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path
-              d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z">
-            </path>
-          </svg>
-          Documentation
-        </a>
-        <a href="#" id="forumLink" class="action-btn" target="_blank" rel="noopener noreferrer">
-          <!-- Forum Icon (People) -->
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path
-              d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z">
-            </path>
-          </svg>
-          Forum
-        </a>
-      </div>
-    </div>
+    <!-- Main -->
+    <main class="home-main">
+      <section class="hero-block">
+        <span class="eyebrow" id="pluginEyebrow">
+          <span id="eyebrowText">FAB MARKETPLACE</span>
+        </span>
+        <h1 id="pluginTitle">Unreal Engine Plugins for Virtual Production</h1>
+        <p id="pluginDescription">Advanced ICVFX tools for color workflows, timecode sync, HyperDeck control, lens calibration, and LED wall planning.</p>
+        <div class="hero-actions">
+          <a href="#" id="marketplaceLink" class="btn" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M19 4h-3.5a2.5 2.5 0 0 0-5 0H7c-1.1 0-2 .9-2 2v13c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5-1.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5z"/></svg>
+            Marketplace
+          </a>
+          <a href="#" id="youtubeLink" class="btn btn-ghost" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M21.58 7.19c-.23-.86-.9-1.52-1.76-1.74C18.25 5 12 5 12 5s-6.25 0-7.82.45c-.86.22-1.53.88-1.76 1.74C2 8.75 2 12 2 12s0 3.25.42 4.81c.23.86.9 1.52 1.76 1.74C5.75 19 12 19 12 19s6.25 0 7.82-.45c.86-.22 1.53-.88 1.76-1.74C22 15.25 22 12 22 12s0-3.25-.42-4.81zM10 15.46V8.54l5.22 3.46L10 15.46z"/></svg>
+            YouTube
+          </a>
+          <a href="#" id="documentationLink" class="btn btn-ghost">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>
+            Docs
+          </a>
+          <a href="#" id="forumLink" class="btn btn-ghost" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+            Forum
+          </a>
+        </div>
+      </section>
 
-    <!-- Right Content: Plugin List (Sidebar) -->
-    <div class="plugin-list" id="pluginListContainer"></div>
+      <aside style="display:flex;flex-direction:column;min-height:0;align-self:stretch;justify-content:center;">
+        <div class="plugin-list-header">
+          <span>Plugins</span>
+          <button class="grid-toggle-btn" id="gridToggleBtn" title="Show all plugins">
+            <svg viewBox="0 0 16 16" fill="currentColor" width="12" height="12"><rect x="1" y="1" width="5" height="5" rx="1"/><rect x="10" y="1" width="5" height="5" rx="1"/><rect x="1" y="10" width="5" height="5" rx="1"/><rect x="10" y="10" width="5" height="5" rx="1"/></svg>
+            All
+          </button>
+        </div>
+        <div class="plugin-list" id="pluginListContainer" aria-label="Plugin list"></div>
+      </aside>
+    </main>
 
     <!-- Footer -->
-    <footer>
-      <span>© 2025 ICVFXTools. All Rights Reserved.</span>
-      <div class="social-links">
-        <a href="https://twitter.com/icvfxtools" target="_blank" rel="noopener noreferrer">X</a>
-        <a href="https://www.instagram.com/icvfxtools" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
-        <a href="https://www.youtube.com/@ICVFXTools">YOUTUBE</a>
-        <a href="https://www.icvfxtools.com/calibration-tool.html">CALIBRATION TOOL</a>
+    <footer class="home-footer">
+      <span>© 2026 ICVFXTOOLS · ALL RIGHTS RESERVED</span>
+      <div class="links">
+        <a href="https://twitter.com/icvfxtools" target="_blank" rel="noopener">X</a>
+        <a href="https://www.instagram.com/icvfxtools" target="_blank" rel="noopener">INSTAGRAM</a>
+        <a href="https://www.youtube.com/@ICVFXTools" target="_blank" rel="noopener">YOUTUBE</a>
+        <a href="calibration-tool.html">CALIBRATION</a>
+        <a href="led-wall-configurator.html">LED WALL</a>
+        <a href="lensforge/">LENSFORGE</a>
       </div>
     </footer>
-  </main>
+  </div>
 
-  <script src="js/home.js"></script>
+  <!-- Fullscreen plugin grid overlay -->
+  <div class="plugin-grid-overlay" id="pluginGridOverlay" role="dialog" aria-label="All plugins">
+    <div class="grid-overlay-header">
+      <span class="grid-overlay-title">All Plugins</span>
+      <button class="grid-overlay-close" id="gridOverlayClose">✕ Close</button>
+    </div>
+    <div class="plugin-icon-grid" id="pluginIconGrid"></div>
+  </div>
+
+  <script>
+    /* Remap production pageUrls to design equivalents */
+    const DESIGN_PAGE_MAP = {
+      'calibration-tool.html': 'calibration-tool.html',
+      'led-wall-configurator.html': 'led-wall-configurator.html',
+      'lensforge/': 'lensforge/'
+    };
+
+    async function loadPlugins() {
+      const res = await fetch('data/plugins.json');
+      const plugins = await res.json();
+      return plugins.map(p =>
+        p.customPage ? { ...p, pageUrl: DESIGN_PAGE_MAP[p.pageUrl] ?? p.pageUrl } : p
+      );
+    }
+
+    async function init() {
+      const PLUGINS = await loadPlugins();
+
+    const titleEl    = document.getElementById('pluginTitle');
+    const descEl     = document.getElementById('pluginDescription');
+    const eyebrowEl  = document.getElementById('eyebrowText');
+    const mktBtn     = document.getElementById('marketplaceLink');
+    const ytBtn      = document.getElementById('youtubeLink');
+    const docBtn     = document.getElementById('documentationLink');
+    const forumBtn   = document.getElementById('forumLink');
+    const list       = document.getElementById('pluginListContainer');
+    let currentIdx   = 0;
+
+    function renderPlugin(idx) {
+      const p = PLUGINS[idx];
+      titleEl.textContent = p.title;
+      descEl.textContent  = p.description;
+
+      /* Engine versions in eyebrow */
+      if (p.engineVersions && p.engineVersions.length) {
+        const vStr = p.engineVersions.map(v => 'UE ' + v).join(' · ');
+        eyebrowEl.textContent = vStr + (p.customPage ? '' : ' · FAB MARKETPLACE');
+      } else {
+        eyebrowEl.textContent = p.customPage ? 'WEB TOOL' : 'FAB MARKETPLACE';
+      }
+
+      if (p.customPage) {
+        mktBtn.innerHTML = 'Open Tool →';
+        mktBtn.href = p.pageUrl; mktBtn.target = '_self';
+        ytBtn.style.display = docBtn.style.display = forumBtn.style.display = 'none';
+      } else {
+        mktBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M19 4h-3.5a2.5 2.5 0 0 0-5 0H7c-1.1 0-2 .9-2 2v13c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5-1.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5z"/></svg> Marketplace`;
+        mktBtn.href = p.marketplaceUrl || '#'; mktBtn.target = '_blank';
+        ytBtn.style.display = ''; ytBtn.href = p.youtubeUrl || '#';
+        docBtn.style.display = ''; docBtn.href = p.docsId ? `docs.html?plugin=${p.docsId}` : (p.documentationUrl || '#');
+        forumBtn.style.display = ''; forumBtn.href = p.forumUrl || '#';
+      }
+
+      [...list.children].forEach((el, i) => el.classList.toggle('active', i === idx));
+      const iGrid = document.getElementById('pluginIconGrid');
+      if (iGrid) [...iGrid.children].forEach((t, i) => t.classList.toggle('active', i === idx));
+      currentIdx = idx;
+
+      /* Update 3D letter from JSON initials + typewriter subtitle */
+      if (window._setPluginLetter) window._setPluginLetter(p.initials || p.title.slice(0, 2).toUpperCase());
+      if (window._startTypewriter) window._startTypewriter(p.subtitle || []);
+    }
+
+    function buildList() {
+      PLUGINS.forEach((p, i) => {
+        const item = document.createElement('div');
+        item.className = 'plugin-item' + (i === 0 ? ' active' : '');
+        if (p.customPage) { item.dataset.customPage = 'true'; item.dataset.pageUrl = p.pageUrl || ''; }
+        const chips = p.engineVersions?.length
+          ? p.engineVersions.map(v => `<span class="ver-chip">${v}</span>`).join('')
+          : (p.customPage ? '<span class="ver-chip">Tool</span>' : '');
+        item.innerHTML = `
+          <img class="plugin-thumb" src="${p.thumbnailUrl}" alt="" />
+          <div>
+            <div class="name">${p.title}</div>
+            <div class="sub">${p.subtext}</div>
+            ${chips ? `<div class="versions">${chips}</div>` : ''}
+          </div>`;
+        list.appendChild(item);
+      });
+    }
+
+    /* ---- Grid overlay ---- */
+    const overlay    = document.getElementById('pluginGridOverlay');
+    const iconGrid   = document.getElementById('pluginIconGrid');
+    const gridBtn    = document.getElementById('gridToggleBtn');
+    const closeBtn   = document.getElementById('gridOverlayClose');
+
+    function buildGrid() {
+      PLUGINS.forEach((p, i) => {
+        const tile = document.createElement('div');
+        tile.className = 'grid-icon' + (i === 0 ? ' active' : '');
+        tile.dataset.idx = i;
+        tile.innerHTML = `
+          <img class="grid-icon-img" src="${p.thumbnailUrl}" alt="${p.title}" />
+          <div class="grid-icon-name">${p.title}</div>
+          <div class="grid-icon-sub">${p.subtext}</div>`;
+        iconGrid.appendChild(tile);
+      });
+    }
+
+    function openGrid() {
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeGrid() {
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    window.openPluginGrid = openGrid;
+    gridBtn.addEventListener('click', openGrid);
+    closeBtn.addEventListener('click', closeGrid);
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeGrid(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeGrid(); });
+    document.getElementById('navPluginsLink').addEventListener('click', e => { e.preventDefault(); openGrid(); });
+
+    iconGrid.addEventListener('click', e => {
+      const tile = e.target.closest('.grid-icon');
+      if (!tile) return;
+      const idx = parseInt(tile.dataset.idx, 10);
+      [...iconGrid.children].forEach((t, i) => t.classList.toggle('active', i === idx));
+      [...list.children].forEach((el, i) => el.classList.toggle('active', i === idx));
+      renderPlugin(idx);
+      resetIdleTimer();
+      closeGrid();
+    });
+
+    buildList();
+    buildGrid();
+    renderPlugin(0);
+
+    let autoTimeout, idleTimeout;
+
+    function getItem(idx) {
+      return list.children[idx];
+    }
+
+    function cycle() {
+      const nextIdx = (currentIdx + 1) % PLUGINS.length;
+      const nextItem = getItem(nextIdx);
+      if (nextItem) nextItem.classList.add('loading');
+      autoTimeout = setTimeout(() => {
+        if (nextItem) nextItem.classList.remove('loading');
+        renderPlugin(nextIdx);
+        cycle();
+      }, 5000);
+    }
+
+    function resetIdleTimer() {
+      clearTimeout(autoTimeout);
+      clearTimeout(idleTimeout);
+      const loading = list.querySelector('.loading');
+      if (loading) loading.classList.remove('loading');
+      idleTimeout = setTimeout(cycle, 10000);
+    }
+
+    // Wire click to also reset idle timer
+    list.addEventListener('click', e => {
+      const item = e.target.closest('.plugin-item');
+      if (!item) return;
+      const idx = [...list.children].indexOf(item);
+      if (idx === -1) return;
+      renderPlugin(idx);
+      resetIdleTimer();
+      if (item.dataset.customPage === 'true' && item.dataset.pageUrl) {
+        window.open(item.dataset.pageUrl, '_blank');
+      }
+    });
+
+    cycle();
+
+    /* Three.js - wireframe letter per plugin */
+    (function initBg() {
+      if (window.innerWidth <= 900 || !window.THREE) return;
+
+      const canvas = document.getElementById('bg-canvas');
+      const scene  = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.z = 10;
+      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(window.innerWidth, window.innerHeight);
+
+      /* Floating particle field */
+      const pts = new THREE.Group();
+      for (let i = 0; i < 300; i++) {
+        const m = new THREE.Mesh(
+          new THREE.SphereGeometry(0.035, 5, 5),
+          new THREE.MeshBasicMaterial({ color: 0xff1d53 })
+        );
+        m.position.set((Math.random()-0.5)*36, (Math.random()-0.5)*24, (Math.random()-0.5)*24);
+        pts.add(m);
+      }
+      scene.add(pts);
+
+      /* Letter mesh state */
+      let letterMesh = null;
+      let font = null;
+      let targetOpacity = 0.55;
+      let fadingOut = false;
+      let pendingLetter = null;
+
+      function buildLetter(char) {
+        if (!font) return;
+        const geo = new THREE.TextGeometry(char, {
+          font,
+          size: 2.4,
+          height: 0.5,
+          curveSegments: 14,
+          bevelEnabled: true,
+          bevelThickness: 0.08,
+          bevelSize: 0.04,
+          bevelSegments: 4
+        });
+        geo.center();
+        const mat = new THREE.MeshBasicMaterial({
+          color: 0xff1d53, wireframe: true,
+          transparent: true, opacity: 0
+        });
+        const mesh = new THREE.Mesh(geo, mat);
+        return mesh;
+      }
+
+      function swapLetter(char) {
+        if (!font) { pendingLetter = char; return; }
+        if (letterMesh) {
+          /* fade out current, then swap */
+          fadingOut = true;
+          pendingLetter = char;
+        } else {
+          /* first letter - fade straight in */
+          const m = buildLetter(char);
+          if (!m) return;
+          scene.add(m);
+          letterMesh = m;
+          targetOpacity = 0.55;
+        }
+      }
+
+      /* Subtitle canvas - typewriter effect */
+      const subCanvas = document.createElement('canvas');
+      subCanvas.width = 1024; subCanvas.height = 96;
+      const subCtx = subCanvas.getContext('2d');
+      subCtx.font = "600 22px 'Roboto Mono', monospace";
+      subCtx.fillStyle = 'rgba(255,255,255,0.75)';
+      subCtx.textAlign = 'center';
+      const subTex = new THREE.CanvasTexture(subCanvas);
+      const subPlane = new THREE.Mesh(
+        new THREE.PlaneGeometry(7, 7 * (subCanvas.height / subCanvas.width)),
+        new THREE.MeshBasicMaterial({ map: subTex, transparent: true })
+      );
+      subPlane.position.y = -3.6;
+      scene.add(subPlane);
+
+      let twLines = [], twLineIdx = 0, twCharIdx = 0, twTimer = null;
+
+      function animateTW() {
+        if (twLineIdx >= twLines.length) { clearInterval(twTimer); return; }
+        subCtx.clearRect(0, 0, subCanvas.width, subCanvas.height);
+        const lineH = 32, startY = 28;
+        for (let i = 0; i < twLineIdx; i++)
+          subCtx.fillText(twLines[i], subCanvas.width / 2, startY + i * lineH);
+        subCtx.fillText(twLines[twLineIdx].slice(0, twCharIdx), subCanvas.width / 2, startY + twLineIdx * lineH);
+        subTex.needsUpdate = true;
+        twCharIdx++;
+        if (twCharIdx > twLines[twLineIdx].length) { twLineIdx++; twCharIdx = 0; }
+      }
+
+      function startTW(lines) {
+        clearInterval(twTimer);
+        twLines = lines || []; twLineIdx = 0; twCharIdx = 0;
+        subCtx.clearRect(0, 0, subCanvas.width, subCanvas.height);
+        subTex.needsUpdate = true;
+        twTimer = setInterval(animateTW, 45);
+      }
+
+      window._startTypewriter = startTW;
+
+      /* expose so renderPlugin can call it */
+      window._setPluginLetter = swapLetter;
+
+      /* Load font then show first letter */
+      const loader = new THREE.FontLoader();
+      loader.load(
+        'https://threejs.org/examples/fonts/helvetiker_bold.typeface.json',
+        function(loadedFont) {
+          font = loadedFont;
+          if (pendingLetter) { swapLetter(pendingLetter); pendingLetter = null; }
+        }
+      );
+
+      /* Mouse parallax */
+      let mx = 0, my = 0;
+      window.addEventListener('mousemove', e => {
+        mx = (e.clientX / window.innerWidth - 0.5) * 0.4;
+        my = (e.clientY / window.innerHeight - 0.5) * 0.4;
+      });
+
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      const FADE_SPEED = 0.04;
+
+      (function animate() {
+        requestAnimationFrame(animate);
+
+        if (letterMesh) {
+          const mat = letterMesh.material;
+
+          if (fadingOut) {
+            mat.opacity = Math.max(0, mat.opacity - FADE_SPEED);
+            if (mat.opacity === 0) {
+              const prevRot = letterMesh.rotation.clone();
+              scene.remove(letterMesh);
+              letterMesh.geometry.dispose();
+              letterMesh = null;
+              fadingOut = false;
+              /* build new letter, inherit previous rotation */
+              const m = buildLetter(pendingLetter);
+              if (m) {
+                m.rotation.copy(prevRot);
+                scene.add(m);
+                letterMesh = m;
+                targetOpacity = 0.55;
+              }
+            }
+          } else {
+            /* fade in + slow spin */
+            mat.opacity = Math.min(targetOpacity, mat.opacity + FADE_SPEED * 0.6);
+            letterMesh.rotation.y += 0.004;
+            letterMesh.rotation.x += 0.001;
+          }
+        }
+
+        pts.rotation.y += 0.0008;
+        camera.position.x += (mx * 3 - camera.position.x) * 0.04;
+        camera.position.y += (-my * 3 - camera.position.y) * 0.04;
+        camera.lookAt(0, 0, 0);
+        renderer.render(scene, camera);
+      })();
+    })();
+    }
+
+    init();
+  </script>
 </body>
-
 </html>

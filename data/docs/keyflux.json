@@ -1,0 +1,115 @@
+{
+  "pluginId": "keyflux",
+  "title": "KeyFlux",
+  "version": "1.0.0",
+  "engineVersions": [
+    "5.3",
+    "5.4",
+    "5.6",
+    "5.7"
+  ],
+  "description": "Extend Unreal Engine's Sequencer with tools to export and import transform data directly from the editor. Capture an actor's keyframes as CSV and reapply them to any actor in a Level Sequence with frame-accurate precision.",
+  "marketplaceUrl": "https://www.fab.com/listings/bda4d017-d1ee-47a2-87b8-e4aeb389beee",
+  "youtubeUrl": "https://youtu.be/tttSbRble0w",
+  "documentationUrl": "https://docs.google.com/document/d/1L_adw3-ffgGLnvSxgNFuv1DLRsejBeYNyepMf7zHVcY/edit?usp=sharing",
+  "forumUrl": "https://forums.unrealengine.com/t/icvfx-tools-keyflux/2690182",
+  "sections": [
+    {
+      "id": "overview",
+      "title": "Overview",
+      "type": "text",
+      "body": [
+        "KeyFlux is a Sequencer companion plugin for Unreal Engine that empowers artists and technical directors to seamlessly export and import transform keyframes between Unreal and external tools such as Maya, Blender, or Excel. It extends Sequencer's functionality with data-driven workflows, enabling frame-accurate roundtripping of motion data.",
+        "All features are implemented in C++ as an editor-only utility - no runtime dependencies, no Blueprint classes."
+      ]
+    },
+    {
+      "id": "features",
+      "title": "Core Features",
+      "type": "text",
+      "body": [
+        "<strong>CSV Export</strong> - Export actor transform keyframes (Location, Rotation, Scale) to a CSV file from any open Level Sequence.",
+        "<strong>CSV Import</strong> - Import transform keyframes from a CSV back into the Sequencer with automatic actor binding and track creation if missing.",
+        "<strong>Frame-Accurate Mapping</strong> - Uses the sequence's Display Rate and Tick Resolution to ensure perfect time alignment.",
+        "<strong>Intelligent File Naming</strong> - Every export is automatically named: <code>&lt;SequenceName&gt;_&lt;ActorName&gt;_&lt;Time&gt;_&lt;Date&gt;.csv</code>.",
+        "<strong>Editor-Only</strong> - No runtime dependencies; not included in packaged builds."
+      ]
+    },
+    {
+      "id": "installation",
+      "title": "Installation",
+      "type": "steps",
+      "steps": [
+        "Copy the <code>KeyFlux</code> folder into your project's <code>Plugins/</code> directory: <code>&lt;YourProject&gt;/Plugins/KeyFlux/</code>",
+        "Rebuild your project from Visual Studio or Rider.",
+        "Launch Unreal Engine and go to <strong>Edit → Plugins</strong>, search for <em>KeyFlux</em>, and enable it.",
+        "Restart the editor when prompted."
+      ]
+    },
+    {
+      "id": "export",
+      "title": "Exporting Transform Data",
+      "type": "steps",
+      "steps": [
+        "Open your Level Sequence in <strong>Sequencer</strong>.",
+        "Select one or more actors in the level.",
+        "Click <strong>Export Transform Data</strong> from the KeyFlux tab or toolbar.",
+        "The plugin creates a CSV file in <code>&lt;ProjectRoot&gt;/Saved/SequencerExports/</code> containing all transform keyframes for those actors."
+      ]
+    },
+    {
+      "id": "export-img",
+      "type": "image",
+      "src": "data/docs/images/keyflux/image1.png",
+      "caption": "KeyFlux Export and Import buttons in the Sequencer toolbar"
+    },
+    {
+      "id": "import",
+      "title": "Importing Transform Data",
+      "type": "steps",
+      "steps": [
+        "Open your Level Sequence.",
+        "Select the actor you want to apply the imported motion to.",
+        "Click <strong>Import Transform Data</strong> in the KeyFlux tab.",
+        "Choose the CSV file to import.",
+        "The plugin recreates transform keyframes on that actor's transform track, aligned with the correct frame rate."
+      ]
+    },
+    {
+      "id": "csv-format",
+      "title": "CSV Format",
+      "type": "callout",
+      "variant": "info",
+      "body": "Column order: <strong>Frame, Time, PosX, PosY, PosZ, RotX, RotY, RotZ, ScaleX, ScaleY, ScaleZ</strong>. Files are saved to <code>Saved/SequencerExports/</code> and named automatically: <code>&lt;SequenceName&gt;_&lt;ActorName&gt;_&lt;Time&gt;_&lt;Date&gt;.csv</code>. Example: <code>Shot03_CameraActor_19-32-58_2025-11-10.csv</code>. Compatible with Grapher for trajectory visualization."
+    },
+    {
+      "id": "technical",
+      "title": "Technical Details",
+      "type": "text",
+      "body": [
+        "<strong>Module Type</strong> - Editor module only; not included in packaged builds.",
+        "<strong>C++ Classes</strong> - 5 classes: Module, Commands, Style, Exporter, Importer.",
+        "<strong>Blueprint Nodes</strong> - None (all features implemented in C++).",
+        "<strong>Network Replicated</strong> - No.",
+        "<strong>Supported Platforms</strong> - Windows and Mac."
+      ]
+    },
+    {
+      "id": "faq",
+      "title": "FAQ",
+      "type": "text",
+      "body": [
+        "<strong>Can I import data to a different actor?</strong> Yes. Select any actor in the level before importing and KeyFlux will apply the transform track to that actor.",
+        "<strong>Does it handle frame rates correctly?</strong> Yes. The plugin uses the Level Sequence's Display Rate and Tick Resolution to ensure perfect time alignment.",
+        "<strong>What data is included?</strong> Frame, Time, Position (X/Y/Z), Rotation (X/Y/Z), Scale (X/Y/Z)."
+      ]
+    },
+    {
+      "id": "limitations",
+      "title": "Known Limitations",
+      "type": "callout",
+      "variant": "warn",
+      "body": "Currently supports only transform data (Location, Rotation, Scale). Does not yet handle custom properties (FOV, Light Intensity, Visibility, etc.). CSV import assumes the same frame rate as the source sequence."
+    }
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "pluginId": "charuco-utilities",
+  "title": "ChArUco Utilities",
+  "version": "1.0.0",
+  "engineVersions": [
+    "5.3",
+    "5.4",
+    "5.6",
+    "5.7"
+  ],
+  "description": "A complete ChArUco-based camera calibration toolkit for Unreal Engine. Generate boards, detect markers from live media feeds, solve intrinsics and stereo rigs, and export directly to UE native Lens Files.",
+  "marketplaceUrl": "https://www.fab.com/listings/95b8d3b1-6ab1-4369-8fdc-ed405198977c",
+  "documentationUrl": "https://docs.google.com/document/d/15gYjOHP8KjmksaghJYJl9Dn6sraJ_a9Fi5RQ_shjWGA/edit?usp=sharing",
+  "forumUrl": "https://forums.unrealengine.com/t/icvfx-tools-charuco-utilities-plugin/2710523",
+  "sections": [
+    {
+      "id": "overview",
+      "title": "Overview",
+      "type": "text",
+      "body": [
+        "ChArUco Utilities is an Unreal Engine 5.3+ plugin designed to streamline camera calibration and tracking workflows. It provides a comprehensive toolset for generating ChArUco boards, detecting markers from live media feeds, solving camera intrinsics, and performing stereo camera calibration.",
+        "The plugin bridges the gap between OpenCV's powerful calibration algorithms and Unreal Engine's native CameraCalibration stack - suitable for Virtual Production (ICVFX), Augmented Reality, and computer vision research."
+      ]
+    },
+    {
+      "id": "features",
+      "title": "Core Features",
+      "type": "text",
+      "body": [
+        "<strong>Integrated ChArUco Generation</strong> - Create and preview custom calibration boards directly in the editor with Spawn Board Actor for world-space alignment.",
+        "<strong>Live Detection</strong> - Real-time board detection from RenderTargets or MediaTextures (Live Link, Blackmagic, AJA feeds).",
+        "<strong>Sophisticated Solver</strong> - Calibrate camera intrinsics (Focal Length, Principal Point) and distortion coefficients k1-k6, p1-p2.",
+        "<strong>Stereo Calibration</strong> - Calculate the precise spatial transform between two cameras for multi-view rigs.",
+        "<strong>Lens File Integration</strong> - Export solved data directly into Unreal's native <code>.uasset</code> Lens Files.",
+        "<strong>Blueprint API</strong> - <code>UChArUcoBlueprintFunctionLib</code> for custom runtime tools.",
+        "<strong>Debug Visualization</strong> - Overlay 3D axes and board outlines onto your media feed for instant validation."
+      ]
+    },
+    {
+      "id": "prerequisites",
+      "title": "Prerequisites",
+      "type": "callout",
+      "variant": "info",
+      "body": "The plugin depends on Unreal's internal camera calibration modules. Ensure <strong>CameraCalibration</strong>, <strong>CameraCalibrationCore</strong>, and <strong>OpenCV</strong> (included in UE5) are enabled via <strong>Edit → Plugins</strong> before installing."
+    },
+    {
+      "id": "installation",
+      "title": "Installation",
+      "type": "steps",
+      "steps": [
+        "Place the <code>ChArUcoUtilities</code> folder into your project's <code>Plugins/</code> directory.",
+        "<strong>Windows:</strong> Ensure the engine's OpenCV module is functional.",
+        "<strong>Mac:</strong> The plugin uses vendored static libraries in <code>ThirdParty/OpenCV/Mac</code>.",
+        "Restart the editor and rebuild the project when prompted."
+      ]
+    },
+    {
+      "id": "accessing",
+      "title": "Accessing the Tool",
+      "type": "text",
+      "body": [
+        "Once installed, open the main interface via the <strong>Level Editor Toolbar</strong> (click the ChArUco icon) or from <strong>Window → ChArUco Utility</strong>."
+      ]
+    },
+    {
+      "id": "accessing-img",
+      "type": "image",
+      "src": "data/docs/images/charuco-utilities/image1.png",
+      "caption": "ChArUco Utilities main interface"
+    },
+    {
+      "id": "workflow-img",
+      "type": "image",
+      "src": "data/docs/images/charuco-utilities/image3.png",
+      "caption": "Main workflow overview"
+    },
+    {
+      "id": "board-config",
+      "title": "Board Configuration",
+      "type": "steps",
+      "steps": [
+        "Navigate to the <strong>Board Setup</strong> section in the widget.",
+        "Define your grid - e.g. <strong>Cols: 5, Rows: 7</strong> - and set Square/Marker Size in MM.",
+        "Physical dimensions must match your printed board exactly for accurate pose scale.",
+        "Click <strong>Generate Preview</strong> to verify your board matches the plugin settings."
+      ]
+    },
+    {
+      "id": "board-img",
+      "type": "image",
+      "src": "data/docs/images/charuco-utilities/image4.png",
+      "caption": "Board configuration panel"
+    },
+    {
+      "id": "capturing",
+      "title": "Capturing Views",
+      "type": "steps",
+      "steps": [
+        "In the <strong>Detection</strong> section, select your Source Media Texture or Render Target.",
+        "Position the physical board in front of the camera.",
+        "When the board is detected (visible in the Debug View), click <strong>Capture View</strong>.",
+        "Repeat from varied angles covering all corners of the frame - aim for 20+ captures."
+      ]
+    },
+    {
+      "id": "capturing-img",
+      "type": "image",
+      "src": "data/docs/images/charuco-utilities/image2.png",
+      "caption": "Live detection and capture view"
+    },
+    {
+      "id": "solving",
+      "title": "Solving and Applying",
+      "type": "steps",
+      "steps": [
+        "Under <strong>Calibration</strong>, select your Distortion Model (Default is usually best).",
+        "Click <strong>Solve Calibration</strong> and check the RMS Error - ideally < 0.5 px.",
+        "Assign a <strong>Target Camera Actor</strong> and click <strong>Apply Pose</strong> to apply the calibration."
+      ]
+    },
+    {
+      "id": "function-buttons-img",
+      "type": "image",
+      "src": "data/docs/images/charuco-utilities/image5.png",
+      "caption": "Function buttons at the bottom of the widget UI"
+    },
+    {
+      "id": "stereo",
+      "title": "Stereo Calibration",
+      "type": "text",
+      "body": [
+        "For stereo rigs (e.g. a secondary tracking camera or a 3D pair): calibrate Camera 1 and Camera 2 individually first to establish their intrinsics, then assign both feeds in the <strong>Stereo Calibration</strong> section to solve the spatial transform between them."
+      ]
+    },
+    {
+      "id": "rms-tip",
+      "type": "callout",
+      "variant": "tip",
+      "body": "<strong>Target RMS &lt; 0.5 px</strong> for a reliable calibration. Use at least 20 varied board poses covering all corners and angles. Avoid motion blur and keep the board in sharp focus. Use <strong>Load Preset / Save Preset</strong> to store your board configuration for reuse across sessions."
+    },
+    {
+      "id": "blueprint-api",
+      "title": "Blueprint API",
+      "type": "text",
+      "body": [
+        "The <code>UChArUcoBlueprintFunctionLib</code> provides functions for custom calibration logic at runtime - enabling integration into automated pipelines, custom UI widgets, and production tools built on top of the plugin."
+      ]
+    }
+  ]
+}

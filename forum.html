@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ICVFXTools Forum | Unreal Engine Virtual Production Support</title>
+  <meta name="description" content="Find support and discussion links for ICVFXTools Unreal Engine plugins and virtual production workflows, including LED walls, calibration, timecode, and diagnostics." />
+  <meta name="author" content="ICVFXTools" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <link rel="canonical" href="https://www.icvfxtools.com/forum.html" />
+  <link rel="alternate" hreflang="en" href="https://www.icvfxtools.com/forum.html" />
+  <meta property="og:title" content="ICVFXTools Forum | Unreal Engine Virtual Production Support" />
+  <meta property="og:description" content="Support and discussion links for ICVFXTools Unreal Engine plugins and virtual production workflows." />
+  <meta property="og:image" content="https://www.icvfxtools.com/img/preview.png" />
+  <meta property="og:url" content="https://www.icvfxtools.com/forum.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="ICVFXTools" />
+  <meta property="og:locale" content="en_US" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ICVFXTools Forum | Unreal Engine Virtual Production Support" />
+  <meta name="twitter:description" content="Support and discussion links for ICVFXTools Unreal Engine plugins and virtual production workflows." />
+  <meta name="twitter:image" content="https://www.icvfxtools.com/img/preview.png" />
+  <meta name="twitter:site" content="@icvfxtools" />
+  <base href="./" />
+
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="tokens.css" />
+  <link rel="stylesheet" href="components.css" />
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "@id": "https://www.icvfxtools.com/forum.html#forum",
+      "name": "ICVFXTools Forum",
+      "url": "https://www.icvfxtools.com/forum.html",
+      "description": "Support and discussion links for ICVFXTools Unreal Engine plugins and virtual production workflows.",
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://www.icvfxtools.com/#organization",
+        "name": "ICVFXTools",
+        "url": "https://www.icvfxtools.com/"
+      }
+    }
+  </script>
+
+  <style>
+    html, body { height: 100%; margin: 0; }
+    body { display: flex; flex-direction: column; overflow: hidden; background: var(--c-bg); }
+
+    /* Topbar */
+    .docs-topbar {
+      display: flex; align-items: center; gap: var(--s-4);
+      padding: 0 var(--s-5);
+      height: 52px; flex: none;
+      border-bottom: 1px solid var(--c-line);
+      background: var(--c-bg-2);
+    }
+    .docs-topbar .back {
+      font-family: var(--font-mono); font-size: var(--t-xs);
+      color: var(--c-text-dim); text-decoration: none;
+      text-transform: uppercase; letter-spacing: var(--tracking-label);
+      display: flex; align-items: center; gap: var(--s-2); flex: none;
+    }
+    .docs-topbar .back:hover { color: var(--c-primary); }
+    .docs-topbar .divider { width: 1px; height: 20px; background: var(--c-line); flex: none; }
+    .docs-topbar .page-title {
+      font-family: var(--font-display); font-size: var(--t-md);
+      color: var(--c-text); letter-spacing: var(--tracking-display);
+      font-weight: 700; flex: 1;
+    }
+    .topbar-ext-link {
+      font-family: var(--font-mono); font-size: var(--t-xs);
+      padding: 4px 10px; border-radius: var(--r-sm);
+      border: 1px solid var(--c-line); color: var(--c-text-dim);
+      text-decoration: none; text-transform: uppercase;
+      letter-spacing: var(--tracking-label);
+      transition: border-color var(--dur-1), color var(--dur-1);
+    }
+    .topbar-ext-link:hover { border-color: var(--c-primary); color: var(--c-primary); }
+
+    /* Layout */
+    .forum-layout {
+      display: flex; flex: 1; overflow: hidden;
+    }
+
+    /* Sidebar */
+    .forum-sidebar {
+      width: 220px; flex: none;
+      border-right: 1px solid var(--c-line);
+      overflow-y: auto; padding: var(--s-5) 0;
+      background: var(--c-bg-2);
+    }
+    .forum-sidebar::-webkit-scrollbar { width: 4px; }
+    .sidebar-label {
+      font-family: var(--font-display); font-size: var(--t-xs);
+      color: var(--c-text-faint); text-transform: uppercase;
+      letter-spacing: var(--tracking-label);
+      padding: 0 var(--s-4) var(--s-3);
+    }
+    .sidebar-item {
+      display: flex; align-items: center; gap: var(--s-3);
+      padding: var(--s-2) var(--s-4);
+      font-family: var(--font-mono); font-size: var(--t-xs);
+      color: var(--c-text-dim); text-decoration: none;
+      border-left: 2px solid transparent;
+      transition: color var(--dur-1), border-color var(--dur-1), background var(--dur-1);
+    }
+    .sidebar-item img {
+      width: 24px; height: 24px; border-radius: 5px;
+      border: 1px solid var(--c-line); object-fit: cover;
+      background: var(--c-bg-3); flex: none;
+    }
+    .sidebar-item:hover { color: var(--c-text); background: rgba(255,255,255,0.03); }
+    .sidebar-item.no-forum { color: var(--c-text-faint); pointer-events: none; opacity: 0.5; }
+
+    /* Content */
+    .forum-content {
+      flex: 1; overflow-y: auto;
+      padding: var(--s-7) var(--s-8);
+    }
+    .forum-content::-webkit-scrollbar { width: 6px; }
+    .forum-content::-webkit-scrollbar-thumb { background: var(--c-line); border-radius: 3px; }
+
+    .forum-inner { max-width: 820px; margin: 0 auto; }
+
+    /* Hero */
+    .forum-hero {
+      margin-bottom: var(--s-8);
+      padding-bottom: var(--s-6);
+      border-bottom: 1px solid var(--c-line-soft);
+    }
+    .forum-hero .eyebrow {
+      font-family: var(--font-mono); font-size: var(--t-xs);
+      color: var(--c-text-faint); text-transform: uppercase;
+      letter-spacing: var(--tracking-label); margin-bottom: var(--s-3);
+    }
+    .forum-hero h1 {
+      font-family: var(--font-display); font-weight: 800;
+      font-size: var(--t-3xl); color: var(--c-primary);
+      text-shadow: var(--shadow-text); letter-spacing: var(--tracking-display);
+      margin: 0 0 var(--s-3);
+    }
+    .forum-hero p {
+      font-family: var(--font-mono); font-size: var(--t-sm);
+      color: var(--c-text-muted); line-height: var(--leading-loose);
+      max-width: 60ch; margin: 0;
+    }
+
+    /* Forum card grid */
+    .forum-grid {
+      display: flex; flex-direction: column; gap: var(--s-3);
+    }
+
+    .forum-card {
+      display: flex; align-items: center; gap: var(--s-5);
+      padding: var(--s-4) var(--s-5);
+      background: var(--c-bg-2); border: 1px solid var(--c-line);
+      border-radius: var(--r-md); text-decoration: none;
+      transition: border-color var(--dur-2), background var(--dur-2);
+      position: relative; overflow: hidden;
+    }
+    .forum-card:hover {
+      border-color: rgba(255,29,83,0.45);
+      background: rgba(255,29,83,0.03);
+    }
+    .forum-card.no-forum {
+      opacity: 0.45; pointer-events: none; cursor: default;
+    }
+
+    .forum-card-thumb {
+      width: 48px; height: 48px; flex: none;
+      border-radius: 10px; border: 1px solid var(--c-line);
+      object-fit: cover; background: var(--c-bg-3);
+    }
+    .forum-card-info { flex: 1; min-width: 0; }
+    .forum-card-name {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: var(--t-md); color: var(--c-text);
+      letter-spacing: var(--tracking-display);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .forum-card:hover .forum-card-name { color: var(--c-primary); }
+    .forum-card-sub {
+      font-family: var(--font-mono); font-size: var(--t-xs);
+      color: var(--c-text-faint); margin-top: 2px;
+    }
+
+    .forum-card-badge {
+      font-family: var(--font-mono); font-size: var(--t-xs);
+      padding: 4px 10px; border-radius: var(--r-sm);
+      border: 1px solid rgba(255,29,83,0.35);
+      color: rgba(255,29,83,0.8);
+      white-space: nowrap; flex: none;
+      transition: background var(--dur-2);
+    }
+    .forum-card:hover .forum-card-badge {
+      background: rgba(255,29,83,0.08);
+    }
+    .forum-card-badge.no-link {
+      border-color: var(--c-line); color: var(--c-text-faint);
+    }
+
+    .forum-section-label {
+      font-family: var(--font-mono); font-size: var(--t-xs);
+      color: var(--c-text-faint); text-transform: uppercase;
+      letter-spacing: var(--tracking-label);
+      padding: var(--s-4) 0 var(--s-2);
+      border-top: 1px solid var(--c-line-soft);
+      margin-top: var(--s-4);
+    }
+
+
+    @media (max-width: 800px) {
+      .forum-sidebar { display: none; }
+      .forum-content { padding: var(--s-5) var(--s-4); }
+    }
+  </style>
+</head>
+<body>
+<header class="docs-topbar">
+  <a href="index.html" class="back">← Home</a>
+  <div class="divider"></div>
+  <span class="page-title">Forum</span>
+  <a class="topbar-ext-link" href="https://forums.unrealengine.com" target="_blank" rel="noopener">Unreal Forum ↗</a>
+</header>
+
+<div class="forum-layout">
+
+  <nav class="forum-sidebar" id="sidebar">
+    <div class="sidebar-label">Plugins</div>
+    <div id="sidebarList"></div>
+  </nav>
+
+  <main class="forum-content">
+    <div class="forum-inner">
+
+      <div class="forum-hero">
+        <div class="eyebrow">ICVFXTools</div>
+        <h1>Forum</h1>
+        <p>Discuss plugins, report issues, and share feedback on the Unreal Engine forum. Each plugin has a dedicated thread  -  choose one below.</p>
+      </div>
+
+      <div class="forum-grid" id="forumGrid">
+        <div style="font-family:var(--font-mono);color:var(--c-text-faint);font-size:var(--t-xs);">Loading…</div>
+      </div>
+
+    </div>
+  </main>
+
+</div>
+
+<script>
+async function init() {
+  const res = await fetch('data/plugins.json');
+  const plugins = await res.json();
+
+  /* sidebar */
+  const sidebarList = document.getElementById('sidebarList');
+  plugins.forEach(p => {
+    const a = document.createElement('a');
+    a.className = 'sidebar-item' + (p.forumUrl ? '' : ' no-forum');
+    a.href = p.forumUrl || '#';
+    if (p.forumUrl) { a.target = '_blank'; a.rel = 'noopener'; }
+    a.innerHTML = `<img src="${p.thumbnailUrl}" alt="" /><span>${p.title}</span>`;
+    sidebarList.appendChild(a);
+  });
+
+  /* main grid */
+  const grid = document.getElementById('forumGrid');
+  grid.innerHTML = '';
+
+  const uePlugins = plugins.filter(p => !p.customPage);
+  const webTools  = plugins.filter(p => p.customPage);
+
+  function addSection(label, list) {
+    if (!list.length) return;
+    const lbl = document.createElement('div');
+    lbl.className = 'forum-section-label';
+    lbl.textContent = label;
+    grid.appendChild(lbl);
+
+    list.forEach(p => {
+      const card = document.createElement('a');
+      card.className = 'forum-card' + (p.forumUrl ? '' : ' no-forum');
+      card.href = p.forumUrl || '#';
+      if (p.forumUrl) { card.target = '_blank'; card.rel = 'noopener'; }
+      card.innerHTML = `
+        <img class="forum-card-thumb" src="${p.thumbnailUrl}" alt="${p.title}" />
+        <div class="forum-card-info">
+          <div class="forum-card-name">${p.title}</div>
+          <div class="forum-card-sub">${p.subtext}</div>
+        </div>
+        <span class="forum-card-badge ${p.forumUrl ? '' : 'no-link'}">${p.forumUrl ? 'View Thread ↗' : 'No thread yet'}</span>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  addSection('UE Plugins', uePlugins);
+  addSection('Web Tools', webTools);
+}
+
+init();
+</script>
+</body>
+</html>

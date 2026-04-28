@@ -1,0 +1,84 @@
+{
+  "pluginId": "grapher",
+  "title": "Grapher",
+  "version": "1.0.0",
+  "engineVersions": [
+    "5.3",
+    "5.4",
+    "5.6",
+    "5.7"
+  ],
+  "description": "Transform trajectory and channel analysis tool for Unreal Engine. Visualize and compare motion tracks from CSV files and Sequencer side-by-side.",
+  "marketplaceUrl": "https://www.fab.com/listings/5f0e51cc-f410-4ba6-9d4d-a0c979460901",
+  "documentationUrl": "https://docs.google.com/document/d/16AqnUHsDIoZM75Zw4wekI3yzaRqhFXzxsz8Ox5ilP6I/edit?usp=sharing",
+  "forumUrl": "https://forums.unrealengine.com/t/icvfx-tools-grapher-chart-plugin/2715554",
+  "sections": [
+    {
+      "id": "overview",
+      "title": "Overview",
+      "type": "text",
+      "body": [
+        "Grapher is an editor plugin for visualizing transform data from CSV files and Sequencer. It is designed for quick spatial and numeric comparison of multiple motion tracks.",
+        "Main capabilities: load one or more transform tracks from CSV or Sequencer, visualize trajectories in three projections (X/Y, X/Z, Y/Z), and analyze six dedicated channels - Position X, Y, Z and Pan, Tilt, Roll - using separate charts."
+      ]
+    },
+    {
+      "id": "showcase",
+      "title": "Interface",
+      "type": "image",
+      "src": "data/docs/images/grapher/image1.png",
+      "caption": "Grapher showing trajectory projections and channel charts"
+    },
+    {
+      "id": "installation",
+      "title": "Installation and Access",
+      "type": "steps",
+      "steps": [
+        "Open Unreal Editor and go to <strong>Edit → Plugins</strong>.",
+        "Search for <em>Grapher</em>, enable it, and restart the editor when prompted.",
+        "Open the tool from the top menu: <strong>Window → Transform Grapher</strong>."
+      ]
+    },
+    {
+      "id": "workflow",
+      "title": "Typical Workflow",
+      "type": "steps",
+      "steps": [
+        "Open the <strong>Transform Grapher</strong> tab.",
+        "Import tracks: click <strong>Load CSV</strong> for file-based data, or <strong>Load Sequencer</strong> for sequence-derived data.",
+        "Use the playback controls to scrub and animate through the timeline.",
+        "Inspect trajectory in the three projection panes (X/Y, X/Z, Y/Z).",
+        "Inspect the channel charts for Position X/Y/Z and Pan/Tilt/Roll below.",
+        "Toggle per-track visibility and use alignment for comparison between takes."
+      ]
+    },
+    {
+      "id": "ui-stats",
+      "title": "UI Reference",
+      "type": "text",
+      "body": [
+        "<strong>Top Stats Bar</strong> - Loaded Tracks count, Timeline Samples, Frame Range (min/max), and Duration.",
+        "<strong>Left Sidebar</strong> - Load CSV and Load Sequencer import buttons, playback controls, trail length setting, alignment toggle, and the track list with per-track visibility checkboxes.",
+        "<strong>Main Views</strong> - Three spatial projection panes: Top (X/Y), Front (X/Z), Side (Y/Z).",
+        "<strong>Channel Charts Grid</strong> - Six separate line charts rendered below the projections: Position X, Position Y, Position Z, Pan (Yaw), Tilt (Pitch), Roll.",
+        "<strong>Bottom Transport</strong> - Play/Reset buttons, timeline slider, current frame label, and time display."
+      ]
+    },
+    {
+      "id": "csv-format",
+      "title": "CSV Format Reference",
+      "type": "callout",
+      "variant": "info",
+      "body": "Expected columns (case-insensitive): <strong>Frame, Time, PosX, PosY, PosZ, RotX, RotY, RotZ, ScaleX, ScaleY, ScaleZ</strong>. Load CSV supports selecting multiple files - each file becomes one track. Compatible with KeyFlux exports."
+    },
+    {
+      "id": "sequencer-import",
+      "title": "Sequencer Import Behavior",
+      "type": "text",
+      "body": [
+        "Load Sequencer attempts to resolve a sequence using several fallbacks: the most recently active open Level Sequence editor asset, then a selected Level Sequence asset in the Content Browser.",
+        "Nested subsequences are supported via recursive scan. All transform tracks found are loaded as individual tracks in Grapher."
+      ]
+    }
+  ]
+}

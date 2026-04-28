@@ -1,0 +1,89 @@
+{
+  "pluginId": "cube-lut",
+  "title": "Cube LUT Importer",
+  "version": "1.0.0",
+  "engineVersions": [
+    "5.3",
+    "5.4",
+    "5.6",
+    "5.7"
+  ],
+  "description": "A seamless, high-fidelity workflow for importing industry-standard .cube LUT files directly into Unreal Engine's color grading pipeline. No texture conversion required.",
+  "marketplaceUrl": "https://www.fab.com/listings/4a58faa9-921a-4052-9e14-95fb3c77e760",
+  "youtubeUrl": "https://youtu.be/hNIfqfWbxE8",
+  "documentationUrl": "https://docs.google.com/document/d/1aCAy9EsEifOF1CwOK79NE254KMvGznStnclZGpRzUjk/edit?usp=sharing",
+  "forumUrl": "https://forums.unrealengine.com/t/icvfx-tools-cubelut-importer/2662480",
+  "sections": [
+    {
+      "id": "demo",
+      "title": "Demo",
+      "type": "video",
+      "youtubeId": "hNIfqfWbxE8"
+    },
+    {
+      "id": "overview",
+      "title": "Overview",
+      "type": "text",
+      "body": [
+        "The Cube LUT Importer is an editor utility plugin for Unreal Engine that provides a seamless and high-fidelity workflow for importing industry-standard .cube LUT files directly into the engine.",
+        "This plugin is particularly useful for workflows involving DaVinci Resolve, as it correctly parses and imports common LUT formats used in professional color grading pipelines."
+      ]
+    },
+    {
+      "id": "features",
+      "title": "Features",
+      "type": "text",
+      "body": [
+        "<strong>Drag-and-Drop Importing</strong> - Simply drag your .cube file directly into the Content Browser to begin the import process.",
+        "<strong>Automatic Volume Texture Creation</strong> - The plugin automatically generates both the necessary 2D texture strip and the final, engine-ready Volume Texture asset.",
+        "<strong>High-Precision Workflow</strong> - To prevent color banding and data loss, the importer creates high-precision 16-bit floating-point textures, preserving the full fidelity of your LUT data."
+      ]
+    },
+    {
+      "id": "how-to-use",
+      "title": "How to Use",
+      "type": "steps",
+      "steps": [
+        "<strong>Enable the Plugin</strong> - Make sure the CubeLUTImporter plugin is installed and enabled in your project's plugin settings.",
+        "<strong>Locate Your LUT</strong> - Find the .cube file you wish to import on your computer.",
+        "<strong>Drag and Drop</strong> - Drag the .cube file from your file explorer and drop it directly into the Unreal Editor's Content Browser.",
+        "The plugin will automatically process the file and create the required texture assets in the Content Browser."
+      ]
+    },
+    {
+      "id": "image",
+      "type": "image",
+      "title": "",
+      "src": "data/docs/images/cube-lut/CubeLutPlugin.png",
+      "caption": "Enable the CubeLUTImporter Plugin in your project and restart the editor"
+    },
+    {
+      "id": "drag-drop-img",
+      "type": "image",
+      "src": "data/docs/images/cube-lut/image2.png",
+      "caption": "Dragging a .cube file into the Unreal Engine Content Browser"
+    },
+    {
+      "id": "result-img",
+      "type": "image",
+      "src": "data/docs/images/cube-lut/image3.png",
+      "caption": "Generated Volume Texture and 2D strip assets in Content Browser"
+    },
+    {
+      "id": "technical",
+      "title": "Technical Details",
+      "type": "text",
+      "body": [
+        "<strong>Floating-Point Parsing</strong> - Color values from the .cube file are read and stored as <code>FLinearColor</code> (32-bit floats).",
+        "<strong>16-bit Texture Creation</strong> - The data is used to create a Texture2D with the <code>TSF_RGBA16F</code> format, avoiding the common pitfall of quantizing LUT data into an 8-bit texture and losing precision.",
+        "<strong>Volume Texture</strong> - The 2D strip is processed into a proper 3D Volume Texture which Unreal Engine's post-process pipeline consumes natively."
+      ]
+    },
+    {
+      "id": "support-img",
+      "type": "image",
+      "src": "data/docs/images/cube-lut/image4.png",
+      "caption": "Plugin in use within a Post Process Volume"
+    }
+  ]
+}

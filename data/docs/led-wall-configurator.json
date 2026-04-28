@@ -1,0 +1,16 @@
+{
+  "pluginId": "led-wall-configurator",
+  "title": "LED Wall Configurator",
+  "version": "1.0.0",
+  "description": "Plan LED wall resolution, map regions to render nodes and processors, validate overlaps/capacity, and export deployment-ready configuration JSON.",
+  "sections": [
+    {
+      "id": "overview",
+      "title": "Overview",
+      "type": "text",
+      "body": [
+        "Documentation coming soon. Add your content to <code>data/docs/led-wall-configurator.json</code>."
+      ]
+    }
+  ]
+}
