@@ -62,6 +62,54 @@
   <script src="https://unpkg.com/three@0.128.0/examples/js/geometries/TextGeometry.js"></script>
 
   <style>
+    * { cursor: none !important; }
+
+    #cur-dot {
+      position: fixed;
+      top: -3px; left: -3px;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--c-primary);
+      box-shadow: 0 0 8px var(--c-primary), 0 0 20px var(--c-glow-soft);
+      pointer-events: none;
+      z-index: 10001;
+      will-change: transform;
+    }
+    #cur-ring {
+      position: fixed;
+      top: -15px; left: -15px;
+      width: 30px; height: 30px;
+      border: 1px solid rgba(255,29,83,0.65);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10000;
+      will-change: transform;
+      box-shadow: 0 0 8px rgba(255,29,83,0.15), inset 0 0 8px rgba(255,29,83,0.05);
+    }
+    /* Crosshair ticks extending outward from ring */
+    #cur-ring::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: -10px; right: -10px; height: 1px;
+      transform: translateY(-50%);
+      background: linear-gradient(
+        to right,
+        rgba(255,29,83,0.65) 10px, transparent 10px,
+        transparent calc(100% - 10px), rgba(255,29,83,0.65) calc(100% - 10px)
+      );
+    }
+    #cur-ring::after {
+      content: '';
+      position: absolute;
+      left: 50%; top: -10px; bottom: -10px; width: 1px;
+      transform: translateX(-50%);
+      background: linear-gradient(
+        to bottom,
+        rgba(255,29,83,0.65) 10px, transparent 10px,
+        transparent calc(100% - 10px), rgba(255,29,83,0.65) calc(100% - 10px)
+      );
+    }
+
     html, body { height: 100%; overflow: hidden; }
 
     #bg-canvas { position: fixed; inset: 0; z-index: 1; }
@@ -314,6 +362,23 @@
     }
     .grid-icon:hover .grid-icon-name, .grid-icon.active .grid-icon-name { color: var(--c-primary); }
 
+    .list-section-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: var(--s-3) var(--s-1) var(--s-1);
+      font-family: var(--font-mono); font-size: var(--t-xs);
+      color: var(--c-text-faint); text-transform: uppercase; letter-spacing: var(--tracking-label);
+      border-bottom: 1px solid var(--c-line-soft);
+      margin-bottom: var(--s-1);
+      margin-top: var(--s-3);
+    }
+    .list-section-header:first-child { margin-top: 0; padding-top: 0; }
+    .section-count {
+      font-family: var(--font-mono); font-size: 9px;
+      padding: 1px 6px; border-radius: var(--r-pill);
+      border: 1px solid var(--c-line);
+      color: var(--c-text-faint); letter-spacing: 0;
+    }
+
     @media (max-width: 900px) {
       html, body { overflow: auto; height: auto; }
       #bg-canvas { display: none; }
@@ -326,6 +391,9 @@
   </style>
 </head>
 <body class="scanlines">
+
+  <div id="cur-dot"></div>
+  <div id="cur-ring"></div>
 
   <canvas id="bg-canvas"></canvas>
   <div class="page">
@@ -370,7 +438,7 @@
 
       <aside style="display:flex;flex-direction:column;min-height:0;align-self:stretch;justify-content:center;">
         <div class="plugin-list-header">
-          <span>Plugins</span>
+          <span>Tools & Plugins</span>
           <button class="grid-toggle-btn" id="gridToggleBtn" title="Show all plugins">
             <svg viewBox="0 0 16 16" fill="currentColor" width="12" height="12"><rect x="1" y="1" width="5" height="5" rx="1"/><rect x="10" y="1" width="5" height="5" rx="1"/><rect x="1" y="10" width="5" height="5" rx="1"/><rect x="10" y="10" width="5" height="5" rx="1"/></svg>
             All
@@ -397,7 +465,7 @@
   <!-- Fullscreen plugin grid overlay -->
   <div class="plugin-grid-overlay" id="pluginGridOverlay" role="dialog" aria-label="All plugins">
     <div class="grid-overlay-header">
-      <span class="grid-overlay-title">All Plugins</span>
+      <span class="grid-overlay-title">All Tools & Plugins</span>
       <button class="grid-overlay-close" id="gridOverlayClose">✕ Close</button>
     </div>
     <div class="plugin-icon-grid" id="pluginIconGrid"></div>
@@ -438,11 +506,12 @@
       descEl.textContent  = p.description;
 
       /* Engine versions in eyebrow */
-      if (p.engineVersions && p.engineVersions.length) {
-        const vStr = p.engineVersions.map(v => 'UE ' + v).join(' · ');
-        eyebrowEl.textContent = vStr + (p.customPage ? '' : ' · FAB MARKETPLACE');
+      if (p.customPage) {
+        eyebrowEl.textContent = 'WEB TOOL';
+      } else if (p.engineVersions && p.engineVersions.length) {
+        eyebrowEl.textContent = p.engineVersions.map(v => 'UE ' + v).join(' · ') + ' · FAB MARKETPLACE';
       } else {
-        eyebrowEl.textContent = p.customPage ? 'WEB TOOL' : 'FAB MARKETPLACE';
+        eyebrowEl.textContent = 'FAB MARKETPLACE';
       }
 
       if (p.customPage) {
@@ -457,7 +526,7 @@
         forumBtn.style.display = ''; forumBtn.href = p.forumUrl || '#';
       }
 
-      [...list.children].forEach((el, i) => el.classList.toggle('active', i === idx));
+      [...list.querySelectorAll('.plugin-item')].forEach((el, i) => el.classList.toggle('active', i === idx));
       const iGrid = document.getElementById('pluginIconGrid');
       if (iGrid) [...iGrid.children].forEach((t, i) => t.classList.toggle('active', i === idx));
       currentIdx = idx;
@@ -468,13 +537,31 @@
     }
 
     function buildList() {
+      const toolCount   = PLUGINS.filter(p => p.customPage).length;
+      const pluginCount = PLUGINS.filter(p => !p.customPage).length;
+      let sectionBreakInserted = false;
+
+      const makeHeader = (label, count) => {
+        const h = document.createElement('div');
+        h.className = 'list-section-header';
+        h.innerHTML = `<span>${label}</span><span class="section-count">${count}</span>`;
+        return h;
+      };
+
+      list.appendChild(makeHeader('Tools', toolCount));
+
       PLUGINS.forEach((p, i) => {
+        if (!sectionBreakInserted && !p.customPage) {
+          sectionBreakInserted = true;
+          list.appendChild(makeHeader('Plugins', pluginCount));
+        }
         const item = document.createElement('div');
         item.className = 'plugin-item' + (i === 0 ? ' active' : '');
+        item.dataset.pluginIdx = i;
         if (p.customPage) { item.dataset.customPage = 'true'; item.dataset.pageUrl = p.pageUrl || ''; }
-        const chips = p.engineVersions?.length
-          ? p.engineVersions.map(v => `<span class="ver-chip">${v}</span>`).join('')
-          : (p.customPage ? '<span class="ver-chip">Tool</span>' : '');
+        const chips = p.customPage
+          ? '<span class="ver-chip">Tool</span>'
+          : (p.engineVersions?.length ? p.engineVersions.map(v => `<span class="ver-chip">${v}</span>`).join('') : '');
         item.innerHTML = `
           <img class="plugin-thumb" src="${p.thumbnailUrl}" alt="" />
           <div>
@@ -526,7 +613,7 @@
       if (!tile) return;
       const idx = parseInt(tile.dataset.idx, 10);
       [...iconGrid.children].forEach((t, i) => t.classList.toggle('active', i === idx));
-      [...list.children].forEach((el, i) => el.classList.toggle('active', i === idx));
+      [...list.querySelectorAll('.plugin-item')].forEach((el, i) => el.classList.toggle('active', i === idx));
       renderPlugin(idx);
       resetIdleTimer();
       closeGrid();
@@ -539,7 +626,7 @@
     let autoTimeout, idleTimeout;
 
     function getItem(idx) {
-      return list.children[idx];
+      return list.querySelector(`.plugin-item[data-plugin-idx="${idx}"]`);
     }
 
     function cycle() {
@@ -565,8 +652,8 @@
     list.addEventListener('click', e => {
       const item = e.target.closest('.plugin-item');
       if (!item) return;
-      const idx = [...list.children].indexOf(item);
-      if (idx === -1) return;
+      const idx = parseInt(item.dataset.pluginIdx, 10);
+      if (isNaN(idx)) return;
       renderPlugin(idx);
       resetIdleTimer();
       if (item.dataset.customPage === 'true' && item.dataset.pageUrl) {
@@ -611,8 +698,8 @@
         if (!font) return;
         const geo = new THREE.TextGeometry(char, {
           font,
-          size: 2.4,
-          height: 0.5,
+          size: 3.6,
+          height: 0.75,
           curveSegments: 14,
           bevelEnabled: true,
           bevelThickness: 0.08,
@@ -742,7 +829,7 @@
           }
         }
 
-        pts.rotation.y += 0.0008;
+        pts.rotation.y += 0.0016;
         camera.position.x += (mx * 3 - camera.position.x) * 0.04;
         camera.position.y += (-my * 3 - camera.position.y) * 0.04;
         camera.lookAt(0, 0, 0);
@@ -752,6 +839,38 @@
     }
 
     init();
+
+    /* Sci-fi custom cursor */
+    (function() {
+      const dot  = document.getElementById('cur-dot');
+      const ring = document.getElementById('cur-ring');
+      let mx = -100, my = -100, rx = -100, ry = -100;
+      let hovered = false;
+
+      window.addEventListener('mousemove', e => {
+        mx = e.clientX; my = e.clientY;
+        dot.style.transform = `translate(${mx}px,${my}px)`;
+      });
+
+      window.addEventListener('mouseover', e => {
+        hovered = !!e.target.closest('a, button, .plugin-item, .grid-icon');
+      });
+
+      document.addEventListener('mouseleave', () => {
+        dot.style.opacity = '0'; ring.style.opacity = '0';
+      });
+      document.addEventListener('mouseenter', () => {
+        dot.style.opacity = '1'; ring.style.opacity = '1';
+      });
+
+      (function animCursor() {
+        rx += (mx - rx) * 0.14;
+        ry += (my - ry) * 0.14;
+        const s = hovered ? 1.6 : 1;
+        ring.style.transform = `translate(${rx}px,${ry}px) scale(${s})`;
+        requestAnimationFrame(animCursor);
+      })();
+    })();
   </script>
 </body>
 </html>
